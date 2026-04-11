@@ -1,10 +1,12 @@
 let level = [];
 
-const targetFramerate = 32
+//you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
+let targetFramerate = 32
 
 const frameTime = (1/targetFramerate)*1000
 let keys= []
 
+//dont you dare forget one or it will be very sad
 const loadTextures = [
     "idle0.svg",
     "idle1.svg",
@@ -65,7 +67,7 @@ loadLevel(0)
 
 let lastError = ""
 
-document.title = "evil cat game by Axolay"
+document.title = "evil cat game by Axolay" //very evil dont remove credit pls im beg this took too long to make
 
 game.start = () => {
     if(!game.started) {
@@ -106,6 +108,7 @@ game.start = () => {
 
             drawText(5, 40, (1000/fpsc.frameTime).toFixed(0), "#000000")
             drawText(5, 120, player.animation, "#000000")
+            drawText(5, 180, game.tick, "#000000")
 
             await wait(frameTime)
         }

@@ -1,11 +1,15 @@
+let controller;
+
 async function defineAnimation(name, frames, speed, loop) {
-    speed *= 1000
     if(player.animation != name) return //works
         player.texture = name+0 //wroks
         if(frames <= 1) return //wroks
     for(let i = 0; i < frames; i++) {
         player.texture = name+i
-        await wait(speed)
+        for(let i = 0; i < speed * 100; i++) {
+            if(player.animation != name) {break}
+            await wait(10)
+        }
         if(player.animation != name) return
     }
     if(!loop) {
@@ -28,3 +32,11 @@ async function runAnimations() {
     }
 }
 runAnimations()
+
+
+if(false) {
+   const oldFrame = game.tick
+while(game.tick - oldFrame < frames || player.animation != name) { 
+    wait(frameTime) 
+} 
+}

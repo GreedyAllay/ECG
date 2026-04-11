@@ -18,7 +18,7 @@
     <script src="../script/game/audio.js"></script>
     <script src="../script/tools.js"></script>
 
-        <p id="credits"> © 2026 - Axolay | indev v0</p>
+        <p id="credits">© 2026 - Axolay | indev v0</p>
     <script>
         window.startGame = false
         const buttons = document.querySelectorAll('.button')
@@ -41,7 +41,7 @@
         function buttonClick(id) {
             switch (id) {
                 case 0:
-
+                    sounds.song.pause()
                     window.parent.game.start()
                     break;
                 case 5:
@@ -51,8 +51,13 @@
             }
         }
 
+        let songStarted = false
+
         addEventListener('click', () => {
+            if(!songStarted) {
+                songStarted = true
                 sounds.song.play()
+            }
 
         })
     </script>

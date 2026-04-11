@@ -1,0 +1,30 @@
+async function defineAnimation(name, frames, speed, loop) {
+    speed *= 1000
+    if(player.animation != name) return //works
+        player.texture = name+0 //wroks
+        if(frames <= 1) return //wroks
+    for(let i = 0; i < frames; i++) {
+        player.texture = name+i
+        await wait(speed)
+        if(player.animation != name) return
+    }
+    if(!loop) {
+        while(player.animation != name) await wait(1)
+    }
+}
+
+async function runAnimations() {
+    while(1) {
+        await defineAnimation("idle", 2, .7, 1)
+        await defineAnimation("run", 6, .1, 1)
+        await defineAnimation("jump", 1, .1, 1)
+        await defineAnimation("fly", 1, .1, 1)
+        await defineAnimation("fall", 1, .1, 1)
+        await defineAnimation("land", 1, .1, 1)
+        await defineAnimation("accident", 0, .1, 1)
+        await defineAnimation("crouch", 4, .1, 1)
+        await defineAnimation("sit", 0, .1, 1)
+        await wait(1)
+    }
+}
+runAnimations()

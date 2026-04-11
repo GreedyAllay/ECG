@@ -1,0 +1,61 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <p id="game-title">evil cat game</p>
+
+
+    <div id="buttons">
+        <div class="button" enabled>play</div>
+        <div class="button">settings</div>
+        <div class="button">multiplayer</div>
+        <div class="button">level editor</div>
+        <div class="button" enabled>credits</div>
+    </div>
+
+    <script src="../script/game/audio.js"></script>
+    <script src="../script/tools.js"></script>
+
+        <p id="credits"> © 2026 - Axolay | indev v0</p>
+    <script>
+        window.startGame = false
+        const buttons = document.querySelectorAll('.button')
+        buttons.forEach((element, i) => {
+            element.addEventListener('pointerdown', () => {
+                sounds.click0.play()
+                sounds.click1.pause()
+                sounds.click1.currentTime = 0
+            })
+            element.addEventListener('pointerup', () => {
+                sounds.click0.pause()
+                sounds.click1.play()
+                sounds.click0.currentTime = 0
+            })
+            element.addEventListener('click', () => {
+                buttonClick(i)
+            })
+        });
+
+        function buttonClick(id) {
+            switch (id) {
+                case 0:
+
+                    window.parent.game.start()
+                    break;
+                case 5:
+                    window.location.href = "credits.html"
+                default:
+                    break;
+            }
+        }
+
+        addEventListener('click', () => {
+                sounds.song.play()
+
+        })
+    </script>
+
+
+</body>

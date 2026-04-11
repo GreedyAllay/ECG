@@ -1,0 +1,29 @@
+<head>
+    <title>game is loading...</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/x-icon" href="assets/textures/favicon.jpg">
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    <div id="play" hidden></div>
+    <iframe src="screens/start.html" frameborder="0" class="menu" id="menu"></iframe>
+
+    <!-- game logic -->
+    <script src="script/game/objects.js"></script>
+    <script src="script/game/controls.js"></script>
+    <script src="script/game/physics.js"></script>
+    <script src="script/game/rendering.js"></script>
+    <script src="script/game/level.js"></script>
+    <script src="script/game/logic.js"></script>
+    <script src="script/game/audio.js"></script>
+
+    <!-- engine -->
+    <script src="script/tools.js"></script>
+    <script src="script/stage.js"></script>
+    <script src="script/engine.js"></script>
+
+    <!-- had to put this here -->
+    <script src="script/game/animations.js"></script>
+    <script src="levels/defineLevel0.js"></script>
+</body>

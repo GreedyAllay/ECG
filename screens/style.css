@@ -1,0 +1,51 @@
+html, body {
+    background-color: #313148;
+    font-family: Archivo;
+    user-select: none;
+    zoom: 2;
+}
+
+#game-title {
+    color: white;
+    font-family: Archivo;
+    text-align: right;
+    margin-top: 20px;
+    margin-right: 20px;
+    font-size: 25;
+}
+
+.button[enabled] {
+    color: #ffa800;
+    cursor: pointer;
+}
+
+.button {
+    color: gray;
+    padding: 10px;
+    font-size: 15;
+    margin-top: -15;
+}
+
+#buttons {
+    width: 100px;
+    text-align: right;
+    margin-left: auto;
+    margin-right: 20px;
+    margin-top: 50px;
+}
+
+.button:active[enabled] {
+    filter: brightness(.8);
+}
+
+#credits {
+    font-size: 5px;
+    color: white;
+    padding-top: auto;
+}
+
+@font-face {
+    font-family: Archivo;
+    src: url('../assets/fonts/archivo.ttf');
+}
+

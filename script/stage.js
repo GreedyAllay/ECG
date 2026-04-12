@@ -53,7 +53,11 @@ const clearScreen = () => {
 
 //javascript bullshit once again
 const font = new FontFace('Archivo', 'url(assets/fonts/archivo.ttf)')
+const font1 = new FontFace('Archivo Black', 'url(assets/fonts/archivoblack.ttf)')
 font.load().then((loaded) => {
+    document.fonts.add(loaded)
+})
+font1.load().then((loaded) => {
     document.fonts.add(loaded)
 })
 
@@ -89,9 +93,15 @@ function loadImage(source, name) {
 
 }
 
-function drawText(x, y, text, color) {
+function drawText(x, y, text, color, size, camera, font) {
+    size = size ?? 48
+    font = font ?? "Archivo"
+    if(camera) {
+        x = screenToWorldX(x)
+        y = screenToWorldY(y)
+    }
     display.context.fillStyle = color
-    display.context.font = "48px Archivo"
+    display.context.font = `${size}px ${font}`
     display.context.fillText(text, x, y)
 }
 
@@ -188,3 +198,4 @@ function openMenu(name) {
     
     document.body.appendChild()
 }
+

@@ -9,6 +9,18 @@ const define = {
         level.push({
             type: 1, x: x, y: y, w: w, h: h, rotation: rotation, source: source, ghost: 1, auto: auto
         })
+    },
+
+    text: (x, y, size, text, font, color ) => {
+        level.push({
+            type: 2, x: x, y: y, size: size, text: text, font: font, color: color
+        })
+    },
+
+    gear: (x, y, size) => {
+        level.push({
+            type: 3, x: x, y: y, size: size
+        })
     }
 }
 
@@ -38,6 +50,11 @@ const spawn = {
     },
 
     gears: (x, y) => {
-        define.image(x, y, 100, 200, 90, "flower", 1)
+        define.gear(x, y, 100)
+    },
+
+    key: (x, y, val) => {
+        define.image(x, y, 100, 100, 90, "key")
+        define.text(x, y, )
     }
 }

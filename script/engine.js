@@ -46,12 +46,16 @@ fpsc.lastLoop = new Date,
 fpsc.thisLoop
 
 resetPlayerHitbox()
-loadLevel(0)
 
 let lastError = ""
 
 document.title = "evil cat game by Axolay" //very evil dont remove credit pls im beg this took too long to make
 
+try {
+    loadLevel(0)
+} catch (error) {
+    lastError = error
+}
 
 game.start = () => {
     if(!game.started) {

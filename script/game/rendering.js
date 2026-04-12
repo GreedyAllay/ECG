@@ -24,6 +24,12 @@ function renderObjects() {
                     display.context.filter = "none";
                 }
                 break;
+            case 2:
+                drawText(screenToWorldX(object.x), screenToWorldY(object.y), object.text, object.color, object.size, 0, object.font)
+                break;
+            case 3:
+                drawImage(object.x, object.y, object.s, object.s, "gear")
+                break;
             default:
                 break;
         }

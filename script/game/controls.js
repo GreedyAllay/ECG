@@ -9,12 +9,14 @@ function handleControls() {
 
     if(checkKey("s") && player.onFloor && player.animation != "accident") {
         player.isSneaking = true
+        setHitboxCrouching(player.mirror)
         if(checkKey("a") || checkKey("d")) {
             player.animation = "crouch"
         } else {
             player.animation = "sit"
         }
     } else  {
+        resetPlayerHitbox()
         if(!(player.animation == "fall" || player.animation == "accident")||player.onFloor && player.floorTime > 5) { //coyote time
             player.animation = "idle"
             player.isRunning = false
@@ -29,6 +31,7 @@ function handleControls() {
                     player.isFlying = true
                     player.animation = 'fly'
                     player.yv = player.yv -= 1.4
+                    rocketSmoke(player.x - (player.mirror ? -15 : 15), player.y+25, 0, 10, 10)
                 } else {
                     player.isFlying = false
                 }
@@ -39,6 +42,9 @@ function handleControls() {
                 if(checkKey("a") || checkKey("d")) {
                     if(player.isSneaking) {
                         player.animation = "crouch"
+                        player.w = 50
+                        player.h = 40
+                        player.oy = -50
                     } else {
                         player.isRunning = true
                         if(player.againstWall) {

@@ -30,9 +30,9 @@ function drawHitboxes() {
             "#cf1b1b"
         )
     });
-    drawObjectWF(player.x, player.y, player.w, player.h, "#cf1b1b")
+    drawObjectWF(player.x+player.hbx, player.y+player.hby, player.w, player.h, "#cf1b1b")
 }
 
 function renderPlayer() {
-    drawImage(player.x-40, player.y-20, 100, 100, player.texture, player.mirror)
+    drawImage(player.x+player.ox, player.y+player.oy, 100, 100, player.texture, player.mirror)
 }

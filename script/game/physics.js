@@ -46,6 +46,7 @@ function handlePhysics() {
 //AABB
 function checkPlayerCollided(ox, oy) {
     ox = ox ?? 0; oy = oy ?? 0
+    ox += player.hbx; oy += player.hby
     let collided = false
     level.forEach(object => {
         if(!object.ghost) {
@@ -59,7 +60,51 @@ function checkPlayerCollided(ox, oy) {
     return collided
 }
 
-function resetPlayerHitbox() { player.w = 15; player.h = 70 }
+function resetPlayerHitbox() { 
+    const memory = {
+        x: player.x, y: player.y,
+        w: player.w, h: player.h,
+    }
+    player.w = 15;
+    player.h = 70;
+    player.ox = -40
+    player.oy = -20
+    player.hbx = 0
+    player.hby = 0
+    let i = 1;
+    while(checkPlayerCollided(0, i)) {
+        i--
+    } 
+    player.y = player.y ?? 0
+    player.y += i
+}
+
+function setHitboxCrouching (mirror) {
+    player.w = 50
+    player.h = 40
+    player.oy = -50
+    player.yv = 100
+    if(mirror) {
+        player.hbx = -30
+    } else {
+        player.hbx = 0
+    }
+    let i = 1;
+    return
+    if(checkPlayerCollided(1, 1)) {
+        while(checkPlayerCollided(i, 1)) {
+            i++
+        }
+        player.x += i
+    }
+    i = 1;
+    if(checkPlayerCollided(-1, 1)) {
+        while(checkPlayerCollided(i, 1)) {
+            i--
+        }
+        player.x += i
+    }
+}
 
 function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
     //its so smoll yet so incredibly powerful and painful to do holy crap this took forever i stole it from my c++ game

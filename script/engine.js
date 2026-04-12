@@ -3,6 +3,8 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
+const instantStart = true
+
 const frameTime = (1/targetFramerate)*1000
 let keys= []
 
@@ -27,12 +29,16 @@ const loadTextures = [
     "accident0.svg",
     "fall0.svg",
     "rotate0.svg",
+    "smoke.svg",
+    "rain.svg",
 ]
 loadTextures.forEach(asset => {
     loadImage(`assets/textures/${asset}`, asset.split('.')[0])
 })
 
-const player = { x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0,
+const player = { 
+    x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
+
     againstWall: false,
     onFloor: false,
     isSneaking: false,
@@ -70,6 +76,7 @@ let lastError = ""
 
 document.title = "evil cat game by Axolay" //very evil dont remove credit pls im beg this took too long to make
 
+
 game.start = () => {
     if(!game.started) {
         game.started = true
@@ -93,6 +100,7 @@ game.start = () => {
                 renderPlayer()
                 gameLogic()
                 renderObjects()
+                handleParticles()
                 drawHitboxes()                
             } catch (error) {
                 lastError = error
@@ -115,6 +123,9 @@ game.start = () => {
         }
     })()
 }
+
+window.onload = () => { if(instantStart) game.start(); } 
+//auto start so u dont have to hear the menu song 10 billion times a second when debugging like a loser
 
 game.pause = () => {
     game.running = false

@@ -47,8 +47,9 @@ html, body {
 
 #notice {
     background-color: rgb(112, 59, 59);
-    border-color: rgb(205, 26, 26);
-    border-width: 3px;
+    border-color: rgb(147, 45, 45);
+    border-width: .5px;
+    border-style: solid;
     color: white;
     padding-left: 20px;
     padding-right: 20px;

@@ -8,3 +8,7 @@ const freeze = async (frames) => {
         await wait(frameTime) 
     }
 }
+
+const random = (min, max) => {
+    return Math.random() * (max - min) + min;
+}

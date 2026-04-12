@@ -5,7 +5,7 @@ let targetFramerate = 32
 
 const instantStart = true
 
-const frameTime = (1/targetFramerate)*1000
+let frameTime = (1/targetFramerate)*1000
 let keys= []
 
 const player = { 
@@ -32,6 +32,10 @@ window.game = {
     running: false,
     renderHitBoxes: false,
     fpsTarget: 31
+}
+
+window.config = {
+    shaders: false,
 }
 
 //fps counter code
@@ -65,7 +69,7 @@ game.start = () => {
         while(1) {
             //gaym code here :3
             try {
-                setCamera(0-player.x, 0-player.y, 1)
+                setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 1)
                 clearScreen()
                 handleControls()
                 handlePhysics()

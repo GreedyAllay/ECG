@@ -116,14 +116,16 @@ function drawImage(x, y, w, h, source, mirror, auto) {
     }
 
 
-    display.context.save()
     if (mirror) {
+    display.context.save()
         display.context.translate(w, 0)
         display.context.scale(-1, 1)
         x *= mirror ? -1 : 1
     }
     display.context.drawImage(textures[source], x, y, w, h)
-    display.context.restore()
+    if(mirror) {
+        display.context.restore()
+    }
 }
 
 function screenToWorldX(x) {

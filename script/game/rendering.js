@@ -12,6 +12,17 @@ function renderObjects() {
         break;
             case 1:
                 drawImage(object.x, object.y, object.w, object.h, object.source, false, object.auto)
+
+                if(config.shaders) {
+                    display.context.filter = "brightness(0) opacity(0.02)";
+                    const dir = -45
+                    const length = 10 //10
+                    const res = 10 //10 looks phenomenal but is incredibly heavy
+                    for(let i = 0; i < 10; i++) {
+                        drawImage(object.x+Math.sin(dir)*(i*(res/length)), object.y+Math.cos(dir)*(i*(res/length)), object.w, object.h, object.source, false, object.auto)
+                    }
+                    display.context.filter = "none";
+                }
                 break;
             default:
                 break;

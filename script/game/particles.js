@@ -2,7 +2,8 @@ const particles = []
 
 function handleParticles() {
     //physics and rendering
-    particles.forEach((particle, i) => {
+    let i = 0;
+    for(const particle of particles) {
         particle.x += particle.xv
         particle.y += particle.yv
         drawImage(particle.x, particle.y, particle.w, particle.h, particle.source, 0)
@@ -14,14 +15,13 @@ function handleParticles() {
         if(particle.gravity) {
             particle.yv += particle.gravity
         }
-        particle.time++
         if(particle.lifetime) {
             if(particle.time >= particle.lifetime) {
                 particles.splice(i, 1)
             }
-        }
-    })
-
+        }        
+        particle.time++
+    }
 }
 
 function defineParticle(x, y, w, h, xv, yv, ghost, source, gravity, lifetime) {
@@ -55,7 +55,11 @@ function smoke(x, y, dir, vel, amount) {
 
 function rocketSmoke(x, y, dir, vel, amount) {
     for(let i = 0; i < amount; i++) {
-        defineParticle(x, y, 20, 20, Math.sin(dir) * vel + random(-3, 3), Math.cos(dir) * vel + random(-3, 3), 0, "smoke", -.3, 10)
+        const size = random(10, 30)
+        defineParticle(x+Math.sin(dir)*random(0, 10), y+Math.cos(dir)*random(0, 10), size, size, Math.sin(dir) * vel + random(-3, 3), Math.cos(dir) * vel + random(-3, 3), 0, "smoke", -.3, 10)
+        if(random(0, 10) < 5) {
+            //defineParticle(x, y, 5, 20, Math.sin(dir) * vel + random(-3, 3), Math.cos(dir) * vel + random(-3, 3), 0, "firespark", -.3, 4)
+        }
     }
 }
 

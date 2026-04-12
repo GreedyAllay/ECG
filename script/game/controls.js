@@ -31,7 +31,7 @@ function handleControls() {
                     player.isFlying = true
                     player.animation = 'fly'
                     player.yv = player.yv -= 1.4
-                    rocketSmoke(player.x - (player.mirror ? -15 : 15), player.y+25, 0, 10, 10)
+                    rocketSmoke(player.x - (player.mirror ? -15 : 4), player.y+25, 0, 5, 5)
                 } else {
                     player.isFlying = false
                 }

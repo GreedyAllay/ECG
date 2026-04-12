@@ -11,7 +11,7 @@ function renderObjects() {
         )
         break;
             case 1:
-                drawImage(object.x, object.y, object.w, object.h, object.source)
+                drawImage(object.x, object.y, object.w, object.h, object.source, false, object.auto)
                 break;
             default:
                 break;

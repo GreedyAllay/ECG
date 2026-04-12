@@ -7,19 +7,19 @@ const camera = {
     x: 0,
     y: 0,
     z: 4,
-    initialZoom: .75,
+    initialZoom: 1.5,
     xv: 0,
     yv: 0,
     oldZoom: undefined,
 }
 const size = {
     screenScale: 70,
-    defaultWidth: 640,
+    defaultHeight: 640,
     screenWidth: undefined,
     screenHeight: undefined,
     oldWidth: undefined,
     oldHeight: undefined,
-    defaultWidthNumber: undefined,
+    defaultHeightNumber: undefined,
 }
 const textures = {}
 display.context = display.canvas.getContext('2d')
@@ -35,7 +35,7 @@ size.screenHeight = size.screenScale * 9
 
 size.oldWidth = size.screenWidth
 size.oldHeight = size.screenHeight
-size.defaultWidthNumber = camera.initialZoom / size.defaultWidth
+size.defaultHeightNumber = camera.initialZoom / size.defaultHeight
 camera.oldZoom = camera.initialZoom
 
 display.canvas.width = window.innerWidth
@@ -95,13 +95,26 @@ function drawText(x, y, text, color) {
     display.context.fillText(text, x, y)
 }
 
-function drawImage(x, y, w, h, source, mirror) {
+function drawImage(x, y, w, h, source, mirror, auto) {
     //inverse rendering code by jwklong
     if(!textures[source] || !textures[source].complete) { throw("engineError: tried to draw unloaded image"); return}
+
+    const width = textures[source].width/100
+    const height = textures[source].height/100
+    //auto = false
+
     x = screenToWorldX(x)
     y = screenToWorldY(y)
-    w *= camera.z
-    h *= camera.z
+
+    if(!auto) auto = false
+    if(auto) {
+        w *= width * camera.z
+        h *= height * camera.z
+    } else {
+        w *= camera.z
+        h *= camera.z
+    }
+
 
     display.context.save()
     if (mirror) {
@@ -154,10 +167,10 @@ function resize() {
     size.screenWidth = canvas.width
     size.screenHeight = canvas.height
 
-    if (size.oldWidth != size.screenWidth || camera.oldZoom != camera.initialZoom) {
-        size.defaultWidthNumber = camera.initialZoom / size.defaultWidth;
-        camera.z = size.screenWidth * size.defaultWidthNumber;
-        oldWidth = size.screenWidth;
+    if (size.oldWidth != size.screenHeight || camera.oldZoom != camera.initialZoom) {
+        size.defaultHeightNumber = camera.initialZoom / size.defaultHeight;
+        camera.z = size.screenHeight * size.defaultHeightNumber;
+        oldWidth = size.screenHeight;
         oldZoom = camera.initialZoom;
     }
 }

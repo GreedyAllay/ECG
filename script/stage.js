@@ -95,18 +95,22 @@ function drawText(x, y, text, color) {
     display.context.fillText(text, x, y)
 }
 
-function drawImage(x, y, w, h, source) {
+function drawImage(x, y, w, h, source, mirror) {
     if(!textures[source] || !textures[source].complete) { throw("engineError: tried to draw unloaded image"); return}
-    display.context.drawImage(
-        textures[source], 
-        screenToWorldX(x), 
-        screenToWorldY(y), 
-        w * camera.z, 
-        h * camera.z
-    )
+    x = screenToWorldX(x)
+    y = screenToWorldY(y)
+    w *= camera.z
+    h *= camera.z
+
+    display.context.save()
+    display.context.translate(-x-w/2, -y-h/2)
+    display.context.scale(mirror ? -1 : 1, 1)
+    display.context.translate(x+w/2, y+h/2)
+    display.context.drawImage(textures[source], x, y, w, h)
+    display.context.restore()
 }
 
-function screenToWorldX(x) {
+function screenToWorldX(x) {[]
     return (x + camera.x) * camera.z + size.screenWidth / 2;
 }
 

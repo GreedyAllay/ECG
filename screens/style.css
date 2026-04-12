@@ -42,6 +42,25 @@ html, body {
     font-size: 5px;
     color: white;
     padding-top: auto;
+    position: absolute;
+}
+
+#notice {
+    background-color: rgb(112, 59, 59);
+    border-color: rgb(205, 26, 26);
+    border-width: 3px;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 3px;
+    position: fixed;
+    top: 0;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 5px;
 }
 
 @font-face {

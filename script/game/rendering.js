@@ -34,5 +34,5 @@ function drawHitboxes() {
 }
 
 function renderPlayer() {
-    drawImage(player.x-40, player.y-20, 100, 100, player.texture)
+    drawImage(player.x-40, player.y-20, 100, 100, player.texture, player.mirror)
 }

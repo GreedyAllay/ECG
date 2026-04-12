@@ -96,6 +96,7 @@ function drawText(x, y, text, color) {
 }
 
 function drawImage(x, y, w, h, source, mirror) {
+    //inverse rendering code by jwklong
     if(!textures[source] || !textures[source].complete) { throw("engineError: tried to draw unloaded image"); return}
     x = screenToWorldX(x)
     y = screenToWorldY(y)
@@ -103,14 +104,16 @@ function drawImage(x, y, w, h, source, mirror) {
     h *= camera.z
 
     display.context.save()
-    display.context.translate(-x-w/2, -y-h/2)
-    display.context.scale(mirror ? -1 : 1, 1)
-    display.context.translate(x+w/2, y+h/2)
+    if (mirror) {
+        display.context.translate(w, 0)
+        display.context.scale(-1, 1)
+        x *= mirror ? -1 : 1
+    }
     display.context.drawImage(textures[source], x, y, w, h)
     display.context.restore()
 }
 
-function screenToWorldX(x) {[]
+function screenToWorldX(x) {
     return (x + camera.x) * camera.z + size.screenWidth / 2;
 }
 

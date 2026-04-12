@@ -4,6 +4,10 @@
 
 
 <body>
+    <div id="startAudio">
+        
+        <p>press anything to enable audio</p>
+    </div>
     <p id="game-title">evil cat game</p>
 
 
@@ -25,6 +29,7 @@
         window.startGame = false
         const buttons = document.querySelectorAll('.button')
         buttons.forEach((element, i) => {
+            if(element.hasAttribute("enabled")) {
             element.addEventListener('pointerdown', () => {
                 sounds.click0.play()
                 sounds.click1.pause()
@@ -38,8 +43,16 @@
             element.addEventListener('click', () => {
                 buttonClick(i)
             })
+        }
         });
 
+        const startAudio = element("startAudio")
+        startAudio.addEventListener('click', () => {
+            startAudio.remove()
+        })
+        addEventListener('keydown', () => {
+            startAudio.remove()
+        })
         function buttonClick(id) {
             switch (id) {
                 case 0:

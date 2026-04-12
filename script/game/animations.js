@@ -28,6 +28,7 @@ async function runAnimations() {
         await defineAnimation("accident", 0, .1, 1)
         await defineAnimation("crouch", 4, .2, 1)
         await defineAnimation("sit", 0, .1, 1)
+        await defineAnimation("rotate", 0, .1, 0)
         await wait(1)
     }
 }

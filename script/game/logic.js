@@ -24,7 +24,7 @@ function gameLogic() {
         }
     }
     if(player.isSneaking && player.onFloor) {
-        if(!checkPlayerCollided(player.mirror ? 30 : -30, 1)) {
+        if(!checkPlayerCollided(player.mirror ? -30 : 30, 1)) {
             if(player.sneakingTime > 3) {
                 player.isSneaking = false
                 player.animation = "accident"

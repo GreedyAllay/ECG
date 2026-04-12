@@ -42,13 +42,15 @@ function handleControls() {
                     } else {
                         player.isRunning = true
                         if(player.againstWall) {
-                            player.animation = "idle"
+                            if(player.animation != "accident") {
+                                player.animation = "idle"
+                            }
                         } else {
                             player.animation = "run"
                         }
                     }
                 } else {
-                    if(player.animation != 'fall' || player.animation == 'accident') {
+                    if(!(player.animation == 'fall' || player.animation == 'accident')) {
                         player.animation = "idle"
                     }
                 }

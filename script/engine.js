@@ -35,7 +35,10 @@ window.game = {
 }
 
 window.config = {
-    shaders: false,
+    performance: {
+        shaders: false,
+        particles: true,
+    }
 }
 
 //fps counter code

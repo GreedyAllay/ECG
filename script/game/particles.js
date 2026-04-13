@@ -1,12 +1,16 @@
 const particles = []
 
 function handleParticles() {
+    if(!config.performance.particles) {return}
     //physics and rendering
     let hasChangedContext = false
     for(let i = particles.length-1; i >= 0; i--) {
         const particle = particles[i]
+        if(!particle.stalled) {
         particle.x += particle.xv
         particle.y += particle.yv
+        }
+
         if(!particle.dead) {
             display.context.filter = "none";
         } else {
@@ -32,6 +36,7 @@ function handleParticles() {
         if(!particle.ghost) {
             if(checkParticleCollided(particle)) {
                 animateDeadParticle(particle, i)
+                particle.stalled = true
             }
         }
         if(particle.gravity) {
@@ -114,11 +119,22 @@ function rocketSmoke(x, y, dir, vel, amount) {
         defineParticle((x-size/2)+Math.sin(dir)*random(0, 10),
         (y-size/2)+Math.cos(dir)*random(0, 10),
         size, size, Math.sin(dir) * vel + random(-3, 3),
-        Math.cos(dir) * vel + random(-3, 3), 0, "smoke", -.3, 20,
+        Math.cos(dir) * vel + random(-3, 3), 0, "smoke1", -.3, 20,
         "grow", "fade"
     )
         if(random(0, 10) < 5) {
-            //defineParticle(x, y, 5, 20, Math.sin(dir) * vel + random(-3, 3), Math.cos(dir) * vel + random(-3, 3), 0, "firespark", -.3, 4)
+        }
+    }
+    vel *= 2
+    for(let i = 0; i < amount; i++) {
+        const size = random(3, 20)
+        defineParticle((x-size/2)+Math.sin(dir)*random(0, 10),
+        (y-size/2)+Math.cos(dir)*random(0, 10),
+        size, size, Math.sin(dir) * vel + random(-3, 3),
+        Math.cos(dir) * vel + random(-3, 3), 0, "fire", 0, 5,
+        "", "fade",
+        )
+        if(random(0, 10) < 5) {
         }
     }
 }

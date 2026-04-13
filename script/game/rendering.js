@@ -13,7 +13,7 @@ function renderObjects() {
             case 1:
                 drawImage(object.x, object.y, object.w, object.h, object.source, false, object.auto)
 
-                if(config.shaders) {
+                if(config.performance.shaders) {
                     display.context.filter = "brightness(0) opacity(0.02)";
                     const dir = -45
                     const length = 10 //10

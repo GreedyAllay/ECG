@@ -19,7 +19,8 @@ const loadTextures = [
     "accident0.svg",
     "fall0.svg",
     "rotate0.svg",
-    "smoke.svg",
+    "smoke0.svg",
+    "smoke1.svg",
     "rain.svg",
     "firespark.svg",
     "stem.svg",
@@ -28,6 +29,7 @@ const loadTextures = [
     "flower.svg",
     "gear.svg",
     "tutorialkey.svg",
+    "fire.svg",
 ]
 loadTextures.forEach(asset => {
     loadImage(`assets/textures/${asset}`, asset.split('.')[0])

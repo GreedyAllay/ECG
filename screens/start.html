@@ -19,7 +19,7 @@
         <div class="button" enabled>credits</div>
     </div>
 
-    <div id="notice">Please set scroll to 80% or it breaks sorry</div>
+    <div id="notice" hidden>Please use a chromium-based browser for best performance <a href="firefox.html">more info</a></div>
 
     <script src="../script/game/audio.js"></script>
     <script src="../script/tools.js"></script>
@@ -75,6 +75,10 @@
             }
 
         })
+
+        if(navigator.userAgent.includes("Firefox")) {
+            element("notice").removeAttribute("hidden")
+        }
     </script>
 
     <style>
@@ -170,6 +174,14 @@
             top: 50%;
             transform: translateX(50%);
             transform: translateY(-50%);
+        }
+
+        a {
+            color: white;
+        }
+
+        a:visited {
+            color: white;
         }
 
 

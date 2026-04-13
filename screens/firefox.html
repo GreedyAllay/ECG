@@ -1,0 +1,57 @@
+<head>
+
+</head>
+
+<body>
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Firefox_logo%2C_2019.svg" alt="" id="firefoxlogo">
+
+    <p id="title"> Why the hell can I not use Firefox?</p>
+
+    <p> I love Firefox. That's why I took the time to add this confirmation. </p>
+    <p> But it's slow when it comes to Javascript. It messes with setTimeOut() and is inconsistent with other browsers.</p>
+    <p> You are probably using Firefox for it's privacy, but there are a lot of Chromium-based browsers that are not controlled by Google.</p>
+    <p>You can still totally play the game, but it will be much slower and animations may look weird. </p>
+    <p class="center" style="margin-top: 50px;"> Here be dragons! </p>
+
+    <div id="backbutton">go back</div>
+
+    <script src="../script/tools.js"></script>
+    
+    <script>
+        element("backbutton").addEventListener("click", () => {
+            window.location = "start.html"
+        })
+    </script>
+    
+
+    <style>
+        html, body {
+            background-color: #313148;
+            font-family: Archivo;
+            user-select: none;
+            zoom: 2;
+            color: white;
+            font-size: 7.5;
+        }
+
+        @font-face {
+            font-family: Archivo;
+            src: url('../assets/fonts/archivo.ttf');
+        }
+
+        #firefoxlogo {
+            width: 10px;
+            height: 10px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        #backbutton {
+            color: rgb(223, 223, 223);
+            cursor: pointer;
+        }
+    </style>
+</body>

@@ -25,7 +25,7 @@ function renderObjects() {
                 }
                 break;
             case 2:
-                drawText(screenToWorldX(object.x), screenToWorldY(object.y), object.text, object.color, object.size, 0, object.font)
+                drawText(screenToWorldX(object.x), screenToWorldY(object.y), object.text, object.color, object.size*camera.z, 0, object.font)
                 break;
             case 3:
                 drawImage(object.x, object.y, object.s, object.s, "gear")
@@ -39,13 +39,16 @@ function renderObjects() {
 function drawHitboxes() {
     if(!game.renderHitBoxes) {return}
     level.forEach(object => {
-        drawObjectWF(
-            object.x,
-            object.y,
-            object.w,
-            object.h,
-            "#cf1b1b"
-        )
+        if(!object.ghost) {
+            drawObjectWF(
+                object.x,
+                object.y,
+                object.w,
+                object.h,
+                "#cf1b1b"
+            )            
+        }
+
     });
     drawObjectWF(player.x+player.hbx, player.y+player.hby, player.w, player.h, "#cf1b1b")
 }

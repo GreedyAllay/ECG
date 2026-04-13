@@ -1,4 +1,5 @@
 function loadLevel(id) {
+    return
     level = []
     if(typeof id == "undefined") {
         //fallback level
@@ -11,6 +12,7 @@ function loadLevel(id) {
             .then(r => r.text())
             .then(d => {
                 console.log(`loaded level:\n\n${d}`)
+                console.log("loaded level: \n\n%c"+d, "color:gray;")
                 eval(d)
             })
             .catch(error => {

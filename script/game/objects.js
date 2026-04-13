@@ -54,7 +54,7 @@ const spawn = {
     },
 
     key: (x, y, val) => {
-        define.image(x, y, 100, 100, 90, "key")
-        define.text(x, y, )
+        define.image(x, y, 25, 25, 90, "tutorialkey")
+        define.text(x+9, y+17, 13, val, "Archivo", "#ffffff")
     }
 }

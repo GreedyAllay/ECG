@@ -3,13 +3,13 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
 
 const player = { 
-    x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
+    x: 1100, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
 
     againstWall: false,
     onFloor: false,
@@ -66,6 +66,7 @@ game.start = () => {
 
     element('menu').style.display = 'none';
     (async()=> {
+        setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 0)
         await wait(1000);
         element('menu').remove();
     })();
@@ -92,7 +93,7 @@ game.start = () => {
             fpsc.lastLoop = fpsc.thisLoop;
 
             if(lastError) {
-                drawText(5, 80, lastError, "#ff0000")
+                drawText(5, 80, lastError, "#ff0000", 30)
             }
 
             drawText(5, 40, (1000/fpsc.frameTime).toFixed(0), "#000000")

@@ -11,28 +11,27 @@ function handleParticles() {
             display.context.filter = "none";
         } else {
             hasChangedContext = true
-            switch (particle.ani) {
+            switch (particle.kani) {
                 case "fade":
-                    display.context.filter = `opacity(${1-particle.animationTime/10})`;
+                    display.context.filter = `opacity(${1-particle.kanimationTime/10})`;
                     break;
-            
                 default:
                     break;
             }
             
         }
 
+        animateParticle(particle, i)
+
         drawImage(particle.x, particle.y, particle.w, particle.h, particle.source, 0)
+
+        if(hasChangedContext) {
+            display.context.filter = "none";
+        }
 
         if(!particle.ghost) {
             if(checkParticleCollided(particle)) {
-                if(particles.ani) {
-                    if(particles) {
-
-                    }
-                } else {
-                }
-                particles.splice(i, 1)
+                animateDeadParticle(particle, i)
             }
         }
         if(particle.gravity) {
@@ -40,43 +39,52 @@ function handleParticles() {
         }
         if(particle.lt) {
             if(particle.time >= particle.lt) {
-                    switch (particle.ani) {
-                        case "fade":
-                            if(typeof particle.animationTime == "undefined") {
-                                particle.animationTime = 0
-                                particle.dead = true
-                            } else {
-                                particle.animationTime++
-                            }
-                            display.context.style
-                            if(particle.animationTime > 10) {
-                                particles.splice(i, 1)
-                            }
-                            break;
-                    
-                        default:
-                        particles.splice(i, 1)
-                            break;
-                    }
+                animateDeadParticle(particle, i)
             }
         }
         particle.time++
     }
-    if(hasChangedContext) {
-        display.context.filter = "none";
-    }
+}
+
+
+function animateDeadParticle(particle, i) {
+    switch (particle.kani) {
+        case "fade":
+            if(typeof particle.kanimationTime == "undefined") {
+                particle.kanimationTime = 0
+                particle.dead = true
+            } else {
+                particle.kanimationTime++
+            }
+            if(particle.kanimationTime > 10) {
+                particles.splice(i, 1)
+            }
+            break;
     
+        default:
+        particles.splice(i, 1)
+            break;
+    }
 }
 
-function animateDeadParticle(animation, time) {
+function animateParticle(particle, i) {
+    switch (particle.ani) {
+    case "grow":
+        particle.w += 3
+        particle.h += 3
+        break;
+
+    default:
+        break;
+}
 }
 
-function defineParticle(x, y, w, h, xv, yv, ghost, source, gravity, lifetime, animation) {
+function defineParticle(x, y, w, h, xv, yv, ghost, source, gravity, lifetime, animation, killanimation) {
     particles.push({
         x: x, y: y, w: w, h: h,
         xv: xv, yv: yv, ghost: ghost,
         source: source, gravity: gravity,
-        lt: lifetime, time: 0, ani: animation
+        lt: lifetime, time: 0, ani: animation, kani: killanimation
     })
 }
 
@@ -102,12 +110,12 @@ function smoke(x, y, dir, vel, amount) {
 
 function rocketSmoke(x, y, dir, vel, amount) {
     for(let i = 0; i < amount; i++) {
-        const size = random(10, 30)
-        defineParticle(x+Math.sin(dir)*random(0, 10),
-        y+Math.cos(dir)*random(0, 10),
+        const size = random(10, 50)
+        defineParticle((x-size/2)+Math.sin(dir)*random(0, 10),
+        (y-size/2)+Math.cos(dir)*random(0, 10),
         size, size, Math.sin(dir) * vel + random(-3, 3),
         Math.cos(dir) * vel + random(-3, 3), 0, "smoke", -.3, 20,
-        "fade"
+        "grow", "fade"
     )
         if(random(0, 10) < 5) {
             //defineParticle(x, y, 5, 20, Math.sin(dir) * vel + random(-3, 3), Math.cos(dir) * vel + random(-3, 3), 0, "firespark", -.3, 4)

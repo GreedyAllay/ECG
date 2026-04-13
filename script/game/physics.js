@@ -71,12 +71,17 @@ function resetPlayerHitbox() {
     player.oy = -20
     player.hbx = 0
     player.hby = 0
+
+    if(false) {
     let i = 1;
     while(checkPlayerCollided(0, i)) {
         i--
     } 
     player.y = player.y ?? 0
     player.y += i
+}
+
+    unstuckPlayer()
 }
 
 function setHitboxCrouching (mirror) {
@@ -115,4 +120,28 @@ function AABB(x1, y1, w1, h1, x2, y2, w2, h2) {
         ) return true;
 
     return false;
+}
+
+function unstuckPlayer() {
+    if(!checkPlayerCollided()) { return true }
+    
+    const directions = 8
+    const maxDist = 1000
+
+    for(let i = 0; i < maxDist; i++) {
+        for(let j = 0; j < directions; j++) {
+            const dir = (j / directions) * Math.PI * 2;
+
+            const x = Math.cos(dir)*i; const y = Math.sin(dir)*i
+
+            if(!checkPlayerCollided(x, y)) {
+                player.x += x
+                player.y += y
+                return false
+            }
+
+        }
+    }
+
+    dir = 0
 }

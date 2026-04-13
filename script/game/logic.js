@@ -1,11 +1,12 @@
 const stepHeight = -20
 
+const maxFlyingTime = 100
 
 function gameLogic() {
     game.frame++
     if(player.isFlying) {
         player.flyingTime++
-        if(player.flyingTime>10) {
+        if(player.flyingTime>maxFlyingTime) {
             player.isFlying = false
             player.canFly = false
         }

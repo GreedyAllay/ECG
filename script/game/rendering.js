@@ -39,16 +39,14 @@ function renderObjects() {
 function drawHitboxes() {
     if(!game.renderHitBoxes) {return}
     level.forEach(object => {
-        if(!object.ghost) {
+        let color = object.ghost ? "#1c1fdb30" : "#cf1b1b"
             drawObjectWF(
                 object.x,
                 object.y,
                 object.w,
                 object.h,
-                "#cf1b1b"
+                color
             )            
-        }
-
     });
     drawObjectWF(player.x+player.hbx, player.y+player.hby, player.w, player.h, "#cf1b1b")
 }

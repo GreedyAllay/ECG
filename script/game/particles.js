@@ -126,6 +126,7 @@ function rocketSmoke(x, y, dir, vel, amount) {
         }
     }
     vel *= 2
+    return
     for(let i = 0; i < amount; i++) {
         const size = random(3, 20)
         defineParticle((x-size/2)+Math.sin(dir)*random(0, 10),

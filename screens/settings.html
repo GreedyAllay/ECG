@@ -1,0 +1,31 @@
+please ctrl+scroll to change resolution
+
+current:
+<p id="resolution"></p>
+
+<script src="../script/tools.js"></script>
+<script>
+    const resolution = element("resolution")
+
+    resolution.textContent = `${window.innerWidth}x${window.innerHeight}`
+
+    addEventListener("resize", () => {
+        resolution.textContent = `${window.innerWidth}x${window.innerHeight}`
+    })
+</script>
+
+<style>
+    body, html {
+        background-color: #313148;
+        font-family: Archivo;
+        user-select: none;
+        zoom: 1.2;
+        color: white;
+    }
+
+    @font-face {
+        font-family: Archivo;
+        src: url('../assets/fonts/archivo.ttf');
+    }
+
+</style>

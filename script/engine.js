@@ -9,8 +9,8 @@ let frameTime = (1/targetFramerate)*1000
 let keys= []
 
 const player = { 
-    x: 1100, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
-
+    x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
+    //1100
     againstWall: false,
     onFloor: false,
     isSneaking: false,

@@ -12,3 +12,5 @@ const freeze = async (frames) => {
 const random = (min, max) => {
     return Math.random() * (max - min) + min;
 }
+
+const math = (args) => Math

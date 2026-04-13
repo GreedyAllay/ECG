@@ -38,9 +38,6 @@ size.oldHeight = size.screenHeight
 size.defaultHeightNumber = camera.initialZoom / size.defaultHeight
 camera.oldZoom = camera.initialZoom
 
-display.canvas.width = window.innerWidth
-display.canvas.height = window.innerHeight
-
 addEventListener('resize', () => {
     resize()
 })
@@ -173,17 +170,17 @@ function resize() {
     //handle different screen sizes at least on paper lets see if it works gng
     //i stole this code from my c++ game
     
-    display.canvas.width = window.innerWidth
-    display.canvas.height = window.innerHeight
+    display.canvas.width = Math.floor(window.innerWidth)
+    display.canvas.height = Math.floor(window.innerHeight)
 
-    size.screenWidth = canvas.width
-    size.screenHeight = canvas.height
+    size.screenWidth = display.canvas.width
+    size.screenHeight = display.canvas.height
 
-    if (size.oldWidth != size.screenHeight || camera.oldZoom != camera.initialZoom) {
+    if (size.oldWidth != size.screenWidth || camera.oldZoom != camera.initialZoom) {
         size.defaultHeightNumber = camera.initialZoom / size.defaultHeight;
         camera.z = size.screenHeight * size.defaultHeightNumber;
-        oldWidth = size.screenHeight;
-        oldZoom = camera.initialZoom;
+        size.oldWidth = size.screenHeight;
+        camera.oldZoom = camera.initialZoom;
     }
 }
 

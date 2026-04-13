@@ -33,11 +33,3 @@ async function runAnimations() {
     }
 }
 runAnimations()
-
-
-if(false) {
-   const oldFrame = game.tick
-while(game.tick - oldFrame < frames || player.animation != name) { 
-    wait(frameTime) 
-} 
-}

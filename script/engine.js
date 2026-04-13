@@ -27,7 +27,7 @@ const player = {
 }
 
 window.game = {
-    tick: 0,
+    frame: 0,
     started: false,
     running: false,
     renderHitBoxes: false,
@@ -57,6 +57,36 @@ try {
     lastError = error
 }
 
+game.tick = () => {
+    //gaym code here :3
+    try {
+        setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 1)
+        clearScreen()
+        handleControls()
+        handlePhysics()
+        gameLogic()
+        renderObjects()
+        renderPlayer()
+        handleParticles()
+        drawHitboxes()                
+    } catch (error) {
+        lastError = error
+    }
+
+    //check framerate
+    const thisFrameTime = (fpsc.thisLoop=new Date) - fpsc.lastLoop;
+    fpsc.frameTime+= (thisFrameTime - fpsc.frameTime) / fpsc.filterStrength;
+    fpsc.lastLoop = fpsc.thisLoop;
+
+    if(lastError) {
+        drawText(5, 80, lastError, "#ff0000", 30)
+    }
+
+    drawText(5, 40, (1000/fpsc.frameTime).toFixed(0), "#000000")
+    drawText(5, 120, player.animation, "#000000")
+    drawText(5, 180, game.frame, "#000000")
+}
+
 game.start = () => {
     if(!game.started) {
         game.started = true
@@ -72,34 +102,7 @@ game.start = () => {
     })();
     (async()=>{
         while(1) {
-            //gaym code here :3
-            try {
-                setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 1)
-                clearScreen()
-                handleControls()
-                handlePhysics()
-                gameLogic()
-                renderObjects()
-                renderPlayer()
-                handleParticles()
-                drawHitboxes()                
-            } catch (error) {
-                lastError = error
-            }
-
-            //check framerate
-            const thisFrameTime = (fpsc.thisLoop=new Date) - fpsc.lastLoop;
-            fpsc.frameTime+= (thisFrameTime - fpsc.frameTime) / fpsc.filterStrength;
-            fpsc.lastLoop = fpsc.thisLoop;
-
-            if(lastError) {
-                drawText(5, 80, lastError, "#ff0000", 30)
-            }
-
-            drawText(5, 40, (1000/fpsc.frameTime).toFixed(0), "#000000")
-            drawText(5, 120, player.animation, "#000000")
-            drawText(5, 180, game.tick, "#000000")
-
+            game.tick()
             await wait(frameTime)
         }
     })()

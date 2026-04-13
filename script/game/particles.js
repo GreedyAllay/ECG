@@ -2,15 +2,33 @@ const particles = []
 
 function handleParticles() {
     //physics and rendering
+    let hasChangedContext = false
     for(let i = particles.length-1; i >= 0; i--) {
         const particle = particles[i]
         particle.x += particle.xv
         particle.y += particle.yv
+        if(!particle.dead) {
+            display.context.filter = "none";
+        } else {
+            hasChangedContext = true
+            switch (particle.ani) {
+                case "fade":
+                    display.context.filter = `opacity(${1-particle.animationTime/10})`;
+                    break;
+            
+                default:
+                    break;
+            }
+            
+        }
+
         drawImage(particle.x, particle.y, particle.w, particle.h, particle.source, 0)
+
         if(!particle.ghost) {
             if(checkParticleCollided(particle)) {
                 if(particles.ani) {
                     if(particles) {
+
                     }
                 } else {
                 }
@@ -22,11 +40,32 @@ function handleParticles() {
         }
         if(particle.lt) {
             if(particle.time >= particle.lt) {
-                particles.splice(i, 1)
+                    switch (particle.ani) {
+                        case "fade":
+                            if(typeof particle.animationTime == "undefined") {
+                                particle.animationTime = 0
+                                particle.dead = true
+                            } else {
+                                particle.animationTime++
+                            }
+                            display.context.style
+                            if(particle.animationTime > 10) {
+                                particles.splice(i, 1)
+                            }
+                            break;
+                    
+                        default:
+                        particles.splice(i, 1)
+                            break;
+                    }
             }
         }
         particle.time++
     }
+    if(hasChangedContext) {
+        display.context.filter = "none";
+    }
+    
 }
 
 function animateDeadParticle(animation, time) {
@@ -67,7 +106,7 @@ function rocketSmoke(x, y, dir, vel, amount) {
         defineParticle(x+Math.sin(dir)*random(0, 10),
         y+Math.cos(dir)*random(0, 10),
         size, size, Math.sin(dir) * vel + random(-3, 3),
-        Math.cos(dir) * vel + random(-3, 3), 0, "smoke", -.3, 10,
+        Math.cos(dir) * vel + random(-3, 3), 0, "smoke", -.3, 20,
         "fade"
     )
         if(random(0, 10) < 5) {

@@ -2,7 +2,7 @@ const stepHeight = -20
 
 
 function gameLogic() {
-    game.tick++
+    game.frame++
     if(player.isFlying) {
         player.flyingTime++
         if(player.flyingTime>10) {

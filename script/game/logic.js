@@ -1,9 +1,85 @@
 const stepHeight = -20
 
-const maxFlyingTime = 100
+const maxFlyingTime = 10 //do 100 for funsies
 
 function gameLogic() {
     game.frame++
+
+    if(checkKey("s") && player.onFloor && player.animation != "accident") {
+        player.isSneaking = true
+        setHitboxCrouching(player.mirror)
+        if(checkKey("a") || checkKey("d")) {
+            player.animation = "crouch"
+        } else {
+            player.animation = "sit"
+        }
+    } else  {
+        resetPlayerHitbox()
+        if(!(player.animation == "fall" || player.animation == "accident")||player.onFloor && player.floorTime > 5) { //coyote time
+            player.animation = "idle"
+            player.isRunning = false
+        }
+        player.isSneaking = false
+        if(checkKey("w")) {
+            if(player.onFloor || (!player.onFloor && player.airTime < 5)) {
+                player.yv = -10
+                player.animation = "jump"
+            } else {
+                if(player.canFly) {
+                    player.isFlying = true
+                    player.animation = 'fly'
+                    player.yv = player.yv -= 1.4
+                    rocketSmoke(player.x - (player.mirror ? -15 : 6), player.y+35, 0, 5, 5)
+                } else {
+                    player.isFlying = false
+                }
+            }
+        } else {
+            player.isFlying = false
+            if(player.onFloor) {
+                if(checkKey("a") || checkKey("d")) {
+                    if(player.isSneaking) {
+                        player.animation = "crouch"
+                        player.w = 50
+                        player.h = 40
+                        player.oy = -50
+                    } else {
+                        player.isRunning = true
+                        if(player.againstWall) {
+                            if(player.animation != "accident") {
+                                player.animation = "idle"
+                            }
+                        } else {
+                            player.animation = "run"
+                        }
+                    }
+                } else {
+                    if(!(player.animation == 'fall' || player.animation == 'accident')) {
+                        player.animation = "idle"
+                    }
+                }
+            }
+        }
+    }
+
+
+    if(checkKey("a")) {
+        player.mirror = true
+        if(player.isSneaking) {
+            player.xv = -2.5 
+        } else {
+            player.xv = -10
+        }
+    }
+    if(checkKey("d")) {
+        player.mirror = false
+        if(player.isSneaking) {
+            player.xv = 2.5 
+        } else {
+            player.xv = 10
+        }
+    }
+
     if(player.isFlying) {
         player.flyingTime++
         if(player.flyingTime>maxFlyingTime) {

@@ -32,6 +32,9 @@ define.object(-500, 100, 10000, 10, '#267126', 0)
 
 define.object(-600, -400, 300, 1000, '#61471b', 0)
 
+define.object(800, 0, 1000, 200, "#5b5b5b")
+
+
 
 spawn.hydrant(0, 54)
 

@@ -22,7 +22,7 @@ async function runAnimations() {
         await defineAnimation("idle", 2, .7, 1)
         await defineAnimation("run", 6, .1, 1)
         await defineAnimation("jump", 1, .1, 1)
-        await defineAnimation("fly", 1, .1, 1)
+        await defineAnimation("fly", 2, .1, 1)
         await defineAnimation("fall", 1, .1, 1)
         await defineAnimation("land", 1, .1, 1)
         await defineAnimation("accident", 0, .1, 1)

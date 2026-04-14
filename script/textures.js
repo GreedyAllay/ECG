@@ -15,6 +15,7 @@ const loadTextures = [
     "jump0.svg",
     "land0.svg",
     "fly0.svg",
+    "fly1.svg",
     "sit0.svg",
     "accident0.svg",
     "fall0.svg",

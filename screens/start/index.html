@@ -1,0 +1,93 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <div id="startAudio">
+        
+        <p>press anything to enable audio</p>
+    </div>
+    <p id="game-title">evil cat game</p>
+
+
+    <div id="buttons">
+        <div class="button" enabled>play</div>
+        <div class="button" enabled>settings</div>
+        <div class="button">multiplayer</div>
+        <div class="button">level editor</div>
+        <div class="button" enabled>credits</div>
+    </div>
+
+    <div id="notice" hidden>Please use a chromium-based browser for best performance <a href="firefox.html">more info</a></div>
+
+    <script src="../../script/tools.js"></script>
+    <script src="../../script/game/audio.js"></script>
+
+        <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
+    <script>
+        window.startGame = false
+        const buttons = document.querySelectorAll('.button')
+        buttons.forEach((element, i) => {
+            if(element.hasAttribute("enabled")) {
+            element.addEventListener('pointerdown', () => {
+                window.parent.sounds.click0.play()
+                window.parent.sounds.click1.pause()
+                window.parent.sounds.click1.currentTime = 0
+            })
+            element.addEventListener('pointerup', () => {
+                window.parent.sounds.click0.pause()
+                window.parent.sounds.click1.play()
+                window.parent.sounds.click0.currentTime = 0
+            })
+            element.addEventListener('click', () => {
+                buttonClick(i)
+            })
+        }
+        });
+
+        const startAudio = element("startAudio")
+        startAudio.addEventListener('click', () => {
+            startScreen()
+        })
+
+        if(sessionStorage.getItem("allowedAudio")) {
+            //startScreen()
+        }
+
+        function buttonClick(id) {
+            switch (id) {
+                case 0:
+                    sounds.song.pause()
+                    window.parent.game.start()
+                    break;
+                case 1:
+                    window.location.href = "../settings"
+                    break;
+                case 4:
+                    window.location.href = "../credits"
+                default:
+                    break;
+            }
+        }
+
+        let songStarted = false
+
+        addEventListener('click', () => {
+            startScreen()
+        })
+
+        function startScreen() {
+            sessionStorage.setItem("allowedAudio", true)
+            startAudio.remove()
+          if(!songStarted) {
+                songStarted = true
+                window.parent.sounds.song.play()
+            }
+        }
+
+        if(navigator.userAgent.includes("Firefox")) {
+            element("notice").removeAttribute("hidden")
+        }
+    </script>
+</body>

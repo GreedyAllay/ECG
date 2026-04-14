@@ -69,8 +69,8 @@ game.tick = () => {
         handlePhysics()
         gameLogic()
         renderObjects()
-        renderPlayer()
         handleParticles()
+        renderPlayer()
         drawHitboxes()                
     } catch (error) {
         lastError = error

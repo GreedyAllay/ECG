@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 
@@ -22,23 +22,22 @@
     <div id="notice" hidden>Please use a chromium-based browser for best performance <a href="firefox.html">more info</a></div>
 
     <script src="../../script/tools.js"></script>
-    <script src="../../script/game/audio.js"></script>
 
         <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
     <script>
-        window.startGame = false
+        const audio = window.parent.sounds
         const buttons = document.querySelectorAll('.button')
         buttons.forEach((element, i) => {
             if(element.hasAttribute("enabled")) {
             element.addEventListener('pointerdown', () => {
-                window.parent.sounds.click0.play()
-                window.parent.sounds.click1.pause()
-                window.parent.sounds.click1.currentTime = 0
+                audio.click0.play()
+                audio.click1.pause()
+                audio.click1.currentTime = 0
             })
             element.addEventListener('pointerup', () => {
-                window.parent.sounds.click0.pause()
-                window.parent.sounds.click1.play()
-                window.parent.sounds.click0.currentTime = 0
+                audio.click0.pause()
+                audio.click1.play()
+                audio.click0.currentTime = 0
             })
             element.addEventListener('click', () => {
                 buttonClick(i)
@@ -58,7 +57,7 @@
         function buttonClick(id) {
             switch (id) {
                 case 0:
-                    sounds.song.pause()
+                    audio.song.pause()
                     window.parent.game.start()
                     break;
                 case 1:
@@ -82,7 +81,7 @@
             startAudio.remove()
           if(!songStarted) {
                 songStarted = true
-                window.parent.sounds.song.play()
+                audio.song.play()
             }
         }
 

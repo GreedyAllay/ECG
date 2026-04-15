@@ -3,7 +3,7 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -18,12 +18,14 @@ const player = {
     isFlying: false,
     canFly: false,
     againstCeiling: false,
+    dead: false,
     animation: 'idle',
     texture: 'idle0',
     floorTime: 0,
     airTime: 0,
     flyingTime: 0,
-    sneakingTime: 0
+    sneakingTime: 0,
+    death: { x: 0, y: 0 }
 }
 
 window.game = {
@@ -31,7 +33,14 @@ window.game = {
     started: false,
     running: false,
     renderHitBoxes: false,
-    fpsTarget: 31
+    renderObjectIDs: false,
+    fpsTarget: 31,
+    editor: false,
+}
+
+window.world = {
+    waterHeight: 0,
+    minHeight: 200
 }
 
 window.config = {
@@ -39,6 +48,12 @@ window.config = {
         shaders: false,
         particles: true,
     }
+}
+
+window.cheats = {
+    jump: 1,
+    sprint: 1,
+    fly: false
 }
 
 //fps counter code
@@ -63,15 +78,28 @@ try {
 game.tick = () => {
     //gaym code here :3
     try {
-        setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 1)
+        if(player.dead) {
+            setCamera(0-player.death.x - player.w/2, 0-player.death.y  - player.h/2, 1)
+        } else {
+            setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 1)
+        }
         clearScreen()
         handleControls()
         handlePhysics()
         gameLogic()
         renderObjects()
         handleParticles()
+        renderWater()
         renderPlayer()
-        drawHitboxes()                
+        drawHitboxes()
+
+        renderEditor()
+
+
+        drawText(100, 100, Math.round(player.x))
+        drawText(100, 200, Math.round(player.y))
+        
+        
     } catch (error) {
         lastError = error
     }
@@ -123,6 +151,18 @@ game.resume = () => {
     game.running = true
     display.canvas.filter = "brightness(1)"
     console.log("resuming game")
+}
+
+const mouse = {}
+addEventListener('mousemove', (e) => {
+    mouse.x = e.clientX
+    mouse.y = e.clientY
+})
+
+const set = {
+    water: (height) => {
+        water.height
+    }
 }
 
 

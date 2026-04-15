@@ -3,7 +3,6 @@ html, body {
     font-family: Archivo;
     user-select: none;
     zoom: 2;
-    
 }
 
 *:focus {
@@ -20,6 +19,11 @@ html, body {
     margin-top: 20px;
     margin-right: 20px;
     font-size: 25;
+}
+
+.button[white] {
+    color: #dddddd;
+    cursor: pointer;
 }
 
 .button[enabled] {
@@ -100,8 +104,11 @@ html, body {
     transform: translateY(-50%);
 }
 
-a {
+p {
     color: white;
+}
+
+a {
 }
 
 a:visited {

@@ -18,4 +18,20 @@ document.addEventListener('keypress', (e) => {
     if(e.key == "1") {
         game.renderHitBoxes = !game.renderHitBoxes
     }
+    if(e.key == "2") {
+        game.renderObjectIDs = !game.renderObjectIDs
+    }
+    if(e.key == "3") {
+        killPlayer()
+    }
+    if(e.key == "4") {
+        game.editor = !game.editor
+    }
+})
+
+addEventListener("mousedown", (e) => {
+    if(game.editor) {
+        editorobjects.push(`define.object(${Math.round(editorobject.x)}, ${Math.round(editorobject.y)}, ${editorobject.width}, ${editorobject.height}, '#742cbb', 0)`)
+        define.object(editorobject.x, editorobject.y, editorobject.width, editorobject.height, "#742cbb")
+    }
 })

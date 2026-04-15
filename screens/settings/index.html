@@ -1,5 +1,5 @@
 <head>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
@@ -18,19 +18,20 @@
 
         <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
     <script>
+        const audio = window.parent.sounds
         const parent = window.parent
         const buttons = document.querySelectorAll('.button')
         buttons.forEach((element, i) => {
             if(element.hasAttribute("enabled")) {
             element.addEventListener('pointerdown', () => {
-                sounds.click0.play()
-                sounds.click1.pause()
-                sounds.click1.currentTime = 0
+                audio.click0.play()
+                audio.click1.pause()
+                audio.click1.currentTime = 0
             })
             element.addEventListener('pointerup', () => {
-                sounds.click0.pause()
-                sounds.click1.play()
-                sounds.click0.currentTime = 0
+                audio.click0.pause()
+                audio.click1.play()
+                audio.click0.currentTime = 0
             })
             element.addEventListener('click', () => {
                 buttonClick(i)
@@ -38,15 +39,11 @@
         }
         });
 
-        addEventListener("keydown", () => {
-            sounds.music.pause()
-        }) 
-
         function buttonClick(id) {
             switch (id) {
                 case 0:
                     //window.parent.sounds.song.pause()
-                    window.location.href = "gameplay"
+                    updatePage()
                     break;
                 case 1:
                     window.location.href = ""
@@ -56,6 +53,10 @@
                 default:
                     break;
             }
+        }
+
+        function updatePage() {
+            location.reload
         }
     </script>
 </body>

@@ -1,6 +1,8 @@
 const stepHeight = -20
 
-const maxFlyingTime = 10 //do 100 for funsies
+const maxFlyingTime = 10 //do 100 for funsies, 10 is default
+
+const movementSpeed = 15 //10 is default
 
 function gameLogic() {
     game.frame++
@@ -21,7 +23,7 @@ function gameLogic() {
         }
         player.isSneaking = false
         if(checkKey("w")) {
-            if(player.onFloor || (!player.onFloor && player.airTime < 5)) {
+            if(player.onFloor || (!player.onFloor && player.airTime < 5) || cheats.fly) {
                 player.yv = -10
                 player.animation = "jump"
             } else {
@@ -65,18 +67,18 @@ function gameLogic() {
 
     if(checkKey("a")) {
         player.mirror = true
-        if(player.isSneaking) {
-            player.xv = -2.5 
+        if(player.isSneaking && false) {
+            player.xv = -2.5
         } else {
-            player.xv = -10
+            player.xv = 0-movementSpeed
         }
     }
     if(checkKey("d")) {
         player.mirror = false
-        if(player.isSneaking) {
+        if(player.isSneaking && false) {
             player.xv = 2.5 
         } else {
-            player.xv = 10
+            player.xv = movementSpeed
         }
     }
 
@@ -124,4 +126,14 @@ function gameLogic() {
             }
         }
     }
+
+    if(player.y > world.minHeight && !player.dead) {
+        killPlayer()
+    }
+}
+
+function killPlayer() {
+    player.dead = true
+    player.death.x = player.x
+    player.death.y = player.y
 }

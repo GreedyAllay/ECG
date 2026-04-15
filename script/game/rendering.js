@@ -34,6 +34,11 @@ function renderObjects() {
                 break;
         }
     });
+    if(game.renderObjectIDs) {
+        level.forEach((object, i) => {
+            drawText(screenToWorldX(object.x), screenToWorldY(object.y), i, "#ff0000")
+        });
+    }
 }
 
 function drawHitboxes() {
@@ -53,4 +58,41 @@ function drawHitboxes() {
 
 function renderPlayer() {
     drawImage(player.x+player.ox, player.y+player.oy, 100, 100, player.texture, player.mirror)
+}
+
+function renderWater() {
+    drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2, "#3c82d74d")
+}
+
+const editorobject = {
+    width: 100,
+    height: 100,
+    x: 0,
+    y: 0
+}
+
+const editorobjects = []
+function renderEditor() {
+    if(game.editor || false) {
+        editorobject.x = (0-camera.x + mouse.x/camera.z)-display.canvas.width/4
+        editorobject.y = (0-camera.y + mouse.y/camera.z)-display.canvas.height/4
+        const x = editorobject.x
+        const y = editorobject.y
+        drawObjectWF(x, y, editorobject.width, editorobject.height, "#cf1b1b")
+
+        if(checkKey("ArrowLeft")) {
+            editorobject.width -= 10
+        }
+        if(checkKey("ArrowRight")) {
+            editorobject.width += 10
+        }
+        if(checkKey("ArrowUp")) {
+            editorobject.height -= 10
+        }
+        if(checkKey("ArrowDown")) {
+            editorobject.height += 10
+        }
+
+
+    }
 }

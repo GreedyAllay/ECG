@@ -19,6 +19,7 @@ const player = {
     canFly: false,
     againstCeiling: false,
     dead: false,
+    allowFly: true,
     animation: 'idle',
     texture: 'idle0',
     floorTime: 0,
@@ -36,6 +37,7 @@ window.game = {
     renderObjectIDs: false,
     fpsTarget: 31,
     editor: false,
+    drawTriggers: false
 }
 
 window.world = {
@@ -75,6 +77,7 @@ try {
     lastError = error
 }
 
+
 game.tick = () => {
     //gaym code here :3
     try {
@@ -92,12 +95,10 @@ game.tick = () => {
         renderPlayer()
         renderWater()
         drawHitboxes()
+        drawTriggers()
+        checkTriggers()
 
         renderEditor()
-
-
-        drawText(100, 100, Math.round(player.x))
-        drawText(100, 200, Math.round(player.y))
         
         
     } catch (error) {
@@ -116,6 +117,12 @@ game.tick = () => {
     drawText(5, 40, (1000/fpsc.frameTime).toFixed(0), "#000000")
     drawText(5, 120, player.animation, "#000000")
     drawText(5, 180, game.frame, "#000000")
+
+    drawText(5, 230, Math.round(player.x))
+    drawText(5, 260, Math.round(player.y))
+
+    drawText(10, 300, camera.initialZoom)
+
 }
 
 game.start = () => {
@@ -161,7 +168,7 @@ addEventListener('mousemove', (e) => {
 
 const set = {
     water: (height) => {
-        water.height
+        world.waterHeight = height
     }
 }
 

@@ -1,3 +1,7 @@
+player.allowFly = false
+
+
+
 spawn.bush(-200, 70, 2)
 
 spawn.tree(150, 0, 1)
@@ -77,5 +81,10 @@ spawn.key(1735, -80, "d")
 
 define.text(1690, -35, 15, '(hold)', "Archivo", "#ffffff")
 
+//define.trigger(0, 0, 100, 100, "alert('sex')", "pulse", "9999")
 
-set.water()
+define.trigger(1300, -100, 100, 100, `player.allowFly = true`, "pulse", 2)
+
+set.water(0)
+
+

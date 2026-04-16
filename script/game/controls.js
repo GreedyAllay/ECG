@@ -27,11 +27,15 @@ document.addEventListener('keypress', (e) => {
     if(e.key == "4") {
         game.editor = !game.editor
     }
-})
-
-addEventListener("mousedown", (e) => {
-    if(game.editor) {
-        editorobjects.push(`define.object(${Math.round(editorobject.x)}, ${Math.round(editorobject.y)}, ${editorobject.width}, ${editorobject.height}, '#742cbb', 0)`)
-        define.object(editorobject.x, editorobject.y, editorobject.width, editorobject.height, "#742cbb")
+    if(e.key == "5") {
+        game.drawTriggers = !game.drawTriggers
+    }
+    if(e.key == "-") {
+        camera.initialZoom /= 1.1
+        resize()
+    }
+    if(e.key == "=") {
+        camera.initialZoom *= 1.1
+        resize()
     }
 })

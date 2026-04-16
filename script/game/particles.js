@@ -84,6 +84,15 @@ function animateParticle(particle, i) {
 }
 }
 
+function spawnBloodSplash(x, y, amount) {
+    const dir = player.mirror ? -1 : 1
+    for(let i = 0; i < amount; i++) {
+        defineParticle(x, y, 3, 3, random(5 * dir, 15 * dir), random(-5, 5), 0, "blood", 1, 100)
+    }
+}
+
+function spawnBloodShed() {}
+
 function defineParticle(x, y, w, h, xv, yv, ghost, source, gravity, lifetime, animation, killanimation) {
     particles.push({
         x: x, y: y, w: w, h: h,

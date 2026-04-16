@@ -23,7 +23,7 @@ function gameLogic() {
         }
         player.isSneaking = false
         if(checkKey("w")) {
-            if(player.onFloor || (!player.onFloor && player.airTime < 5) || cheats.fly) {
+            if(player.onFloor || (!player.onFloor && player.airTime < 5)) {
                 player.yv = -10
                 player.animation = "jump"
             } else {
@@ -82,9 +82,20 @@ function gameLogic() {
         }
     }
 
+    let maxflytime = maxFlyingTime
+    if(game.editor || cheats.fly) {
+        maxflytime = 99999
+    } else {
+        if(player.allowFly) {
+            maxflytime = maxFlyingTime
+        } else {
+            maxflytime = 0
+        }        
+    }
+
     if(player.isFlying) {
         player.flyingTime++
-        if(player.flyingTime>maxFlyingTime) {
+        if(player.flyingTime> maxflytime ) {
             player.isFlying = false
             player.canFly = false
         }

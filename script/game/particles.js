@@ -23,8 +23,8 @@ function handleParticles() {
                 default:
                     break;
             }
-                defineStain(x, y, w, h, source)
             if(particle.stains) {
+                defineStain(x, y, w, h, source)
             }
 
         }
@@ -89,10 +89,18 @@ function animateParticle(particle, i) {
 }
 }
 
+function bloodStab(x, y, amount) {
+    const dir = player.mirror ? -1 : 1
+    for(let i = 0; i < amount; i++) {
+        defineParticle(x, y, 10, 10, random(5 * dir, 15 * dir), random(-5, 5), 0, "blood", 1, 100, "", "fade", true)
+    }
+}
+
 function spawnBloodSplash(x, y, amount) {
     const dir = player.mirror ? -1 : 1
     for(let i = 0; i < amount; i++) {
-        defineParticle(x, y, 20, 20, random(5 * dir, 15 * dir), random(-5, 5), 0, "blood", 1, 100, "", "fade", true)
+    const size = random(3, 10)
+        defineParticle(x, y, size, size, random(-10, 10), random(-10, 10), 0, "blood", 1, 100, "", "fade", true)
     }
 }
 
@@ -135,7 +143,7 @@ function rocketSmoke(x, y, dir, vel, amount) {
         (y-size/2)+Math.cos(dir)*random(0, 10),
         size, size, Math.sin(dir) * vel + random(-3, 3),
         Math.cos(dir) * vel + random(-3, 3), 0, "smoke1", -.3, 20,
-        "grow", "fade"
+        "grow", "fade", false
     )
         if(random(0, 10) < 5) {
         }

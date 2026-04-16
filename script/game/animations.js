@@ -18,7 +18,7 @@ async function defineAnimation(name, frames, speed, loop) {
 }
 
 async function runAnimations() {
-    while(1) {
+    while(!player.dead) {
         await defineAnimation("idle", 2, .7, 1)
         await defineAnimation("run", 6, .1, 1)
         await defineAnimation("jump", 1, .1, 1)
@@ -29,6 +29,7 @@ async function runAnimations() {
         await defineAnimation("crouch", 4, .2, 1)
         await defineAnimation("sit", 0, .1, 1)
         await defineAnimation("rotate", 0, .1, 0)
+        await defineAnimation("dead", 0, .1, 0)
         await wait(1)
     }
 }

@@ -21,14 +21,14 @@
         buttons.forEach((element, i) => {
             if(element.hasAttribute("enabled")) {
             element.addEventListener('pointerdown', () => {
-                sounds.click0.play()
-                sounds.click1.pause()
-                sounds.click1.currentTime = 0
+                audio.click0.play()
+                audio.click1.pause()
+                audio.click1.currentTime = 0
             })
             element.addEventListener('pointerup', () => {
-                sounds.click0.pause()
-                sounds.click1.play()
-                sounds.click0.currentTime = 0
+                audio.click0.pause()
+                audio.click1.play()
+                audio.click0.currentTime = 0
             })
             element.addEventListener('click', () => {
                 buttonClick(i)
@@ -37,7 +37,7 @@
         });
 
         addEventListener("keydown", () => {
-            sounds.music.pause()
+            audio.music.pause()
         }) 
 
         function buttonClick(id) {

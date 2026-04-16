@@ -139,12 +139,26 @@ function gameLogic() {
     }
 
     if(player.y > world.minHeight && !player.dead) {
-        killPlayer()
+        killPlayer("abyss")
     }
 }
 
-function killPlayer() {
+function killPlayer(cause) {
     player.dead = true
     player.death.x = player.x
     player.death.y = player.y
+
+    switch (cause) {
+        case "abyss":
+        audio.death_meow_abyss.play()
+        player.animation = "accident"
+        
+            break;
+    
+        default:
+        audio.death_meow.play()
+        player.animation = "dead"
+        spawnBloodSplash(player.x, player.y, 10)
+            break;
+    }
 }

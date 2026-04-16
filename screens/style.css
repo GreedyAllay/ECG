@@ -85,7 +85,7 @@ html, body {
 
 #startAudio {
     background-color: rgba(128, 128, 128, 0.272);
-    background-color: #313148;
+    background-color: #151523;
     position: fixed;
     left: 0;
     top:0;
@@ -113,4 +113,13 @@ a {
 
 a:visited {
     color: white;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
 }

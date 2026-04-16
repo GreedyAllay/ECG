@@ -1,0 +1,46 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<!-- <img src="../../assets/textures/splash-background.svg" alt="" id="backgroundimage"> -->
+<script src="../../script/tools.js"></script>
+
+<div id="starcontainer"></div>
+
+<script>
+    async function generateStars(amount) {
+        for(let i = 0; i < amount; i++) {
+            const size = random(1, 20)
+            const star = document.createElement("img")
+            star.className = "star"
+            star.src = "../../assets/textures/star.svg"
+            star.style.left = random(0, window.innerWidth)
+            star.style.top = random(0, window.innerHeight)
+            star.style.width = size
+            star.style.height = size
+            element("starcontainer").appendChild(star)
+        }
+    }
+
+    async function animateLogo() {
+        await wait(500)
+        const logo = document.createElement("img")
+        logo.src = "../../assets/textures/splash-name.svg"
+        logo.id = "splash"
+        element("starcontainer").appendChild(logo)
+
+        const text = document.createElement("p")
+        text.textContent = "Axolay Studios"
+        text.id = "name"
+        element("starcontainer").appendChild(text)
+
+    }
+
+    generateStars(100)
+    animateLogo()
+
+    (async()=> {
+        await wait(1000)
+        window.location.href = "../start"
+    })()
+</script>

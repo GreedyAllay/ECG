@@ -1,0 +1,60 @@
+html, body {
+    background-color: black;
+    margin: 0;
+    overflow: hidden;
+    user-select: none;
+}
+
+#backgroundimage {
+    width: 100%;
+    height: 100%;
+}
+
+#starcontainer {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.star {
+
+    position: absolute;
+}
+
+#splash {
+    left: 50%;
+    top:35%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    width: 20%;
+    animation: fadeIn .35s linear;
+}
+
+#name {
+    left: 50%;
+    top:50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    font-family: Archivo;
+    color: white;
+    font-weight: 800;
+    font-size: 6vw;
+    white-space: nowrap;
+    text-align: center;
+    animation: fadeIn .35s linear;
+}
+
+@font-face {
+    font-family: Archivo;
+    src: url('../../assets/fonts/archivo.ttf');
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

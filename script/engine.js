@@ -91,6 +91,7 @@ game.tick = () => {
         handlePhysics()
         gameLogic()
         renderObjects()
+        renderStains()
         handleParticles()
         renderPlayer()
         renderWater()
@@ -102,6 +103,7 @@ game.tick = () => {
         
         
     } catch (error) {
+        console.error(error)
         lastError = error
     }
 

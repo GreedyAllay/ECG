@@ -6,6 +6,7 @@ function handleParticles() {
     let hasChangedContext = false
     for(let i = particles.length-1; i >= 0; i--) {
         const particle = particles[i]
+        const {x, y, w, h, source} = particle
         if(!particle.stalled) {
         particle.x += particle.xv
         particle.y += particle.yv
@@ -22,7 +23,10 @@ function handleParticles() {
                 default:
                     break;
             }
-            
+                defineStain(x, y, w, h, source)
+            if(particle.stains) {
+            }
+
         }
 
         animateParticle(particle, i)
@@ -53,6 +57,7 @@ function handleParticles() {
 
 
 function animateDeadParticle(particle, i) {
+    const {x, y, w, h, source} = particle
     switch (particle.kani) {
         case "fade":
             if(typeof particle.kanimationTime == "undefined") {
@@ -87,18 +92,19 @@ function animateParticle(particle, i) {
 function spawnBloodSplash(x, y, amount) {
     const dir = player.mirror ? -1 : 1
     for(let i = 0; i < amount; i++) {
-        defineParticle(x, y, 3, 3, random(5 * dir, 15 * dir), random(-5, 5), 0, "blood", 1, 100)
+        defineParticle(x, y, 20, 20, random(5 * dir, 15 * dir), random(-5, 5), 0, "blood", 1, 100, "", "fade", true)
     }
 }
 
 function spawnBloodShed() {}
 
-function defineParticle(x, y, w, h, xv, yv, ghost, source, gravity, lifetime, animation, killanimation) {
+function defineParticle(x, y, w, h, xv, yv, ghost, source, gravity, lifetime, animation, killanimation, stains) {
     particles.push({
         x: x, y: y, w: w, h: h,
         xv: xv, yv: yv, ghost: ghost,
         source: source, gravity: gravity,
-        lt: lifetime, time: 0, ani: animation, kani: killanimation
+        lt: lifetime, time: 0, ani: animation, kani: killanimation,
+        stains: stains
     })
 }
 

@@ -39,6 +39,7 @@ function renderObjects() {
             drawText(screenToWorldX(object.x), screenToWorldY(object.y), i, "#ff0000")
         });
     }
+    display.context.restore()
 }
 
 function drawHitboxes() {
@@ -60,6 +61,9 @@ function drawTriggers() {
     if(!game.drawTriggers) {return}
     level.forEach(object => {
         let color = "rgba(218, 33, 80, 0.4)"
+        if(object.active) {
+            color = "rgba(231, 18, 71, 0.72)"
+        }
         if(object.type == 3) {
             drawObject(
                 object.x,

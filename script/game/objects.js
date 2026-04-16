@@ -19,7 +19,7 @@ const define = {
 
     trigger: (x, y, w, h, action, type, uses) => {
         level.push({
-            type: 3, x: x, y: y, w: w, h: h, action: action, trtype: type, maxUses: uses, ghost: 1
+            type: 3, x: x, y: y, w: w, h: h, action: action, trtype: type, maxUses: uses, ghost: 1, active: false
         })
     },
 

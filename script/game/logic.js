@@ -88,7 +88,7 @@ function gameLogic() {
     if(checkKey("a")) {
         if(player.dead) return;
         player.mirror = true
-        if(player.isSneaking && false) {
+        if(player.isSneaking) {
             player.xv = -2.5
         } else {
             player.xv = 0-movespeed
@@ -97,7 +97,7 @@ function gameLogic() {
     if(checkKey("d")) {
         if(player.dead) return;
         player.mirror = false
-        if(player.isSneaking && false) {
+        if(player.isSneaking) {
             player.xv = 2.5 
         } else {
             player.xv = movespeed
@@ -124,7 +124,9 @@ function gameLogic() {
     }
     if(player.onFloor) {
         player.flyingTime = 0
-        player.canFly = true
+        if(player.allowFly) {
+            player.canFly = true
+        }
         player.isFlying = false
         player.airTime = 0
         player.floorTime++

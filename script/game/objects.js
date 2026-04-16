@@ -23,12 +23,6 @@ const define = {
         })
     },
 
-    key(x, y, id) {
-        level.push({
-            type: 4, x: x, y: y, size: size
-        })
-    },
-
     gear: (x, y, size) => {
         level.push({
             type: 4, x: x, y: y, size: size
@@ -68,5 +62,12 @@ const spawn = {
     keyboard: (x, y, val) => {
         define.image(x, y, 25, 25, 90, "tutorialkey")
         define.text(x+9, y+17, 13, val, "Archivo", "#ffffff")
+    },
+
+    key(x, y, id) {
+        level.push({
+            type: 4, x: x, y: y, size: size
+        })
+        define.trigger(x, y, 20, 20, "alert('ok u got the key nice pretend as if the key is gone now')")
     }
 }

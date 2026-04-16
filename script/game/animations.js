@@ -32,7 +32,7 @@ async function runAnimations() {
             await defineAnimation("rotate", 0, .1, 0)
             await defineAnimation("attack", 2, .2, 0)
             while(player.dead) {
-                await defineAnimation("dead", 0, .1, 0)
+                await defineDeathAnimation()
                 await wait(1)
             }
             await wait(1)
@@ -41,3 +41,12 @@ async function runAnimations() {
     }
 }
 runAnimations()
+
+async function defineDeathAnimation() {
+    if(player.againstWall) {
+        player.texture = "deadwall"
+
+    } else {
+        player.texture = "dead"
+    }
+}

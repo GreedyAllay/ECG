@@ -14,7 +14,6 @@ audio.splash = new Audio(`../../assets/audio/splash.mp3`)
 audio.trigger = new Audio(`../../assets/audio/trigger.wav`)
 
 
-
 document.addEventListener('click', () => {
     //sounds.song.play()
 })

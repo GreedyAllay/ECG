@@ -9,7 +9,7 @@ let frameTime = (1/targetFramerate)*1000
 let keys= []
 
 const player = { 
-    x: 1400, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
+    x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
     //1100
     againstWall: false,
     onFloor: false,
@@ -88,7 +88,7 @@ game.tick = () => {
         if(player.dead) {
             setCamera(0-player.death.x - player.w/2, 0-player.death.y  - player.h/2, 1)
         } else {
-            setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 1)
+            setCamera((0-player.x - player.w/2 ) - player.xv, (0-player.y - player.h/2) - player.yv , 1)
         }
         clearScreen()
         handleControls()

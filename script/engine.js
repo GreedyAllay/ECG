@@ -50,6 +50,7 @@ window.config = {
     performance: {
         shaders: false,
         particles: true,
+        transparency: false
     },
     effects: {
         gore: true

@@ -21,15 +21,16 @@ html, body {
     font-size: 25;
 }
 
+.button[enabled] {
+    color: #ffa800;
+    cursor: pointer;
+}
+
 .button[white] {
     color: #dddddd;
     cursor: pointer;
 }
 
-.button[enabled] {
-    color: #ffa800;
-    cursor: pointer;
-}
 
 .button {
     color: gray;

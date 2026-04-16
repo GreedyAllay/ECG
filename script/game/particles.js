@@ -13,12 +13,18 @@ function handleParticles() {
         }
 
         if(!particle.dead) {
-            display.context.filter = "none";
+            if(config.performance.transparency) {
+                display.context.filter = "none";
+            }
+            
         } else {
             hasChangedContext = true
             switch (particle.kani) {
                 case "fade":
-                    display.context.filter = `opacity(${1-particle.kanimationTime/10})`;
+                    if(config.performance.transparency) {
+                        display.context.filter = `opacity(${1-particle.kanimationTime/10})`;
+                    }
+                    
                     break;
                 default:
                     if(particle.stains && floor) {

@@ -11,7 +11,7 @@
         <div class="button" enabled>graphics</div>
         <div class="button">multiplayer</div>
         <div class="button">level editor</div>
-        <div class="button" enabled white>go back</div>
+        <div class="button"  white enabled >go back</div>
     </div>
 
     <script src="../../script/tools.js"></script>
@@ -42,8 +42,7 @@
         function buttonClick(id) {
             switch (id) {
                 case 0:
-                    //window.parent.sounds.song.pause()
-                    updatePage()
+                    window.location.href = "gameplay"
                     break;
                 case 1:
                     window.location.href = ""

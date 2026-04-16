@@ -6,10 +6,8 @@
     <p id="game-title">settings</p>
 
 
-    <div id="buttons">
-        <div class="button" enabled>shaders: off</div>
-        <div class="button" enabled>particles: off</div>
-        <div class="button" enabled white>go back</div>
+    <div id="options">
+        <div class="option" enabled white>go back</div>
     </div>
 
     <script src="../../script/tools.js"></script>
@@ -30,30 +28,20 @@
                 audio.click1.play()
                 audio.click0.currentTime = 0
             })
-            element.addEventListener('click', () => {
-                buttonClick(i)
-            })
         }
         });
 
-        addEventListener("keydown", () => {
-            audio.music.pause()
-        }) 
-
-        function buttonClick(id) {
-            switch (id) {
-                case 0:
-                    //window.parent.sounds.song.pause()
-                    window.parent.game.start()
-                    break;
-                case 1:
-                    window.location.href = ""
-                    break;
-                case 4:
-                    window.location.href = "../"
-                default:
-                    break;
-            }
+        function generateOptions(path) {
+            const options = Object.keys(parent.config[path])
+            options.forEach(option => {
+                const optionObject = document.createElement("div")
+                optionObject.className = "option"
+                optionObject.addEventListener("click", () => {
+                element("options").appendChild(optionObject)
+                })
+            });
         }
+
+        generateOptions("performance")
     </script>
 </body>

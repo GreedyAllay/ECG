@@ -100,14 +100,14 @@ function animateParticle(particle, i) {
 
 function spawnBloodWater(x, y, amount) {
     return
-    if(!config.effects.gore) return;
+    if(!config.gameplay.gore) return;
     for(let i = 0; i < amount; i++) {
         defineParticle(x, y, 10, 10, random(-5, 5), random(-5, 5), 0, "blood", 0, 100, "", "fade", true)
     }
 }
 
 function bloodStab(x, y, amount) {
-    if(!config.effects.gore) return;
+    if(!config.gameplay.gore) return;
     const dir = player.mirror ? -1 : 1
     for(let i = 0; i < amount; i++) {
         defineParticle(x, y, 10, 10, random(5 * dir, 15 * dir), random(-5, 5), 0, "blood", 1, 100, "", "fade", true)
@@ -115,7 +115,7 @@ function bloodStab(x, y, amount) {
 }
 
 function spawnBloodSplash(x, y, amount) {
-    if(!config.effects.gore) return;
+    if(!config.gameplay.gore) return;
     const dir = player.mirror ? -1 : 1
     for(let i = 0; i < amount; i++) {
     const size = random(3, 10)

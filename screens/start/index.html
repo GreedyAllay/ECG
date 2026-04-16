@@ -11,11 +11,11 @@
 
 
     <div id="buttons">
-        <div class="button" enabled>play</div>
-        <div class="button" enabled>settings</div>
+        <div class="button" enabled tabindex="0">play</div>
+        <div class="button" enabled tabindex="1">settings</div>
         <div class="button">multiplayer</div>
         <div class="button">level editor</div>
-        <div class="button" enabled>credits</div>
+        <div class="button" enabled tabindex="3">credits</div>
     </div>
 
     <div id="notice" hidden>Please use a chromium-based browser for best performance <a href="firefox.html">more info</a></div>
@@ -32,20 +32,32 @@
         buttons.forEach((element, i) => {
             if(element.hasAttribute("enabled")) {
             element.addEventListener('pointerdown', () => {
-                audio.click0.play()
-                audio.click1.pause()
-                audio.click1.currentTime = 0
+                    startClickSound()
             })
             element.addEventListener('pointerup', () => {
-                audio.click0.pause()
-                audio.click1.play()
-                audio.click0.currentTime = 0
+                if(i == 0) {
+                    audio.coolclick.play()
+                } else {
+                    stopClickSound()
+
+                }
             })
             element.addEventListener('click', () => {
                 buttonClick(i)
             })
         }
         });
+
+        function startClickSound() {
+            audio.click0.play()
+            audio.click1.pause()
+            audio.click1.currentTime = 0
+        }
+        function stopClickSound() {
+            audio.click0.pause()
+            audio.click1.play()
+            audio.click0.currentTime = 0
+        }
 
         const startAudio = element("startAudio")
         startAudio.addEventListener('click', () => {

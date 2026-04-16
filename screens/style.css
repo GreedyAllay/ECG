@@ -89,6 +89,14 @@ none:focus {
     bottom: 0;
 }
 
+.option[on="false"] {
+    color: rgb(94, 94, 94)
+}
+
+.option[on="true"] {
+    color: rgb(9, 255, 0)
+}
+
 #notice {
     background-color: rgb(112, 59, 59);
     border-color: rgb(147, 45, 45);

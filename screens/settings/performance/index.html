@@ -23,11 +23,21 @@
         function generateOptions(path) {
             const options = Object.keys(parent.config.performance)
             options.forEach(option => {
+                let thisOption = parent.config.performance[option]
                 const optionObject = document.createElement("div")
                 optionObject.className = "option"
-                optionObject.textContent = option
+
+                function setThisThing() {
+                    optionObject.textContent = `${option}: ${thisOption ? "on" : "off"}`
+                    optionObject.setAttribute("on", thisOption)
+                }
+
+                setThisThing()
                 element("options").prepend(optionObject)
                 optionObject.addEventListener("click", () => {
+                    thisOption = !thisOption
+                    parent.config.performance[option] = thisOption
+                    setThisThing()
                 })
             });
         }

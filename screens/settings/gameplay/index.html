@@ -29,17 +29,14 @@
 
                 function setThisThing() {
                     optionObject.textContent = `${option}: ${thisOption ? "on" : "off"}`
-                    if(thisOption) {
-                        optionObject.style.color = "#3ac924"
-                    } else {
-                        optionObject.style.color = "#733838"
-                    }
+                    optionObject.setAttribute("on", thisOption)
                 }
 
                 setThisThing()
                 element("options").prepend(optionObject)
                 optionObject.addEventListener("click", () => {
                     thisOption = !thisOption
+                    parent.config.gameplay[option] = thisOption
                     setThisThing()
                 })
             });

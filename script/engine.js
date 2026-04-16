@@ -52,7 +52,7 @@ window.config = {
         particles: true,
         transparency: false
     },
-    effects: {
+    gameplay: {
         gore: true
     }
 }

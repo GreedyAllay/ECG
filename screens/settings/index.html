@@ -8,9 +8,7 @@
 
     <div id="buttons">
         <div class="button" enabled>gameplay</div>
-        <div class="button" enabled>graphics</div>
-        <div class="button">multiplayer</div>
-        <div class="button">level editor</div>
+        <div class="button" enabled>performance</div>
         <div class="button"  white enabled >go back</div>
     </div>
 
@@ -20,6 +18,9 @@
     <script>
         const audio = window.parent.audio
         const parent = window.parent
+
+        parent.document.title = "settings - evil cat game"
+
         const buttons = document.querySelectorAll('.button')
         buttons.forEach((element, i) => {
             if(element.hasAttribute("enabled")) {
@@ -45,9 +46,9 @@
                     window.location.href = "gameplay"
                     break;
                 case 1:
-                    window.location.href = ""
+                    window.location.href = "performance"
                     break;
-                case 4:
+                case 2:
                     window.location.href = "../start"
                 default:
                     break;

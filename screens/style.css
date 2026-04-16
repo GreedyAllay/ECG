@@ -3,6 +3,7 @@ html, body {
     font-family: Archivo;
     user-select: none;
     zoom: 2;
+    overflow-x: hidden;
 }
 
 *:focus {
@@ -31,12 +32,33 @@ html, body {
     cursor: pointer;
 }
 
-
 .button {
     color: gray;
     padding: 10px;
     font-size: 15;
     margin-top: -15;
+    animation: moveIn .75s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+}
+
+.option[enabled] {
+    color: #ffa800;
+    cursor: pointer;
+}
+
+.option[white] {
+    color: #dddddd;
+    cursor: pointer;
+}
+
+.option {
+    color: gray;
+    padding: 10px;
+    font-size: 15;
+    margin-top: -15;
+}
+
+.option:active[enabled] {
+    filter: brightness(.8);
 }
 
 #buttons {
@@ -122,5 +144,25 @@ a:visited {
     }
     to {
         opacity: 0;
+    }
+}
+
+@keyframes moveIn {
+    from {
+        transform: translateX(130%);
+    }
+    to {
+        transform: translateX(0);
+
+    }
+}
+
+@keyframes moveBack {
+    from {
+        transform: translateX(0);
+    }
+    to {
+        transform: translateX(130%);
+
     }
 }

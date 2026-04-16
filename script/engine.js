@@ -89,8 +89,8 @@ game.tick = () => {
         gameLogic()
         renderObjects()
         handleParticles()
-        renderWater()
         renderPlayer()
+        renderWater()
         drawHitboxes()
 
         renderEditor()

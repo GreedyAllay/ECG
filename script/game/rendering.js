@@ -64,6 +64,7 @@ function renderWater() {
     drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2, "#3c82d74d")
 }
 
+//i made this real quick pls dont judge it wasnt meant to be used by anyone besides me ok?
 const editorobject = {
     width: 100,
     height: 100,

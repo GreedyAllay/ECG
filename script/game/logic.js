@@ -8,6 +8,7 @@ function gameLogic() {
     game.frame++
 
     if(checkKey("s") && player.onFloor && player.animation != "accident") {
+        if(player.dead) return;
         player.isSneaking = true
         setHitboxCrouching(player.mirror)
         if(checkKey("a") || checkKey("d")) {
@@ -23,6 +24,7 @@ function gameLogic() {
         }
         player.isSneaking = false
         if(checkKey("w")) {
+        if(player.dead) return;
             if(player.onFloor || (!player.onFloor && player.airTime < 5)) {
                 player.yv = -10
                 player.animation = "jump"
@@ -40,6 +42,7 @@ function gameLogic() {
             player.isFlying = false
             if(player.onFloor) {
                 if(checkKey("a") || checkKey("d")) {
+                    if(player.dead) return;
                     if(player.isSneaking) {
                         player.animation = "crouch"
                         player.w = 50
@@ -66,6 +69,7 @@ function gameLogic() {
 
 
     if(checkKey("a")) {
+        if(player.dead) return;
         player.mirror = true
         if(player.isSneaking && false) {
             player.xv = -2.5
@@ -74,6 +78,7 @@ function gameLogic() {
         }
     }
     if(checkKey("d")) {
+        if(player.dead) return;
         player.mirror = false
         if(player.isSneaking && false) {
             player.xv = 2.5 
@@ -158,7 +163,10 @@ function killPlayer(cause) {
         default:
         audio.death_meow.play()
         player.animation = "dead"
-        spawnBloodSplash(player.x, player.y, 10)
-            break;
+        spawnBloodSplash(player.x, player.y, 20)
+        if(player.onFloor) {
+            spawnBloodPool(player.x, player.y, 5)
+        }
+        break;
     }
 }

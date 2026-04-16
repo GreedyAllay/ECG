@@ -1,0 +1,66 @@
+<head>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<style>
+    html, body {
+        background-color: rgba(0, 0, 0, 0.404);
+    }
+
+    html, body * {
+        background-color: rgba(240, 248, 255, 0);
+    }
+</style>
+
+<body>
+    <p id="game-title">you died</p>
+
+
+    <div id="buttons">
+        <div class="button" enabled>restart</div>
+        <div class="button" enabled>main menu</div>
+    </div>
+
+    <div id="notice" hidden>Please use a chromium-based browser for best performance <a href="firefox.html">more info</a></div>
+
+    <script src="../../script/tools.js"></script>
+
+        <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
+    <script>
+        const audio = window.parent.audio
+        const buttons = document.querySelectorAll('.button')
+        buttons.forEach((element, i) => {
+            if(element.hasAttribute("enabled")) {
+            element.addEventListener('pointerdown', () => {
+                audio.click0.play()
+                audio.click1.pause()
+                audio.click1.currentTime = 0
+            })
+            element.addEventListener('pointerup', () => {
+                audio.click0.pause()
+                audio.click1.play()
+                audio.click0.currentTime = 0
+            })
+            element.addEventListener('click', () => {
+                buttonClick(i)
+            })
+        }
+        });
+
+        function buttonClick(id) {
+            switch (id) {
+                case 0:
+                    audio.song.pause()
+                    window.parent.game.start()
+                    break;
+                case 1:
+                    window.location.href = "../settings"
+                    break;
+                case 4:
+                    window.location.href = "../credits"
+                default:
+                    break;
+            }
+        }
+    </script>
+</body>

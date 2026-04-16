@@ -6,11 +6,13 @@ function checkTriggers() {
 
                 if(!(trigger.trtype == "pulse" && trigger.active) || trigger.trtype == "repeat") {
                     trigger.active = true
-
-                    
+                    if(game.drawTriggers) {
+                        audio.trigger.play()
+                    }
                     if(trigger.uses < trigger.maxUses) {
                         console.log("triggered")
                         trigger.uses++
+
                         eval(trigger.action)
                         if(trigger.uses) {
                         } else {
@@ -25,6 +27,10 @@ function checkTriggers() {
 
             } else {
                 trigger.active = false
+                if(game.drawTriggers) {
+                    audio.trigger.pause()
+                    audio.trigger.currentTime = 0
+                }
             }
         }
     });

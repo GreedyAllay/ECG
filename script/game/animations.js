@@ -18,19 +18,26 @@ async function defineAnimation(name, frames, speed, loop) {
 }
 
 async function runAnimations() {
-    while(!player.dead) {
-        await defineAnimation("idle", 2, .7, 1)
-        await defineAnimation("run", 6, .1, 1)
-        await defineAnimation("jump", 1, .1, 1)
-        await defineAnimation("fly", 2, .1, 1)
-        await defineAnimation("fall", 1, .1, 1)
-        await defineAnimation("land", 1, .1, 1)
-        await defineAnimation("accident", 0, .1, 1)
-        await defineAnimation("crouch", 4, .2, 1)
-        await defineAnimation("sit", 0, .1, 1)
-        await defineAnimation("rotate", 0, .1, 0)
-        await wait(1)
+    while(1) {
+        for(let i = 0; i < 2; i++) {
+            await defineAnimation("idle", 2, .7, 1)
+            await defineAnimation("run", 6, .1, 1)
+            await defineAnimation("jump", 1, .1, 1)
+            await defineAnimation("fly", 2, .1, 1)
+            await defineAnimation("fall", 1, .1, 1)
+            await defineAnimation("land", 1, .1, 1)
+            await defineAnimation("accident", 0, .1, 1)
+            await defineAnimation("crouch", 4, .2, 1)
+            await defineAnimation("sit", 0, .1, 1)
+            await defineAnimation("rotate", 0, .1, 0)
+            await defineAnimation("attack", 2, .2, 0)
+            while(player.dead) {
+                await defineAnimation("dead", 0, .1, 0)
+                await wait(1)
+            }
+            await wait(1)
+        }
+
     }
-    await defineAnimation("dead", 0, .1, 0)
 }
 runAnimations()

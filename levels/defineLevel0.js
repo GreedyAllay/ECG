@@ -60,31 +60,31 @@ define.text(-200, -50, 30, 'evil cat game', 'Archivo Black', '#ffffff')
 define.text(-130, -25, 20, 'by Axolay', 'Archivo', '#e7e7e7')
 
 define.text(-8, 135, 15, 'move', "Archivo Black", "#ffffff")
-spawn.key(-15, 150, "a")
-spawn.key(15, 150, "d")
+spawn.keyboard(-15, 150, "a")
+spawn.keyboard(15, 150, "d")
 
 define.text(500, 135, 15, 'jump', "Archivo Black", "#ffffff")
-spawn.key(510, 150, "w")
+spawn.keyboard(510, 150, "w")
 
 define.text(1075, 30, 15, 'sneak', "Archivo Black", "#ffffff")
-spawn.key(1050, 40, "s")
+spawn.keyboard(1050, 40, "s")
 define.text(1080, 55, 15, "+", "Archivo", "#ffffff")
-spawn.key(1095, 40, "a")
-spawn.key(1125, 40, "d")
+spawn.keyboard(1095, 40, "a")
+spawn.keyboard(1125, 40, "d")
 
 define.text(1700, -100, 15, 'fly', "Archivo Black", "#ffffff")
-spawn.key(1660, -80, "w")
+spawn.keyboard(1660, -80, "w")
 
 define.text(1690, -65, 15, "+", "Archivo", "#ffffff")
-spawn.key(1705, -80, "a")
-spawn.key(1735, -80, "d")
+spawn.keyboard(1705, -80, "a")
+spawn.keyboard(1735, -80, "d")
 
 define.text(1690, -35, 15, '(hold)', "Archivo", "#ffffff")
 
 //define.trigger(0, 0, 100, 100, "alert('sex')", "pulse", "9999")
 
 define.trigger(1300, -100, 100, 100, `player.allowFly = true`, "pulse", 2)
+define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 
 set.water(0)
-
 

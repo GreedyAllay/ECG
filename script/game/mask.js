@@ -48,7 +48,8 @@ addEventListener("keydown", (e) => {
 })
 
 function spawnBloodPool(x, y, size) {
+    if(!config.effects.gore) return;
     for(let i = 0; i < size; i++) {
-        defineStain(x + random(-5, 5), y+60  + random(-5, 5), 50, 20, "blood")
+        defineStain(x + random(-20, -5), y+60  + random(-5, 5), 50, 20, "blood")
     }
 }

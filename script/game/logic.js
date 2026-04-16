@@ -2,71 +2,88 @@ const stepHeight = -20
 
 const maxFlyingTime = 10 //do 100 for funsies, 10 is default
 
-const movementSpeed = 15 //10 is default
+const movementSpeed = 10 //10 is default
 
 function gameLogic() {
     game.frame++
 
-    if(checkKey("s") && player.onFloor && player.animation != "accident") {
-        if(player.dead) return;
-        player.isSneaking = true
-        setHitboxCrouching(player.mirror)
-        if(checkKey("a") || checkKey("d")) {
-            player.animation = "crouch"
-        } else {
-            player.animation = "sit"
-        }
-    } else  {
-        resetPlayerHitbox()
-        if(!(player.animation == "fall" || player.animation == "accident")||player.onFloor && player.floorTime > 5) { //coyote time
-            player.animation = "idle"
-            player.isRunning = false
-        }
-        player.isSneaking = false
-        if(checkKey("w")) {
-        if(player.dead) return;
-            if(player.onFloor || (!player.onFloor && player.airTime < 5)) {
-                player.yv = -10
-                player.animation = "jump"
-            } else {
-                if(player.canFly) {
-                    player.isFlying = true
-                    player.animation = 'fly'
-                    player.yv = player.yv -= 1.4
-                    rocketSmoke(player.x - (player.mirror ? -15 : 6), player.y+35, 0, 5, 5)
-                } else {
-                    player.isFlying = false
-                }
+    if(checkKey(" ") || player.attackTime > 0) {
+        player.attackTime++
+        player.animation = "attack"
+        if(player.attackTime > 10) {
+            if(!player.dead) {
+                player.animation = "idle"
             }
-        } else {
-            player.isFlying = false
-            if(player.onFloor) {
-                if(checkKey("a") || checkKey("d")) {
-                    if(player.dead) return;
-                    if(player.isSneaking) {
-                        player.animation = "crouch"
-                        player.w = 50
-                        player.h = 40
-                        player.oy = -50
+            player.attackTime = 0
+        }
+    } else {
+    if(checkKey("s") && player.onFloor && player.animation != "accident") {
+            if(player.dead) return;
+            player.isSneaking = true
+            setHitboxCrouching(player.mirror)
+            if(checkKey("a") || checkKey("d")) {
+                player.animation = "crouch"
+            } else {
+                player.animation = "sit"
+            }
+        } else  {
+            resetPlayerHitbox()
+            if((!(player.animation == "fall" || player.animation == "accident")||player.onFloor && player.floorTime > 5) && player.animation !== "dead" ) { //coyote time
+                
+                player.animation = "idle"
+                player.isRunning = false
+            }
+            player.isSneaking = false
+            if(checkKey("w")) {
+            if(player.dead) return;
+                if(player.onFloor || (!player.onFloor && player.airTime < 5)) {
+                    player.yv = -10
+                    player.animation = "jump"
+                } else {
+                    if(player.canFly) {
+                        player.isFlying = true
+                        player.animation = 'fly'
+                        player.yv = player.yv -= 1.4
+                        rocketSmoke(player.x - (player.mirror ? -15 : 6), player.y+35, 0, 5, 5)
                     } else {
-                        player.isRunning = true
-                        if(player.againstWall) {
-                            if(player.animation != "accident") {
-                                player.animation = "idle"
-                            }
+                        player.isFlying = false
+                    }
+                }
+            } else {
+                player.isFlying = false
+                if(player.onFloor) {
+                    if(checkKey("a") || checkKey("d")) {
+                        if(player.dead) return;
+                        if(player.isSneaking) {
+                            player.animation = "crouch"
+                            player.w = 50
+                            player.h = 40
+                            player.oy = -50
                         } else {
-                            player.animation = "run"
+                            player.isRunning = true
+                            if(player.againstWall) {
+                                if(player.animation != "accident" && player.animation != "dead") {
+                                    player.animation = "idle"
+                                }
+                            } else {
+                                player.animation = "run"
+                            }
+                        }
+                    } else {
+                        if(!(player.animation == 'fall' || player.animation == 'accident' || player.animation == "dead")) {
+                            player.animation = "idle"
                         }
                     }
-                } else {
-                    if(!(player.animation == 'fall' || player.animation == 'accident')) {
-                        player.animation = "idle"
-                    }
                 }
             }
-        }
+        }        
     }
 
+    
+    let movespeed = movementSpeed
+    if(game.editor) {
+        movespeed *= 1.5
+    }
 
     if(checkKey("a")) {
         if(player.dead) return;
@@ -74,7 +91,7 @@ function gameLogic() {
         if(player.isSneaking && false) {
             player.xv = -2.5
         } else {
-            player.xv = 0-movementSpeed
+            player.xv = 0-movespeed
         }
     }
     if(checkKey("d")) {
@@ -83,7 +100,7 @@ function gameLogic() {
         if(player.isSneaking && false) {
             player.xv = 2.5 
         } else {
-            player.xv = movementSpeed
+            player.xv = movespeed
         }
     }
 
@@ -157,13 +174,14 @@ function killPlayer(cause) {
         case "abyss":
         audio.death_meow_abyss.play()
         player.animation = "accident"
-        
+        spawnBloodSplash(player.x, player.y, 100)
+        spawnBloodWater(player.x, player.y, 100)
             break;
     
         default:
         audio.death_meow.play()
         player.animation = "dead"
-        spawnBloodSplash(player.x, player.y, 20)
+        spawnBloodSplash(player.x, player.y, 100)
         if(player.onFloor) {
             spawnBloodPool(player.x, player.y, 5)
         }

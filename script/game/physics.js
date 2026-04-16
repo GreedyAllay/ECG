@@ -33,11 +33,11 @@ function handlePhysics() {
     } else {
         player.yv += 1
     }
-    if(player.onFloor) {
+    if(player.onFloor && !player.dead) {
         player.xv /= 1.5
 
     } else {
-        player.xv /= 1.5 //can be changed to 1.3 or 1.1 but would be annoying
+        player.xv /= 1.2 //can be changed to 1.3 or 1.1 but would be annoying
 
     }
 

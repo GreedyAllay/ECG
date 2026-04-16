@@ -9,7 +9,7 @@ let frameTime = (1/targetFramerate)*1000
 let keys= []
 
 const player = { 
-    x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
+    x: 1400, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
     //1100
     againstWall: false,
     onFloor: false,
@@ -20,6 +20,7 @@ const player = {
     againstCeiling: false,
     dead: false,
     allowFly: true,
+    attackTime: 0,
     animation: 'idle',
     texture: 'idle0',
     floorTime: 0,
@@ -49,6 +50,9 @@ window.config = {
     performance: {
         shaders: false,
         particles: true,
+    },
+    effects: {
+        gore: true
     }
 }
 
@@ -117,13 +121,19 @@ game.tick = () => {
     }
 
     drawText(5, 40, (1000/fpsc.frameTime).toFixed(0), "#000000")
-    drawText(5, 120, player.animation, "#000000")
-    drawText(5, 180, game.frame, "#000000")
+    //drawText(5, 120, player.animation, "#000000")
+    //drawText(5, 180, game.frame, "#000000")
 
-    drawText(5, 230, Math.round(player.x))
-    drawText(5, 260, Math.round(player.y))
 
-    drawText(10, 300, camera.initialZoom)
+
+    if(game.editor) {
+        drawText(5, 230, "x: " + Math.round(player.x))
+        drawText(5, 270, "y: " + Math.round(player.y))
+
+        drawText(5, 310, "z: " + camera.initialZoom)
+
+        drawText(5, 140, "editor mode")
+    }
 
 }
 

@@ -9,6 +9,10 @@ audio.click1 = new Audio(`../../assets/audio/click1.wav`)
 audio.death_meow = new Audio(`../../assets/audio/meow-death.mp3`)
 audio.death_meow_abyss = new Audio(`../../assets/audio/meow-death-abyss.mp3`)
 
+audio.splash = new Audio(`../../assets/audio/splash.mp3`)
+
+audio.trigger = new Audio(`../../assets/audio/trigger.wav`)
+
 
 
 document.addEventListener('click', () => {

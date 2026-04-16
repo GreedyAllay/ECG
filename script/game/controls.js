@@ -30,12 +30,15 @@ document.addEventListener('keypress', (e) => {
     if(e.key == "5") {
         game.drawTriggers = !game.drawTriggers
     }
-    if(e.key == "-") {
-        camera.initialZoom /= 1.1
-        resize()
+    if(game.editor) {
+        if(e.key == "-") {
+            camera.initialZoom /= 1.1
+            resize()
+        }
+        if(e.key == "=") {
+            camera.initialZoom *= 1.1
+            resize()
+        }        
     }
-    if(e.key == "=") {
-        camera.initialZoom *= 1.1
-        resize()
-    }
+
 })

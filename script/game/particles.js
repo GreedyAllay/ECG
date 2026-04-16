@@ -21,10 +21,10 @@ function handleParticles() {
                     display.context.filter = `opacity(${1-particle.kanimationTime/10})`;
                     break;
                 default:
+                    if(particle.stains && floor) {
+                        defineStain(x, y, w, h, source)
+                    }
                     break;
-            }
-            if(particle.stains) {
-                defineStain(x, y, w, h, source)
             }
 
         }
@@ -39,7 +39,7 @@ function handleParticles() {
 
         if(!particle.ghost) {
             if(checkParticleCollided(particle)) {
-                animateDeadParticle(particle, i)
+                animateDeadParticle(particle, i, true)
                 particle.stalled = true
             }
         }
@@ -56,13 +56,16 @@ function handleParticles() {
 }
 
 
-function animateDeadParticle(particle, i) {
+function animateDeadParticle(particle, i, floor) {
     const {x, y, w, h, source} = particle
     switch (particle.kani) {
         case "fade":
             if(typeof particle.kanimationTime == "undefined") {
                 particle.kanimationTime = 0
                 particle.dead = true
+                if(particle.stains && floor) {
+                    defineStain(x, y, w, h, source)
+                }
             } else {
                 particle.kanimationTime++
             }
@@ -89,7 +92,16 @@ function animateParticle(particle, i) {
 }
 }
 
+function spawnBloodWater(x, y, amount) {
+    return
+    if(!config.effects.gore) return;
+    for(let i = 0; i < amount; i++) {
+        defineParticle(x, y, 10, 10, random(-5, 5), random(-5, 5), 0, "blood", 0, 100, "", "fade", true)
+    }
+}
+
 function bloodStab(x, y, amount) {
+    if(!config.effects.gore) return;
     const dir = player.mirror ? -1 : 1
     for(let i = 0; i < amount; i++) {
         defineParticle(x, y, 10, 10, random(5 * dir, 15 * dir), random(-5, 5), 0, "blood", 1, 100, "", "fade", true)
@@ -97,6 +109,7 @@ function bloodStab(x, y, amount) {
 }
 
 function spawnBloodSplash(x, y, amount) {
+    if(!config.effects.gore) return;
     const dir = player.mirror ? -1 : 1
     for(let i = 0; i < amount; i++) {
     const size = random(3, 10)

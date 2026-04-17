@@ -7,6 +7,16 @@ const movementSpeed = 10 //10 is default
 function gameLogic() {
     game.frame++
 
+    if(player.isRunning && player.onFloor) {
+        player.runningTime++
+    } else {
+        player.runningTime = 0
+    }
+
+    if(player.dead) {
+        player.isRunning = false
+    }
+
     if(checkKey(" ") || player.attackTime > 0) {
         player.attackTime++
         player.animation = "attack"
@@ -116,11 +126,20 @@ function gameLogic() {
     }
 
     if(player.isFlying) {
+        if(audio.jetpack.currentTime == 0 || audio.jetpack.currentTime > audio.jetpack.duration - 1) {
+            audio.jetpack.play()
+        }
+        const a = audio.jetpack.currentTime * 10
+        const vol = a > 1 ? 1 : a
+        audio.jetpack.volume = vol
         player.flyingTime++
         if(player.flyingTime> maxflytime ) {
             player.isFlying = false
             player.canFly = false
         }
+    } else {
+        audio.jetpack.pause()
+        audio.jetpack.currentTime = 0
     }
     if(player.onFloor) {
         player.flyingTime = 0
@@ -164,6 +183,12 @@ function gameLogic() {
 
     if(player.y > world.minHeight && !player.dead) {
         killPlayer("abyss")
+    }
+
+    if(player.isRunning && !player.againstWall) {
+        if(player.runningTime % 10 == 0) {
+            playFootStep()
+        }
     }
 }
 

@@ -14,3 +14,7 @@ const random = (min, max) => {
 }
 
 const math = (args) => Math
+
+const removeListItem = (array, index) => {
+    array.splice(index, 1)
+}

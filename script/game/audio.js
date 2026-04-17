@@ -12,9 +12,24 @@ audio.death_meow_abyss = new Audio(`../../assets/audio/meow-death-abyss.mp3`)
 
 audio.splash = new Audio(`../../assets/audio/splash.mp3`)
 
+audio.footstep0 = new Audio(`../../assets/audio/footstep0.wav`)
+audio.footstep1 = new Audio(`../../assets/audio/footstep1.wav`)
+audio.footstep2 = new Audio(`../../assets/audio/footstep2.wav`)
+
+audio.jetpack = new Audio(`../../assets/audio/jetpack.wav`)
+
 audio.trigger = new Audio(`../../assets/audio/trigger.wav`)
 
 
 document.addEventListener('click', () => {
     //sounds.song.play()
 })
+
+function playFootStep() {
+    const selected = "footstep"+Math.round(random(0, 2))
+    if(audio[selected].currentTime > 0) {
+        audio[selected].pause()
+        audio[selected].currentTime = 0
+    }
+    audio[selected].play()
+}

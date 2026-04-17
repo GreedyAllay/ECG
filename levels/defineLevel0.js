@@ -84,7 +84,11 @@ define.text(1690, -35, 15, '(hold)', "Archivo", "#ffffff")
 
 //define.trigger(0, 0, 100, 100, "alert('sex')", "pulse", "9999")
 
-define.trigger(1300, -100, 100, 100, `player.allowFly = true; loadJetCatTextures()`, "pulse", 2)
+define.trigger(1300, -100, 100, 100, `
+    player.allowFly = true;
+    loadJetCatTextures();
+    removeListItem(level, 62)
+    `, "pulse", 2)
 //define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 
 define.image(1300, -64, 150, 150, 90, "jetpack", 1)

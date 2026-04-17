@@ -4,6 +4,8 @@ const maxFlyingTime = 10 //do 100 for funsies, 10 is default
 
 const movementSpeed = 10 //10 is default
 
+const editorFlyingSpeed = 5
+
 function gameLogic() {
     game.frame++
 
@@ -53,10 +55,16 @@ function gameLogic() {
                     if(player.canFly) {
                         player.isFlying = true
                         player.animation = 'fly'
-                        player.yv = player.yv -= 1.4
+                        if(game.editor) {
+                            player.yv -= editorFlyingSpeed
+                        } else {
+                            player.yv -= 1.4
+                        }
                         rocketSmoke(player.x - (player.mirror ? -15 : 6), player.y+35, 0, 5, 5)
                     } else {
-                        player.isFlying = false
+                        if(!game.editor) {
+                            player.isFlying = false
+                        }
                     }
                 }
             } else {
@@ -86,7 +94,12 @@ function gameLogic() {
                     }
                 }
             }
-        }        
+        }     
+        if(checkKey("s")) {
+            if(game.editor && player.allowFly) {
+                player.yv += 5
+            }
+        }   
     }
 
     
@@ -193,6 +206,7 @@ function gameLogic() {
 }
 
 function killPlayer(cause) {
+    if(!player.canDie) return;
     player.dead = true
     player.death.x = player.x
     player.death.y = player.y

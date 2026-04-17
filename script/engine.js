@@ -3,7 +3,7 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -20,6 +20,7 @@ const player = {
     againstCeiling: false,
     dead: false,
     allowFly: true,
+    canDie: true,
     attackTime: 0,
     animation: 'idle',
     texture: 'idle0',
@@ -28,7 +29,7 @@ const player = {
     flyingTime: 0,
     sneakingTime: 0,
     runningTime: 0,
-    death: { x: 0, y: 0 }
+    death: { x: 0, y: 0 },
 }
 
 window.game = {
@@ -37,7 +38,7 @@ window.game = {
     running: false,
     renderHitBoxes: false,
     renderObjectIDs: false,
-    fpsTarget: 31,
+    fpsLimit: false,
     editor: false,
     drawTriggers: false
 }
@@ -85,7 +86,7 @@ try {
 }
 
 
-game.tick = () => {
+game.tick = async() => {
     //gaym code here :3
     try {
         if(player.dead) {
@@ -138,6 +139,8 @@ game.tick = () => {
         drawText(5, 140, "editor mode")
     }
 
+    requestAnimationFrame(game.tick)
+
 }
 
 game.start = () => {
@@ -153,7 +156,11 @@ game.start = () => {
         await wait(1000);
         element('menu').remove();
     })();
+        requestAnimationFrame(game.tick)
+
+    //obsolte below
     (async()=>{
+        return
         while(1) {
             game.tick()
             await wait(frameTime)

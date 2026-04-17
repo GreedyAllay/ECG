@@ -31,7 +31,11 @@ function handlePhysics() {
     if(yCol) {
         player.yv = 0
     } else {
-        player.yv += 1
+        if(game.editor && player.allowFly) {
+            player.yv /= 1.5
+        } else {
+            player.yv += 1
+        }
     }
     if(player.onFloor && !player.dead) {
         player.xv /= 1.5

@@ -26,6 +26,7 @@ document.addEventListener('keypress', (e) => {
     }
     if(e.key == "4") {
         game.editor = !game.editor
+        player.canDie = !game.editor
     }
     if(e.key == "5") {
         game.drawTriggers = !game.drawTriggers
@@ -42,3 +43,15 @@ document.addEventListener('keypress', (e) => {
     }
 
 })
+
+
+window.addEventListener("gamepadconnected", (e) => {
+  const gp = navigator.getGamepads()[e.gamepad.index];
+  console.log(
+    "Gamepad connected at index %d: %s. %d buttons, %d axes.",
+    gp.index,
+    gp.id,
+    gp.buttons.length,
+    gp.axes.length,
+  );
+});

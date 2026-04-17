@@ -1,8 +1,8 @@
 const editorobjects = []
 function renderEditor() {
     if(game.editor) {
-        editorobject.x = (0-camera.x + mouse.x/camera.z)-display.canvas.width/4
-        editorobject.y = (0-camera.y + mouse.y/camera.z)-display.canvas.height/4
+        editorobject.x = 0-camera.x + (mouse.x - display.canvas.width / 2) / camera.z;
+        editorobject.y = 0-camera.y + (mouse.y - display.canvas.height / 2) / camera.z;
         const x = editorobject.x
         const y = editorobject.y
         drawObjectWF(x, y, editorobject.width, editorobject.height, "#cf1b1b")
@@ -19,8 +19,6 @@ function renderEditor() {
         if(checkKey("ArrowDown")) {
             editorobject.height += 10
         }
-
-
     }
 }
 

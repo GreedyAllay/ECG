@@ -92,3 +92,22 @@ const editorobject = {
     x: 0,
     y: 0
 }
+
+const damageFlashy = () => {
+    return
+    let tick = 0
+    return () => {
+        if(tick < 10) {
+            const canvas = display.canvas
+            const {width, height} = canvas
+            drawImage(0-width/2, 0-height/2, width, height, "damage", 0, 0)
+        }
+        tick++
+    }
+}
+
+async function damageFlash() {
+    const canvas = display.canvas
+    const {width, height} = canvas
+    drawImage(0-width/2, 0-height/2, width, height, "damage", 0, 0)
+}

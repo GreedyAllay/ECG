@@ -19,6 +19,7 @@ loadTextures(
     "key.svg",
     "jetpack.svg",
     "sword.svg",
+    "damage.svg",
 ], 
 
 "assets/textures"

@@ -20,6 +20,9 @@ audio.jetpack = new Audio(`../../assets/audio/jetpack.wav`)
 
 audio.trigger = new Audio(`../../assets/audio/trigger.wav`)
 
+audio.pickup = new Audio(`../../assets/audio/pickup.ogg`)
+
+
 
 document.addEventListener('click', () => {
     //sounds.song.play()
@@ -32,4 +35,8 @@ function playFootStep() {
         audio[selected].currentTime = 0
     }
     audio[selected].play()
+}
+
+function pickupSound() {
+    audio.pickup.play()
 }

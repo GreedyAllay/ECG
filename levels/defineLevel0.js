@@ -87,7 +87,8 @@ define.text(1690, -35, 15, '(hold)', "Archivo", "#ffffff")
 define.trigger(1300, -100, 100, 100, `
     player.allowFly = true;
     loadJetCatTextures();
-    removeListItem(level, 62)
+    removeListItem(level, 62);
+    pickupSound();
     `, "pulse", 2)
 //define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 

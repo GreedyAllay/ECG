@@ -3,6 +3,7 @@ html, body {
     margin: 0;
     overflow: hidden;
     user-select: none;
+    cursor: pointer;
 }
 
 #backgroundimage {
@@ -43,6 +44,15 @@ html, body {
     white-space: nowrap;
     text-align: center;
     animation: fadeIn .35s linear;
+}
+
+#paw {
+    position: absolute;
+    width: 10%;
+    top:80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: fadeIn .2s linear;
 }
 
 @font-face {

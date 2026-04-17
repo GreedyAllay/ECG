@@ -9,6 +9,7 @@
 
 <script>
     (async()=> {
+        return
         await wait(2000)
         window.location.href = "../start"
     })()
@@ -40,8 +41,29 @@
 
     }
 
+    async function addClickIndicator() {
+            await wait(2000)
+        const paw = document.createElement("img")
+        paw.src = "../../assets/textures/paw.svg"
+        paw.id = "paw"
+        element("starcontainer").appendChild(paw)
+
+        async function animatePaw() {
+            //spent too god damn long on this eventually gave up and went for this shitty animation
+            let timer = 0
+            while(1) {
+                timer++;
+                paw.style.marginTop = (Math.sin(timer/75) *10)
+                paw.style.width = (Math.sin(timer/75) *10) + 100
+                await wait(0)
+            }
+        }
+        animatePaw()
+    }
+
     generateStars(100)
     animateLogo()
+    addClickIndicator()
 
     addEventListener("pointerdown", () => {
         window.location.href = "../start"

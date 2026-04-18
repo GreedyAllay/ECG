@@ -60,7 +60,7 @@ function gameLogic() {
                         } else {
                             player.yv -= 1.4 * DT
                         }
-                        rocketSmoke(player.x - (player.mirror ? -15 : 6), player.y+35, 0, 5, 5)
+                        rocketSmoke(player.x - (player.mirror ? -15 : 6), player.y+35, 0, 5, Math.round(5*DT))
                     } else {
                         if(!game.editor) {
                             player.isFlying = false

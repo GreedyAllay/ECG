@@ -1,10 +1,9 @@
+//controllo
+
+//what
+
 function handleControls() {
     if(checkKey("r")) { location.reload() }
-    //if(checkKey("s") && (player.onFloor && player.animation != "accident")) { player }
-    //if(checkKey("a")) { player.xv -= 4 }
-    //if(checkKey("d")) { player.xv += 4 }
-    //if(checkKey("w") && player.onFloor) { player.yv -= 8;}
-
 }
 
 //key logging (the good one)
@@ -14,6 +13,7 @@ function checkKey(key) {
     return keys.includes(key)
 }
 
+//ugly ass key detection i am very sorry
 document.addEventListener('keypress', (e) => {
     if(e.key == "1") {
         game.renderHitBoxes = !game.renderHitBoxes
@@ -31,6 +31,9 @@ document.addEventListener('keypress', (e) => {
     if(e.key == "5") {
         game.drawTriggers = !game.drawTriggers
     }
+    if(e.key == "/") {
+        openConsole()
+    }
     if(game.editor) {
         if(e.key == "-") {
             camera.initialZoom /= 1.1
@@ -44,7 +47,7 @@ document.addEventListener('keypress', (e) => {
 
 })
 
-
+//i stole this from some on;line website
 window.addEventListener("gamepadconnected", (e) => {
   const gp = navigator.getGamepads()[e.gamepad.index];
   console.log(
@@ -55,3 +58,7 @@ window.addEventListener("gamepadconnected", (e) => {
     gp.axes.length,
   );
 });
+
+function defineOnScreenControl(x, y, w, h, icon, key) {
+    //sooooooo being used right now
+}

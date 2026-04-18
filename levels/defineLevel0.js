@@ -1,5 +1,4 @@
-player.allowFly = false
-
+const skipIntro = false
 
 
 spawn.bush(-200, 70, 2)
@@ -94,5 +93,34 @@ define.trigger(1300, -100, 100, 100, `
 
 define.image(1300, -64, 150, 150, 90, "jetpack", 1)
 
+player.allowFly = false
 set.water(0)
 
+if(!skipIntro) {
+
+    camera.follow = false;
+    player.animation = "freefall";
+    player.canMove = false;
+    player.y = -500
+    camera.y = 0;
+    audio.fall.volume = 0.2
+    audio.fall.play();
+
+    (async() => {
+        while(1) {
+            if(player.onFloor) {
+                audio.impact.volume = .3
+                audio.impact.play()
+                player.animation = "dead"
+                await wait(1000)
+                player.animation = "idle"
+                camera.follow = true
+                player.canMove = true
+                return
+            }
+            await wait(1)
+        }
+    })()
+
+
+}

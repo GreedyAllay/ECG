@@ -11,6 +11,7 @@ const camera = {
     xv: 0,
     yv: 0,
     oldZoom: undefined,
+    follow: true
 }
 const size = {
     screenScale: 70,
@@ -144,6 +145,7 @@ function screenToWorldY(y) {
 }
 
 function setCamera(x, y, s) {
+    if(!camera.follow) return;
     const smoothness = 5;
     const damping = 100;
     if (s) {

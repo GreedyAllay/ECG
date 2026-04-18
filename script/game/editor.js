@@ -1,3 +1,5 @@
+//shitass editor
+
 const editorobjects = []
 function renderEditor() {
     if(game.editor) {

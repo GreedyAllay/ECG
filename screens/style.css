@@ -37,6 +37,7 @@ html, body {
     padding: 1px;
     font-size: 15;
     animation: moveIn .75s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+    cursor: not-allowed;
 }
 
 .option[enabled] {

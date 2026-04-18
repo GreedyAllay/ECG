@@ -1,3 +1,7 @@
+//MY EARS
+
+
+
 window.audio = {}
 
 const song = "toaster-kubbi.mp3" //change la song here gng
@@ -11,6 +15,9 @@ audio.death_meow = new Audio(`../../assets/audio/meow-death.mp3`)
 audio.death_meow_abyss = new Audio(`../../assets/audio/meow-death-abyss.mp3`)
 
 audio.splash = new Audio(`../../assets/audio/splash.mp3`)
+audio.impact = new Audio(`../../assets/audio/impact.wav`)
+audio.fall = new Audio(`../../assets/audio/fall.wav`)
+audio.land = new Audio(`../../assets/audio/land.ogg`)
 
 audio.footstep0 = new Audio(`../../assets/audio/footstep0.wav`)
 audio.footstep1 = new Audio(`../../assets/audio/footstep1.wav`)

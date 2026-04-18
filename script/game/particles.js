@@ -8,15 +8,13 @@ function handleParticles() {
         const particle = particles[i]
         const {x, y, w, h, source} = particle
         if(!particle.stalled) {
-        particle.x += particle.xv * DT
-        particle.y += particle.yv * DT
+            particle.x += particle.xv * DT
+            particle.y += particle.yv * DT
         }
-
         if(!particle.dead) {
             if(config.performance.transparency) {
                 display.context.filter = "none";
             }
-            
         } else {
             hasChangedContext = true
             switch (particle.kani) {
@@ -32,9 +30,7 @@ function handleParticles() {
                     }
                     break;
             }
-
         }
-
         animateParticle(particle, i)
 
         drawImage(particle.x, particle.y, particle.w, particle.h, particle.source, 0)
@@ -42,7 +38,6 @@ function handleParticles() {
         if(hasChangedContext) {
             display.context.filter = "none";
         }
-
         if(!particle.ghost) {
             if(checkParticleCollided(particle)) {
                 animateDeadParticle(particle, i, true)
@@ -70,6 +65,14 @@ function animateDeadParticle(particle, i, onFloor) {
                 particle.kanimationTime = 0
                 particle.dead = true
                 if(particle.stains && onFloor) {
+                    //oh noes! we fell on the floor!
+                    //ugh for gods sake, i have to extrapolate the position to predict where it would have been
+                    //if your stupid screen wouldn't have had like 2 billion hertz
+                    //due to the nature of physics in computers
+                    //the higher framerate means the higher collision checks
+                    //if you go really fast it often skips collisions and gets inside of objects
+                    //we actually want that this time but oh boy you HAD to have 180 hertz huh
+                    const antiDT = DT / 30 * 1000
                     defineStain(x, y, w, h, source)
                 }
             } else {

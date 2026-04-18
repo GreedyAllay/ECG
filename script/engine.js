@@ -3,7 +3,9 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
+
+const build = 10000
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -23,6 +25,7 @@ const player = {
     dead: false,
     allowFly: true,
     canDie: true,
+    canMove: true,
     attackTime: 0,
     animation: 'idle',
     texture: 'idle0',
@@ -89,13 +92,11 @@ try {
     lastError = error
 }
 
+//most likely the ugliest part of code in the entire game
 game.tick = async() => {
     //gaym code here :3
     const now = performance.now()
-    DT = (now - lastUpdate)
-
-    DT /= 1000
-    DT *= 30
+    DT = (now - lastUpdate); DT /= 1000; DT *= 30; DT = Math.min(DT, 2)
 
     lastUpdate = now
 

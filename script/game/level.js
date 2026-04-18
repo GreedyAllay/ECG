@@ -1,3 +1,5 @@
+//ts isn't even used btw
+
 function loadLevel(id) {
     return
     level = []

@@ -8,11 +8,18 @@
 <div id="starcontainer"></div>
 
 <script>
+    window.onload = () => {
     (async()=> {
         return
         await wait(2000)
         window.location.href = "../start"
     })()
+    generateStars(100)
+    animateLogo()
+    addClickIndicator()
+
+    }
+
     async function generateStars(amount) {
         for(let i = 0; i < amount; i++) {
             const size = random(1, 20)
@@ -61,9 +68,7 @@
         animatePaw()
     }
 
-    generateStars(100)
-    animateLogo()
-    addClickIndicator()
+
 
     addEventListener("pointerdown", () => {
         window.location.href = "../start"

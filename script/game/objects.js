@@ -1,7 +1,7 @@
 const define = {
-    object: (x, y, w, h, c, g) => {
+    object: (x, y, w, h, color, ghost) => {
         level.push({
-            type: 0, x: x, y: y, w: w, h: h, ghost: g, color: c
+            type: 0, x: x, y: y, w: w, h: h, ghost: ghost, color: color
         })
     },
 

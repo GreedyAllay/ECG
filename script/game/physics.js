@@ -3,12 +3,12 @@ function handlePhysics() {
     player.againstWall = checkPlayerCollided((player.mirror ? -1 : 1), 0)
     for(let i = 0; i < collisionRes; i++) {
         if(checkPlayerCollided()) {
-            player.x += 0-player.xv/collisionRes
+            player.x += (0-player.xv/collisionRes) * DT
             player.xv = 0
             player.againstWall = true
             break
         } else {
-            player.x += player.xv/collisionRes
+            player.x += (player.xv/collisionRes) * DT
         }
     }
     player.onFloor = checkPlayerCollided(0, 1)
@@ -17,7 +17,7 @@ function handlePhysics() {
     for(let i = 0; i < collisionRes; i++) {
         yCol = checkPlayerCollided()
         if(yCol) {
-            player.y += 0-player.yv/collisionRes
+            player.y += (0-player.yv/collisionRes) * DT
             player.yv = 0
             if(checkPlayerCollided(0, 1)) {
                 player.onFloor = true
@@ -25,16 +25,16 @@ function handlePhysics() {
             }
             break
         } else {
-            player.y += player.yv/collisionRes
+            player.y += (player.yv/collisionRes) * DT
         }
     }
     if(yCol) {
         player.yv = 0
     } else {
         if(game.editor && player.allowFly) {
-            player.yv /= 1.5
+            player.yv /= (1.5 * DT)
         } else {
-            player.yv += 1
+            player.yv += (1 * DT)
         }
     }
     if(player.onFloor && !player.dead) {

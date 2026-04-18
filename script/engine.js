@@ -8,6 +8,8 @@ const instantStart = true
 let frameTime = (1/targetFramerate)*1000
 let keys= []
 
+let DT = (1/60) * 30
+
 const player = { 
     x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
     //1100
@@ -38,7 +40,6 @@ window.game = {
     running: false,
     renderHitBoxes: false,
     renderObjectIDs: false,
-    fpsLimit: false,
     editor: false,
     drawTriggers: false
 }
@@ -53,7 +54,8 @@ window.config = {
     performance: {
         shaders: false,
         particles: true,
-        transparency: false
+        transparency: false,
+        fpsLimit: false,
     },
     gameplay: {
         gore: true
@@ -73,6 +75,8 @@ fpsc.frameTime = 0
 fpsc.lastLoop = new Date,
 fpsc.thisLoop
 
+let framerate = 0
+
 resetPlayerHitbox()
 
 let lastError = ""
@@ -85,29 +89,40 @@ try {
     lastError = error
 }
 
-
 game.tick = async() => {
     //gaym code here :3
+    const now = performance.now()
+    DT = (now - lastUpdate)
+
+    DT /= 1000
+    DT *= 30
+
+    lastUpdate = now
+
+
     try {
         if(player.dead) {
             setCamera(0-player.death.x - player.w/2, 0-player.death.y  - player.h/2, 1)
         } else {
-            setCamera((0-player.x - player.w/2 ) - player.xv, (0-player.y - player.h/2) - player.yv , 1)
+            setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 1)
         }
+
         clearScreen()
         handleControls()
         handlePhysics()
         gameLogic()
+        
         renderObjects()
         renderStains()
         handleParticles()
         renderPlayer()
         renderWater()
         drawHitboxes()
-        drawTriggers()
         checkTriggers()
+        drawTriggers()
 
         renderEditor()
+
         
         
     } catch (error) {
@@ -120,11 +135,13 @@ game.tick = async() => {
     fpsc.frameTime+= (thisFrameTime - fpsc.frameTime) / fpsc.filterStrength;
     fpsc.lastLoop = fpsc.thisLoop;
 
+    framerate = (1000/fpsc.frameTime).toFixed(0)
+
     if(lastError) {
         drawText(5, 80, lastError, "#ff0000", 30)
     }
 
-    drawText(5, 40, (1000/fpsc.frameTime).toFixed(0), "#000000")
+    drawText(5, 40, framerate, "#000000")
     //drawText(5, 120, player.animation, "#000000")
     //drawText(5, 180, game.frame, "#000000")
 
@@ -139,9 +156,13 @@ game.tick = async() => {
         drawText(5, 140, "editor mode")
     }
 
-    requestAnimationFrame(game.tick)
+    if(!config.performance.fpsLimit) {
+        requestAnimationFrame(game.tick)
+    }
 
 }
+
+let lastUpdate = performance.now()
 
 game.start = () => {
     if(!game.started) {
@@ -156,16 +177,18 @@ game.start = () => {
         await wait(1000);
         element('menu').remove();
     })();
+    if(config.performance.fpsLimit) {
+        (async()=>{
+            while(1) {
+                game.tick()
+                await wait(frameTime)
+            }
+        })()
+    } else {
         requestAnimationFrame(game.tick)
-
+    }
     //obsolte below
-    (async()=>{
-        return
-        while(1) {
-            game.tick()
-            await wait(frameTime)
-        }
-    })()
+
 }
 
 game.reset = () => {

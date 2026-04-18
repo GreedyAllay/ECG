@@ -7,10 +7,10 @@ const movementSpeed = 10 //10 is default
 const editorFlyingSpeed = 5
 
 function gameLogic() {
-    game.frame++
+    game.frame += DT
 
     if(player.isRunning && player.onFloor) {
-        player.runningTime++
+        player.runningTime += DT
     } else {
         player.runningTime = 0
     }
@@ -19,10 +19,10 @@ function gameLogic() {
         player.isRunning = false
     }
 
-    if(checkKey(" ") || player.attackTime > 0) {
-        player.attackTime++
+    if(checkKey(" ") || floor(player.attackTime) > 0) {
+        player.attackTime += DT
         player.animation = "attack"
-        if(player.attackTime > 10) {
+        if(floor(player.attackTime) > 10) {
             if(!player.dead) {
                 player.animation = "idle"
             }
@@ -40,7 +40,7 @@ function gameLogic() {
             }
         } else  {
             resetPlayerHitbox()
-            if((!(player.animation == "fall" || player.animation == "accident")||player.onFloor && player.floorTime > 5) && player.animation !== "dead" ) { //coyote time
+            if((!(player.animation == "fall" || player.animation == "accident")||player.onFloor && floor(player.floorTime) > 5) && player.animation !== "dead" ) { //coyote time
                 
                 player.animation = "idle"
                 player.isRunning = false
@@ -48,7 +48,7 @@ function gameLogic() {
             player.isSneaking = false
             if(checkKey("w")) {
             if(player.dead) return;
-                if(player.onFloor || (!player.onFloor && player.airTime < 5)) {
+                if(player.onFloor || (!player.onFloor && floor(player.airTime) < 5)) {
                     player.yv = -10
                     player.animation = "jump"
                 } else {
@@ -56,9 +56,9 @@ function gameLogic() {
                         player.isFlying = true
                         player.animation = 'fly'
                         if(game.editor) {
-                            player.yv -= editorFlyingSpeed
+                            player.yv -= editorFlyingSpeed * DT
                         } else {
-                            player.yv -= 1.4
+                            player.yv -= 1.4 * DT
                         }
                         rocketSmoke(player.x - (player.mirror ? -15 : 6), player.y+35, 0, 5, 5)
                     } else {
@@ -139,13 +139,13 @@ function gameLogic() {
     }
 
     if(player.isFlying) {
-        if(audio.jetpack.currentTime == 0 || audio.jetpack.currentTime > audio.jetpack.duration - 1) {
+        if(audio.jetpack.currentTime == 0 || floor(audio.jetpack.currentTime) > audio.jetpack.duration - 1) {
             audio.jetpack.play()
         }
         const a = audio.jetpack.currentTime * 10
         const vol = a > 1 ? 1 : a
         audio.jetpack.volume = vol
-        player.flyingTime++
+        player.flyingTime += DT
         if(player.flyingTime> maxflytime ) {
             player.isFlying = false
             player.canFly = false
@@ -161,9 +161,9 @@ function gameLogic() {
         }
         player.isFlying = false
         player.airTime = 0
-        player.floorTime++
+        player.floorTime += DT
     } else {
-        player.airTime++
+        player.airTime += DT
         player.floorTime = 0
         if(!((player.animation == "jump" || player.animation == "fly")||player.animation == "accident")) {
             player.animation = "fall"
@@ -180,7 +180,7 @@ function gameLogic() {
         }
     }
     if(player.isSneaking) {
-        player.sneakingTime++
+        player.sneakingTime += DT
     } else {
         player.sneakingTime = 0
     }

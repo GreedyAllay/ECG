@@ -151,8 +151,8 @@ function setCamera(x, y, s) {
         y = y - camera.y;
         camera.xv += x;
         camera.yv += y;
-        camera.x += (x / smoothness);
-        camera.y += (y / smoothness);
+        camera.x += (x / smoothness) * DT;
+        camera.y += (y / smoothness) * DT;
         camera.xv = camera.xv / damping;
         camera.yv = camera.yv / damping;
     }

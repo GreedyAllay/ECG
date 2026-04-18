@@ -8,8 +8,8 @@ function handleParticles() {
         const particle = particles[i]
         const {x, y, w, h, source} = particle
         if(!particle.stalled) {
-        particle.x += particle.xv
-        particle.y += particle.yv
+        particle.x += particle.xv * DT
+        particle.y += particle.yv * DT
         }
 
         if(!particle.dead) {
@@ -50,32 +50,32 @@ function handleParticles() {
             }
         }
         if(particle.gravity) {
-            particle.yv += particle.gravity
+            particle.yv += particle.gravity * DT
         }
         if(particle.lt) {
-            if(particle.time >= particle.lt) {
+            if(floor(particle.time) >= particle.lt) {
                 animateDeadParticle(particle, i)
             }
         }
-        particle.time++
+        particle.time += DT
     }
 }
 
 
-function animateDeadParticle(particle, i, floor) {
+function animateDeadParticle(particle, i, onFloor) {
     const {x, y, w, h, source} = particle
     switch (particle.kani) {
         case "fade":
             if(typeof particle.kanimationTime == "undefined") {
                 particle.kanimationTime = 0
                 particle.dead = true
-                if(particle.stains && floor) {
+                if(particle.stains && onFloor) {
                     defineStain(x, y, w, h, source)
                 }
             } else {
-                particle.kanimationTime++
+                particle.kanimationTime += DT
             }
-            if(particle.kanimationTime > 10) {
+            if(floor(particle.kanimationTime) > 10) {
                 particles.splice(i, 1)
             }
             break;
@@ -89,8 +89,8 @@ function animateDeadParticle(particle, i, floor) {
 function animateParticle(particle, i) {
     switch (particle.ani) {
     case "grow":
-        particle.w += 3
-        particle.h += 3
+        particle.w += 3 * DT
+        particle.h += 3 * DT
         break;
 
     default:

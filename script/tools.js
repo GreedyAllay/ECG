@@ -18,3 +18,5 @@ const math = (args) => Math
 const removeListItem = (array, index) => {
     array.splice(index, 1)
 }
+
+const floor = (number) => Math.floor(number)

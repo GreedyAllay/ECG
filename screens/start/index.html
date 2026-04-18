@@ -5,6 +5,9 @@
 
 <body>
     <!-- you are no longer needed but the audio breaks when i get rid of it for some reason -->
+    <div id="background"></div>
+
+    
     <div id="startAudio" hidden>
         <p>press anything to enable audio</p>
     </div>    
@@ -20,12 +23,13 @@
         <div class="button" enabled tabindex="3">credits</div>
     </div>
 
+
     <div id="notice" hidden>Please use a chromium-based browser for best performance <a href="compat.html">more info</a></div>
 
     <script src="../../script/tools.js"></script>
     <script src="../../script/tools.js"></script>
 
-        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11100</p>
+        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11200</p>
         <!-- 
         build naming legend
         1000: major update (for instance one that took all day)
@@ -117,6 +121,10 @@
 
         if(navigator.userAgent.includes("Firefox")) {
             element("notice").removeAttribute("hidden")
+        }
+
+        function animateBackground() {
+
         }
     </script>
 </body>

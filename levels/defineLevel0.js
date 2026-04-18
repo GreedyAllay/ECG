@@ -112,7 +112,9 @@ const defineLevel = () => {
                     audio.impact.volume = .3
                     audio.impact.play()
                     player.animation = "dead"
-                    await wait(1000)
+                    spawnBloodSplash(player.x, player.y+50, 100)
+                    spawnBloodPool(player.x, player.y, 5)
+                    await wait(2000)
                     player.animation = "standup"
                     await wait(2000)
                     player.animation = "idle"

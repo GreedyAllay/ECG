@@ -1,9 +1,8 @@
 html, body {
-    background-color: #313148;
     font-family: Archivo;
     user-select: none;
     zoom: 2;
-    overflow-x: hidden;
+    overflow: hidden;
 }
 
 *:focus {
@@ -20,6 +19,7 @@ html, body {
     margin-top: 20px;
     margin-right: 20px;
     font-size: 25;
+    z-index: 10;
 }
 
 .button[enabled] {
@@ -181,6 +181,29 @@ a:visited {
     }
     to {
         transform: translateX(130%);
+    }
+}
 
+#background {
+    background-image: url("../../assets/textures/tile.svg");
+    border-image-repeat: repeat;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-29px, -29px);
+    width: calc(100% + 29px);
+    height: calc(100% + 29px);
+    z-index: -1;
+    animation: animateBackground 5s linear infinite;
+}
+
+@keyframes animateBackground {
+    from {
+        left: 0;
+        top: 29px;
+    }
+    to {
+        left: 29px;
+        top: 0;
     }
 }

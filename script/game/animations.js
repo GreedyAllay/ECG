@@ -15,14 +15,14 @@ async function defineAnimation(name, frames, speed, loop) {
         if(frames <= 1) return //wroks
     for(let i = 0; i < frames; i++) {
         player.texture = name+i
-        for(let i = 0; i < speed * 100; i++) {
+        for(let j = 0; j < speed * 100; j++) {
             if(player.animation != name) {break}
             await wait(10)
         }
         if(player.animation != name) return
     }
     if(!loop) {
-        while(player.animation != name) await wait(1)
+        while(player.animation === name) await wait(1);
     }
 }
 
@@ -42,6 +42,7 @@ async function runAnimations() {
             await defineAnimation("attack", 2, .2, 0)
             await defineAnimation("freefall", 0, 0, 0)
             await defineAnimation("dead", 0, 0, 0)
+            await defineAnimation("standup", 5, 0.2, 0)
             while(player.dead) {
                 await defineDeathAnimation()
                 await wait(1)

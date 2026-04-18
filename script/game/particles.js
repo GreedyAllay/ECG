@@ -190,3 +190,11 @@ function spawnRain(amount) {
         defineParticle(random(-400, 400), random(-400, -220), 5, 20, 0, 10, 0, "rain", 1)
     }
 }
+
+function smoothFluids() {
+    particles.forEach(particle => {
+        level.forEach(object => {
+            //this is gonna be shit for performance probably, might need to use a web worker to not create too much overhead
+        });
+    });
+}

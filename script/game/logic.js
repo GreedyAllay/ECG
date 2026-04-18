@@ -250,6 +250,7 @@ function setAnimation(animation, force) {
     if(!force) {
         if(player.animation == "accident") return;
         if(player.animation == "freefall") return;
+        if(player.animation == "standup") return;
     }
     player.animation = animation
 }

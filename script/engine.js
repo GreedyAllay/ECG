@@ -3,9 +3,7 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = true
-
-const build = 10000
+const instantStart = false
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -188,7 +186,7 @@ game.start = () => {
     } else {
         requestAnimationFrame(game.tick)
     }
-    //obsolte below
+    defineLevel()
 
 }
 
@@ -226,3 +224,11 @@ const set = {
 //function AABB(x1, y1, w1, h1, x2, y2, w2, h2) { (x1, y1, w1, h1, x2, y2, w2, h2) <= Math.abs(x1 - x2) <= ((w1 / 2) + (w2 / 2)) && Math.abs(y1-y2)<=((h1 / 2) + (h2 / 2)) }
 
 
+
+
+level.forEach(obj => {
+    if(AABB(obj.x, obj.y, obj.w, obj.y, mouse.x, mouse.y, 0, 0)) {
+        level.splice(i, 1)
+    }
+    
+});

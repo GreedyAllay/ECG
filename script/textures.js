@@ -89,6 +89,11 @@ function loadCatTextures() {
     "dead.svg",
     "deadwall.svg",
     "freefall.svg",
+    "standup0.svg",
+    "standup1.svg",
+    "standup2.svg",
+    "standup3.svg",
+    "standup4.svg",
     ], path)
 }
 

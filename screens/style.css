@@ -77,6 +77,45 @@ html, body {
     scrollbar-width: none;
 }
 
+#levels {
+    width: calc(100% - 20px);
+    max-height: calc(100% - 100px);
+    height: 100%;
+    border-radius: 5px;
+    background-color: rgba(21, 21, 35, 0.50);
+    backdrop-filter: blur(1px);
+    overflow-y: scroll;
+    position: absolute;
+    scrollbar-width: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.level {
+    padding: 0px;
+    background-color: rgb(21, 21, 35);
+    outline-style: solid;
+    outline-width: 4px;
+    outline-color: rgb(21, 21, 35);
+    border-radius: 4px;
+    width: 20px;
+    height: 20px;
+    margin: 8px;
+    cursor: pointer;
+    font-size:8px;
+    color: rgb(237, 237, 237);
+    text-align: center;
+    background-image: url("../assets/textures/levelcat.svg");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 none:focus {
     outline-style: dotted;
     outline-width: 2px;
@@ -200,6 +239,11 @@ a:visited {
 .mainBg {
     background-image: url("../../assets/textures/tile.svg");
 }
+
+.playBg {
+    background-image: url("../../assets/textures/tileplay.svg");
+}
+
 
 #background {
     border-image-repeat: repeat;

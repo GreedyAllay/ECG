@@ -29,7 +29,7 @@
     <script src="../../script/tools.js"></script>
     <script src="../../script/tools.js"></script>
 
-        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11500 | Javascript edition</p>
+        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11600 | Javascript edition</p>
         <!-- 
         build naming legend
         1000: major update (for instance one that took all day)
@@ -98,8 +98,7 @@
         function buttonClick(id) {
             switch (id) {
                 case 0:
-                    audio.song.pause()
-                    window.parent.game.start()
+                    window.location.href = "../levels"
                     break;
                 case 1:
                     window.location.href = "../settings"

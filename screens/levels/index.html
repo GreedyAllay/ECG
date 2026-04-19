@@ -3,19 +3,19 @@
 </head>
 
 <body>
-    <div id="background" class="gearBg"></div>
-    <p id="game-title">settings</p>
+    <div id="background" class="playBg"></div>
+    <p id="game-title">level select</p>
 
+    <div id="options">
+        <div class="option" id="return" style="position: absolute; top: 40px;" onclick='window.location.href = "../start"' enabled white>go back</div>
+    </div>
+    <div id="levels">
 
-    <div id="buttons">
-        <div class="button" enabled>gameplay</div>
-        <div class="button" enabled>performance</div>
-        <div class="button"  white enabled >go back</div>
     </div>
 
     <script src="../../script/tools.js"></script>
 
-        <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
+        <p id="credits">&#169 2026 - Axolay</p>
     <script>
         const audio = window.parent.audio
         const parent = window.parent
@@ -56,15 +56,21 @@
             }
         }
 
-        function updatePage() {
-            location.reload
+        function loadLevels() {
+            for(let i = 0; i < 1; i++) {
+                const level = document.createElement("div")
+                level.className = "level"
+                level.textContent = i + 1
+                element("levels").appendChild(level)
+            }
         }
 
-        function animateTransition() {
-            const transition = document.createElement("img")
-            transition.id="transition"
-            document.appendChild(transition)
-        }
+        element("levels").addEventListener('click', (e) => {
+            audio.song.pause()
+            parent.game.start()
+        })
+
+        loadLevels()
 
     </script>
 </body>

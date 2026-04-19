@@ -1,6 +1,8 @@
 const defineLevel = () => {
     const skipIntro = false
 
+    world.useReflections = false
+
     spawn.bush(-200, 70, 2)
 
     spawn.tree(150, 0, 1)
@@ -55,7 +57,7 @@ const defineLevel = () => {
     spawn.foliage(-300, 97, 50, 900)
 
 
-    //player.x = 1298
+    player.x = 0
 
 
 
@@ -98,6 +100,7 @@ const defineLevel = () => {
         loadJetCatTextures();
         removeListItem(level, 62);
         pickupSound();
+        world.useReflections = true;
         `, "pulse", 2)
     //define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 

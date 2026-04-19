@@ -82,7 +82,41 @@ function renderPlayer() {
 }
 
 function renderWater() {
-    drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2, "#3c82d74d")
+    drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2 - camera.y, "#3c82d74d")
+    renderWaterReflections()
+}
+
+function renderWaterReflections() {
+    if(!config.performance.reflections || !world.useReflections) return;
+    const ctx = display.context
+    ctx.filter = `opacity(.5)`;
+
+    //prevent stuff from rendering outside of the water
+    ctx.save()
+    ctx.beginPath()
+    ctx.rect(screenToWorldX((0-camera.x) - display.canvas.width / 4, world.minHeight), screenToWorldY(world.minHeight), display.canvas.width, display.canvas.height / 2 - camera.y)
+    ctx.clip()
+
+    //wobbly watery effecty wow so cool and simple
+    const offset = {
+        x: Math.sin(game.frame/10) * 4,
+        y: Math.cos(game.frame/10) * 4,
+    }
+
+    //render player's reflection with shitass math
+    drawImage(player.x+player.ox + offset.x, ((190 - player.y) - player.h) + world.minHeight + offset.y, 100, 100, player.texture, player.mirror, 1, true)
+
+
+    //level stuff
+    level.forEach(object => {
+        if(object.type == 0) {
+            const {x, y, w, h} = object
+            drawObject(x + offset.x, world.minHeight-y+h + offset.y, w, h, object.color)            
+        }
+
+    });
+    ctx.restore()
+    ctx.filter = "none";
 }
 
 //i made this real quick pls dont judge it wasnt meant to be used by anyone besides me ok?

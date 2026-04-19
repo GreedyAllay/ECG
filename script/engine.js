@@ -3,7 +3,7 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -48,12 +48,14 @@ window.game = {
 window.world = {
     waterHeight: 0,
     minHeight: 200,
-    environment: "grassy"
+    environment: "grassy",
+    useReflections: true,
 }
 
 window.config = {
     performance: {
         shaders: false,
+        reflections: true,
         particles: true,
         transparency: false,
         fpsLimit: false,

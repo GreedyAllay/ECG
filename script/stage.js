@@ -103,7 +103,7 @@ function drawText(x, y, text, color, size, camera, font) {
     display.context.fillText(text, x, y)
 }
 
-function drawImage(x, y, w, h, source, mirror, auto) {
+function drawImage(x, y, w, h, source, mirror, auto, flip) {
     //inverse rendering code by jwklong
     if(!textures[source] || !textures[source].complete) { throw("engineError: tried to draw unloaded image"); return}
 
@@ -124,14 +124,19 @@ function drawImage(x, y, w, h, source, mirror, auto) {
     }
 
 
-    if (mirror) {
+    if (mirror || flip) {
     display.context.save()
-        display.context.translate(w, 0)
-        display.context.scale(-1, 1)
-        x *= mirror ? -1 : 1
+        display.context.translate(mirror ? w : 0, flip ? h : 0)
+        display.context.scale(mirror ? -1 : 1, flip ? -1 : 1)
+        if(mirror) {
+            x *= mirror ? -1 : 1
+        }
+        if(flip) {
+            y *= flip ? -1 : 1
+        }
     }
     display.context.drawImage(textures[source], x, y, w, h)
-    if(mirror) {
+    if(mirror || flip) {
         display.context.restore()
     }
 }

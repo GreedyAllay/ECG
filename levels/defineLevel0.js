@@ -27,6 +27,8 @@ const defineLevel = () => {
     define.object(1000, -600, 500, 1000, "#373737", 1)
 
 
+    spawn.rock(1000, 0, 10, 10)
+    spawn.rock(600, 0, 4, 10)
 
 
     //ground
@@ -48,12 +50,20 @@ const defineLevel = () => {
 
     define.object(1850, -200, 1000, 700, "#5b5b5b") //ledge you have to fly up to
 
+    spawn.hydrant(50, 54)
+
+    spawn.foliage(-300, 97, 50, 900)
+
+
+    //player.x = 1298
+
+
+
+    define.image(1700, 100, 60, 60, 90, "warn", 1)
 
 
 
 
-
-    spawn.hydrant(0, 54)
 
     define.text(-200, -50, 30, 'evil cat game', 'Archivo Black', '#ffffff')
     define.text(-130, -25, 20, 'by Axolay', 'Archivo', '#e7e7e7')
@@ -91,7 +101,7 @@ const defineLevel = () => {
         `, "pulse", 2)
     //define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 
-    define.image(1300, -64, 150, 150, 90, "jetpack", 1)
+    const jetpack = define.image(1300, -64, 150, 150, 90, "jetpack", 1)
 
     player.allowFly = false
     set.water(0)
@@ -112,7 +122,7 @@ const defineLevel = () => {
                     audio.impact.volume = .3
                     audio.impact.play()
                     player.animation = "dead"
-                    spawnBloodSplash(player.x, player.y+50, 100)
+                    spawnFluidSplash(player.x, player.y+50, 100, "blood")
                     spawnBloodPool(player.x, player.y, 5)
                     await wait(2000)
                     player.animation = "standup"

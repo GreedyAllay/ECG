@@ -71,6 +71,10 @@ html, body {
     margin-left: auto;
     margin-right: 20px;
     margin-top: 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: calc(100% - 100px);
+    scrollbar-width: none;
 }
 
 none:focus {
@@ -150,6 +154,7 @@ p {
 }
 
 a {
+    color: white;
 }
 
 a:visited {
@@ -184,8 +189,19 @@ a:visited {
     }
 }
 
-#background {
+.settingBg {
+    background-image: url("../../assets/textures/tilesetting.svg");
+}
+
+.gearBg {
+    background-image: url("../../assets/textures/tilegear.svg");
+}
+
+.mainBg {
     background-image: url("../../assets/textures/tile.svg");
+}
+
+#background {
     border-image-repeat: repeat;
     position: absolute;
     left: 0;

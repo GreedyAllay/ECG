@@ -3,6 +3,7 @@
 </head>
 
 <body>
+    <div id="background" class="gearBg"></div>
     <p id="game-title">settings</p>
 
 
@@ -43,10 +44,10 @@
         function buttonClick(id) {
             switch (id) {
                 case 0:
-                    window.location.href = "gameplay"
+                    window.location.href = "set.html?page=gameplay"
                     break;
                 case 1:
-                    window.location.href = "performance"
+                    window.location.href = "set.html?page=performance"
                     break;
                 case 2:
                     window.location.href = "../start"
@@ -58,5 +59,12 @@
         function updatePage() {
             location.reload
         }
+
+        function animateTransition() {
+            const transition = document.createElement("img")
+            transition.id="transition"
+            document.appendChild(transition)
+        }
+
     </script>
 </body>

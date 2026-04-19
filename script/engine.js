@@ -10,7 +10,7 @@ let keys= []
 
 let DT = (1/60) * 30
 
-const player = { 
+window.player = { 
     x: 0, y: 0, w: 0, h: 0, mirror: false, xv: 0, yv: 0, ox: -40, oy: -20, hbx: 0, hby: 0,
     //1100
     againstWall: false,
@@ -21,7 +21,7 @@ const player = {
     canFly: false,
     againstCeiling: false,
     dead: false,
-    allowFly: true,
+    allowFly: false,
     canDie: true,
     canMove: true,
     attackTime: 0,

@@ -7,6 +7,7 @@ function checkTriggers() {
                 if(!(trigger.trtype == "pulse" && trigger.active) || trigger.trtype == "repeat") {
                     trigger.active = true
                     if(game.drawTriggers) {
+                        audio.trigger.volume = .4
                         audio.trigger.play()
                     }
                     if(trigger.uses < trigger.maxUses) {

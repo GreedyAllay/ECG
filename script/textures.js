@@ -11,7 +11,7 @@ loadTextures(
     "stem.svg",
     "leaves.svg",
     "hydrant.svg",
-    "flower.svg",
+    "foliage/flower.svg",
     "gear.svg",
     "tutorialkey.svg",
     "fire.svg",
@@ -20,6 +20,14 @@ loadTextures(
     "jetpack.svg",
     "sword.svg",
     "damage.svg",
+    "foliage/grass0.svg",
+    "foliage/grass1.svg",
+    "foliage/grass2.svg",
+    "foliage/grass3.svg",
+    "rock.svg",
+    "glitter.svg",
+    "warn.svg",
+    "water.svg",
 ], 
 
 "assets/textures"

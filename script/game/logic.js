@@ -230,15 +230,15 @@ function killPlayer(cause) {
     switch (cause) {
         case "abyss":
         audio.death_meow_abyss.play()
+        audio.splash.play()
         setAnimation("accident")
-        spawnBloodSplash(player.x, player.y, 100)
+        spawnFluidSplash(player.x, player.y+50, 100, "water")
         spawnBloodWater(player.x, player.y, 100)
             break;
-    
         default:
         audio.death_meow.play()
         setAnimation("dead", 1)
-        spawnBloodSplash(player.x, player.y, 100)
+         spawnFluidSplash(player.x, player.y+50, 100, "blood")
         if(player.onFloor) {
             spawnBloodPool(player.x, player.y, 5)
         }

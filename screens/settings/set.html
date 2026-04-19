@@ -1,8 +1,9 @@
 <head>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../style.css">
 </head>
 
 <body>
+    <div id="background" class="settingBg"></div>
     <p id="game-title">gameplay</p>
 
 
@@ -10,7 +11,7 @@
         <div class="option" id="return" enabled white>go back</div>
     </div>
 
-    <script src="../../../script/tools.js"></script>
+    <script src="../../script/tools.js"></script>
 
         <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
     <script>
@@ -20,10 +21,13 @@
 
         parent.document.title = "gameplay - evil cat game"
 
-        function generateOptions(path) {
-            const options = Object.keys(parent.config.performance)
+        const parameters = new URLSearchParams(window.location.search);
+        const page = parameters.get('page')
+
+        function generateOptions() {
+            const options = Object.keys(parent.config[page])
             options.forEach(option => {
-                let thisOption = parent.config.performance[option]
+                let thisOption = parent.config[page][option]
                 const optionObject = document.createElement("div")
                 optionObject.className = "option"
 
@@ -36,13 +40,13 @@
                 element("options").prepend(optionObject)
                 optionObject.addEventListener("click", () => {
                     thisOption = !thisOption
-                    parent.config.performance[option] = thisOption
+                    parent.config[page][option] = thisOption
                     setThisThing()
                 })
             });
         }
 
-        generateOptions("performance")
+        generateOptions()
 
         buttons.forEach((element, i) => {
             if(element.hasAttribute("enabled")) {
@@ -60,7 +64,7 @@
         });
 
         element("return").addEventListener("click", () => {
-            window.location.href = "../"
+            window.location.href = "index.html"
         })
 
     </script>

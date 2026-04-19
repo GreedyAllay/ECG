@@ -34,6 +34,9 @@ document.addEventListener('keypress', (e) => {
     if(e.key == "/") {
         openConsole()
     }
+    if(e.key == "o") {
+        loadCustomLevel()
+    }
     if(game.editor) {
         if(e.key == "-") {
             camera.initialZoom /= 1.1

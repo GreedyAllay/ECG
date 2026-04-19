@@ -22,12 +22,6 @@ function handleParticles() {
                     if(config.performance.transparency) {
                         display.context.filter = `opacity(${1-particle.kanimationTime/10})`;
                     }
-                    
-                    break;
-                default:
-                    if(particle.stains && floor) {
-                        defineStain(x, y, w, h, source)
-                    }
                     break;
             }
         }
@@ -40,6 +34,7 @@ function handleParticles() {
         }
         if(!particle.ghost) {
             if(checkParticleCollided(particle)) {
+                particle.dead = true
                 animateDeadParticle(particle, i, true)
                 particle.stalled = true
             }
@@ -64,17 +59,6 @@ function animateDeadParticle(particle, i, onFloor) {
             if(typeof particle.kanimationTime == "undefined") {
                 particle.kanimationTime = 0
                 particle.dead = true
-                if(particle.stains && onFloor) {
-                    //oh noes! we fell on the floor!
-                    //ugh for gods sake, i have to extrapolate the position to predict where it would have been
-                    //if your stupid screen wouldn't have had like 2 billion hertz
-                    //due to the nature of physics in computers
-                    //the higher framerate means the higher collision checks
-                    //if you go really fast it often skips collisions and gets inside of objects
-                    //we actually want that this time but oh boy you HAD to have 180 hertz huh
-                    const antiDT = DT / 30 * 1000
-                    defineStain(x, y, w, h, source)
-                }
             } else {
                 particle.kanimationTime += DT
             }
@@ -84,8 +68,20 @@ function animateDeadParticle(particle, i, onFloor) {
             break;
     
         default:
-        particles.splice(i, 1)
+            particle.dead = true
+            particles.splice(i, 1)
             break;
+    }
+    if(particle.stains && onFloor) {
+        //oh noes! we fell on the floor!
+        //ugh for gods sake, i have to extrapolate the position to predict where it would have been
+        //if your stupid screen wouldn't have had like 2 billion hertz
+        //due to the nature of physics in computers
+        //the higher framerate means the higher collision checks
+        //if you go really fast it often skips collisions and gets inside of objects
+        //we actually want that this time but oh boy you HAD to have 180 hertz huh
+        const antiDT = (1/20) / DT
+        defineStain(x + particle.xv * antiDT, y + particle.yv * antiDT, w, h, source)
     }
 }
 
@@ -117,12 +113,12 @@ function bloodStab(x, y, amount) {
     }
 }
 
-function spawnBloodSplash(x, y, amount) {
+function spawnFluidSplash(x, y, amount, source) {
     if(!config.gameplay.gore) return;
     const dir = player.mirror ? -1 : 1
     for(let i = 0; i < amount; i++) {
     const size = random(3, 10)
-        defineParticle(x, y, size, size, random(-10, 10), random(-10, 10), 0, "blood", 1, 100, "", "fade", true)
+        defineParticle(x, y, size, size, random(-10, 10), random(-10, 10), 0, source, 1, 100, "", "", true)
     }
 }
 
@@ -134,7 +130,7 @@ function defineParticle(x, y, w, h, xv, yv, ghost, source, gravity, lifetime, an
         xv: xv, yv: yv, ghost: ghost,
         source: source, gravity: gravity,
         lt: lifetime, time: 0, ani: animation, kani: killanimation,
-        stains: stains
+        stains: stains,
     })
 }
 
@@ -197,4 +193,10 @@ function smoothFluids() {
             //this is gonna be shit for performance probably, might need to use a web worker to not create too much overhead
         });
     });
+}
+
+function spawnConfetti(x, y, amount) {
+    for(let i = 0; i < amount; i++) {
+        defineParticle(x, y, 10, 10, random(-5, 5), random(-5, 5), 0, "glitter", 1, 100, "", "", 1)
+    }
 }

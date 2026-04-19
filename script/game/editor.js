@@ -30,3 +30,8 @@ addEventListener("mousedown", (e) => {
         define.object(editorobject.x, editorobject.y, editorobject.width, editorobject.height, "#742cbb")
     }
 })
+
+function loadCustomLevel() {
+    //VERY SAFE
+    eval(prompt("enter javascript code"))
+}

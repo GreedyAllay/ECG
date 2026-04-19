@@ -15,3 +15,8 @@ To setup the game;
 
 ## game information
 - use the number keys to debug/enable certain features
+
+
+
+## license
+https://creativecommons.org/licenses/by-nc-sa/4.0/

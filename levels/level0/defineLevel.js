@@ -3,6 +3,13 @@ const defineLevel = () => {
 
     world.useReflections = false
 
+
+    const color = {
+        rock: "#909190",
+        cave: "#5b5b5b"
+    }
+
+
     spawn.bush(-200, 70, 2)
 
     spawn.tree(150, 0, 1)
@@ -23,13 +30,26 @@ const defineLevel = () => {
     //spawn.bush(450, 0, 1)
     //spawn.bush(400, 30, 1)
 
-    define.object(1000, -300, 900, 800, "#373737", 1)
+    define.object(1000, -300, 900, 800, "#373737", 1, -1)
 
     //too tired to explain all this man just go dfind it out urself
-    define.object(1000, -600, 500, 1000, "#373737", 1)
+    define.object(1000, -600, 500, 1000, "#373737", 1, -1)
+
+    spawn.rock(550, 40, 1, 10, 1)
+    spawn.rock(800, -20, 10, 10, 1)
+    spawn.rock(1000, -20, 10, 10, 0)
+    spawn.rock(1200, -20, 10, 10, 0)
+    spawn.rock(1300, 20, 10, 10, 0)
+    spawn.rock(1000, -150, 10, 10, 1)
+    spawn.rock(1200, -150, 10, 10, 1)
+    spawn.rock(950, -200, 1, 10, 1)
+    spawn.rock(950, -250, 1, 10, 1)
+    spawn.rock(950, -300, 1, 10, 1)
+    spawn.rock(950, -350, 1, 10, 1)
+    spawn.rock(950, -400, 1, 10, 1)
 
 
-    spawn.rock(1000, 0, 10, 10)
+
     spawn.rock(600, 0, 4, 10)
 
 
@@ -40,25 +60,21 @@ const defineLevel = () => {
     define.object(-600, -400, 300, 1000, '#61471b', 0)
 
     //first jumps
-    define.object(600, 50, 1000, 300, "#5b5b5b")
+    define.object(600, 50, 1000, 300, color.cave)
 
-    define.object(1000, -600, 300, 500, "#5b5b5b")
+    define.object(1000, -600, 300, 500, color.cave)
 
     //annoying ass crawl
     //define.object(1200, -550, 300, 500, "#5b5b5b")
 
 
-    define.object(800, 0, 800, 500, "#5b5b5b") //part before you have to fly up to the thing
+    define.object(800, 0, 800, 500, color.cave) //part before you have to fly up to the thing
 
-    define.object(1850, -200, 1000, 700, "#5b5b5b") //ledge you have to fly up to
+    define.object(1850, -200, 1000, 700, color.cave) //ledge you have to fly up to
 
     spawn.hydrant(50, 54)
 
     spawn.foliage(-300, 97, 50, 900)
-
-
-    player.x = 0
-
 
 
     define.image(1700, 100, 60, 60, 90, "warn", 1)
@@ -92,8 +108,9 @@ const defineLevel = () => {
 
     define.text(1690, -35, 15, '(hold)', "Archivo", "#ffffff")
 
-
     //define.trigger(0, 0, 100, 100, "alert('sex')", "pulse", "9999")
+
+    window.jetpack = define.image(1300, -64, 150, 150, 90, "jetpack", 1)
 
     define.trigger(1300, -100, 100, 100, `
         player.allowFly = true;
@@ -101,10 +118,10 @@ const defineLevel = () => {
         removeListItem(level, 62);
         pickupSound();
         world.useReflections = true;
+        removeID(window.jetpack);
         `, "pulse", 2)
     //define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 
-    const jetpack = define.image(1300, -64, 150, 150, 90, "jetpack", 1)
 
     player.allowFly = false
     set.water(0)

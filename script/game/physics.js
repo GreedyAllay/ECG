@@ -32,7 +32,7 @@ function handlePhysics() {
         player.yv = 0
     } else {
         if(game.editor && player.allowFly) {
-            player.yv /= (1.5 * DT)
+            player.yv / 10
         } else {
             player.yv += (1 * DT)
         }
@@ -92,7 +92,8 @@ function setHitboxCrouching (mirror) {
     player.w = 50
     player.h = 40
     player.oy = -50
-    player.yv = 100
+    if(!player.isSneaking) {player.yv = 100}
+    player.y += 29
     if(mirror) {
         player.hbx = -30
     } else {

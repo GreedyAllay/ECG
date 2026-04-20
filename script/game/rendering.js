@@ -1,7 +1,20 @@
 function renderObjects() {
     level.forEach(object => {
-        switch (object.type) {
-            case 0:
+        if(!object.layer) {
+            renderObject(object)
+        }
+    });
+    if(game.renderObjectIDs) {
+        level.forEach((object, i) => {
+            drawText(screenToWorldX(object.x), screenToWorldY(object.y), object.id, "#ff0000", 15)
+        });
+    }
+    display.context.restore()
+}
+
+function renderObject(object) {
+    switch (object.type) {
+        case 0:
                 drawObject(
                 object.x,
                 object.y,
@@ -33,13 +46,6 @@ function renderObjects() {
             default:
                 break;
         }
-    });
-    if(game.renderObjectIDs) {
-        level.forEach((object, i) => {
-            drawText(screenToWorldX(object.x), screenToWorldY(object.y), i, "#ff0000")
-        });
-    }
-    display.context.restore()
 }
 
 function drawHitboxes() {
@@ -82,8 +88,7 @@ function renderPlayer() {
 }
 
 function renderWater() {
-    drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2 - camera.y, "#3c82d74d")
-    renderWaterReflections()
+    drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2 - camera.y, "#3f89e4b8")
 }
 
 function renderWaterReflections() {
@@ -94,7 +99,7 @@ function renderWaterReflections() {
     //prevent stuff from rendering outside of the water
     ctx.save()
     ctx.beginPath()
-    ctx.rect(screenToWorldX((0-camera.x) - display.canvas.width / 4, world.minHeight), screenToWorldY(world.minHeight), display.canvas.width, display.canvas.height / 2 - camera.y)
+    ctx.rect(screenToWorldX((0-camera.x) - display.canvas.width / 4, world.minHeight), screenToWorldY(world.minHeight), display.canvas.width*2, display.canvas.height / 2 - camera.y)
     ctx.clip()
 
     //wobbly watery effecty wow so cool and simple
@@ -111,7 +116,7 @@ function renderWaterReflections() {
     level.forEach(object => {
         if(object.type == 0) {
             const {x, y, w, h} = object
-            drawObject(x + offset.x, world.minHeight-y+h + offset.y, w, h, object.color)            
+            drawObject(x + offset.x, 2*world.minHeight-y-h + offset.y, w, h, object.color)            
         }
 
     });
@@ -144,4 +149,20 @@ async function damageFlash() {
     const canvas = display.canvas
     const {width, height} = canvas
     drawImage(0-width/2, 0-height/2, width, height, "damage", 0, 0)
+}
+
+function renderBackgroundLayer() {
+    level.forEach(object => {
+        if(object.layer == -1) {
+            renderObject(object)
+        }
+    });
+}
+
+function renderForegroundLayer() {
+    level.forEach(object => {
+        if(object.layer > 0) {
+            renderObject(object)
+        }
+    });
 }

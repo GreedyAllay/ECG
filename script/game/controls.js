@@ -65,3 +65,12 @@ window.addEventListener("gamepadconnected", (e) => {
 function defineOnScreenControl(x, y, w, h, icon, key) {
     //sooooooo being used right now
 }
+
+addEventListener("wheel", (e) => {
+    if(e.deltaY>0) {
+        camera.initialZoom /= 1.1
+    } else {
+        camera.initialZoom *= 1.1
+    }
+    resize()
+})

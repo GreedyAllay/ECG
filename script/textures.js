@@ -28,6 +28,7 @@ loadTextures(
     "glitter.svg",
     "warn.svg",
     "water.svg",
+    "rockcave.svg",
 ], 
 
 "assets/textures"

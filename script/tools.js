@@ -20,3 +20,9 @@ const removeListItem = (array, index) => {
 }
 
 const floor = (number) => Math.floor(number)
+
+const waitDT = (time) => {
+    return;
+    const oldframe = game.frame
+    game.frame - oldframe < time
+}

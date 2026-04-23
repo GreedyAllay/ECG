@@ -19,7 +19,7 @@ loadTextures(
     "key.svg",
     "jetpack.svg",
     "sword.svg",
-    "damage.svg",
+    "bloodvignette.svg",
     "foliage/grass0.svg",
     "foliage/grass1.svg",
     "foliage/grass2.svg",

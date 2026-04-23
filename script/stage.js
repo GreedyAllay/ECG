@@ -103,7 +103,7 @@ function drawText(x, y, text, color, size, camera, font) {
     display.context.fillText(text, x, y)
 }
 
-function drawImage(x, y, w, h, source, mirror, auto, flip) {
+function drawImage(x, y, w, h, source, mirror, auto, flip, screenspace) {
     //inverse rendering code by jwklong
     if(!textures[source] || !textures[source].complete) { throw("engineError: tried to draw unloaded image"); return}
 
@@ -111,8 +111,8 @@ function drawImage(x, y, w, h, source, mirror, auto, flip) {
     const height = textures[source].height/100
     //auto = false
 
-    x = screenToWorldX(x)
-    y = screenToWorldY(y)
+    x = screenspace ? x : screenToWorldX(x)
+    y = screenspace ? y : screenToWorldY(y)
 
     if(!auto) auto = false
     if(auto) {

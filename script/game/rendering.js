@@ -148,7 +148,12 @@ const damageFlashy = () => {
 async function damageFlash() {
     const canvas = display.canvas
     const {width, height} = canvas
-    drawImage(0-width/2, 0-height/2, width, height, "damage", 0, 0)
+    const oldTick = game.frame
+    while(game.frame-oldTick < 40) {
+        drawImage(0-width/2, 0-height/2, width, height, "bloodvignette", 0, 0)
+        drawImage(0, 0, display.canvas.width/2.5, display.canvas.height/2.5, "bloodvignette", 0, 0, 1, 1)
+    await wait(1)
+    }
 }
 
 function renderBackgroundLayer() {

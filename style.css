@@ -11,6 +11,11 @@ canvas {
     left: 0;
 }
 
+.pixelated {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
 #play {
     background-color: rgba(0, 0, 0, 0.423);
     backdrop-filter:blur(2px);

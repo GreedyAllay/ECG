@@ -53,6 +53,15 @@ function gameLogic() {
                 player.isSneaking = false
                 if(checkKey("w")) {
                 if(player.dead) return;
+                    if(player.againstWall) {
+                            player.yv = -10
+                            player.againstWall = false
+                        if(checkKey("a")) {
+                            player.xv = 500
+                        } else if(checkKey("d")) {
+                            player.xv = -500
+                        }
+                    }
                     if(player.onFloor || (!player.onFloor && floor(player.airTime) < 5)) {
                         player.yv = -10
                         setAnimation("jump")

@@ -3,7 +3,7 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -42,7 +42,8 @@ window.game = {
     renderHitBoxes: false,
     renderObjectIDs: false,
     editor: false,
-    drawTriggers: false
+    drawTriggers: false,
+    isMultiplayer: false
 }
 
 window.world = {
@@ -61,7 +62,7 @@ window.config = {
         fpsLimit: false,
     },
     gameplay: {
-        gore: true
+        gore: true,
     }
 }
 
@@ -125,9 +126,7 @@ game.tick = async() => {
         checkTriggers()
         drawTriggers()
 
-        renderEditor()
-
-        
+        renderEditor()        
         
     } catch (error) {
         console.error(error)
@@ -195,6 +194,12 @@ game.start = () => {
 
 }
 
+game.startMP = (address) => {
+    game.isMultiplayer = true,
+    multiplayer.address = address
+    multiplayer.start()
+}
+
 game.reset = () => {
     game.isRunning
 }
@@ -229,7 +234,9 @@ const set = {
 //function AABB(x1, y1, w1, h1, x2, y2, w2, h2) { (x1, y1, w1, h1, x2, y2, w2, h2) <= Math.abs(x1 - x2) <= ((w1 / 2) + (w2 / 2)) && Math.abs(y1-y2)<=((h1 / 2) + (h2 / 2)) }
 
 
-
+if(config.performance.pixelate) {
+    display.canvas.className = "pixelated"
+}
 
 level.forEach(obj => {
     if(AABB(obj.x, obj.y, obj.w, obj.y, mouse.x, mouse.y, 0, 0)) {

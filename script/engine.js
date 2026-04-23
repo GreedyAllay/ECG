@@ -3,7 +3,7 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = true
+const instantStart = false
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []

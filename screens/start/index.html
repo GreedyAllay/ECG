@@ -18,7 +18,7 @@
     <div id="buttons">
         <div class="button" enabled tabindex="0">play</div>
         <div class="button" enabled tabindex="1">settings</div>
-        <div class="button">multiplayer</div>
+        <div class="button" enabled>multiplayer</div>
         <div class="button">level editor</div>
         <div class="button" enabled tabindex="3">credits</div>
     </div>
@@ -95,7 +95,7 @@
             //startScreen()
         }
 
-        function buttonClick(id) {
+        async function buttonClick(id) {
             switch (id) {
                 case 0:
                     window.location.href = "../levels"
@@ -103,8 +103,12 @@
                 case 1:
                     window.location.href = "../settings"
                     break;
+                case 2:
+                    await parent.multiplayer.connect("ws://localhost:6969")
+                    break;
                 case 4:
                     window.location.href = "../credits"
+                    break;
                 default:
                     break;
             }

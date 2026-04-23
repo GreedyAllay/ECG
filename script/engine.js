@@ -24,6 +24,8 @@ window.player = {
     allowFly: false,
     canDie: true,
     canMove: true,
+    wallJumped: false,
+    lastWallJumpSide: undefined,
     attackTime: 0,
     animation: 'idle',
     texture: 'idle0',
@@ -33,6 +35,7 @@ window.player = {
     sneakingTime: 0,
     runningTime: 0,
     death: { x: 0, y: 0 },
+    wallJumpTime: 0,
 }
 
 window.game = {

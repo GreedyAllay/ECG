@@ -8,6 +8,12 @@ const editorFlyingSpeed = 5
 
 let footstepPlayed = false
 
+player.lastWallJumpSide = null
+
+var hasReleasedAkey = false
+var hasReleasedDkey = false
+
+
 //i am deeply sorry to you for combining the controls with the logic,
 // i just didn't know what the heck to do
 function gameLogic() {
@@ -17,6 +23,10 @@ function gameLogic() {
         player.runningTime += DT
     } else {
         player.runningTime = 0
+    }
+
+    if(player.onFloor) {
+        lastWallJumpSide = null
     }
 
     if(player.dead) {
@@ -53,15 +63,19 @@ function gameLogic() {
                 player.isSneaking = false
                 if(checkKey("w")) {
                 if(player.dead) return;
-                    if(player.againstWall) {
-                            player.yv = -10
-                            player.againstWall = false
-                        if(checkKey("a")) {
-                            player.xv = 500
-                        } else if(checkKey("d")) {
-                            player.xv = -500
-                        }
+                if(typeof player.lastWallJumpSide == "undefined") { player.lastWallJumpSide = !player.mirror}
+                if(player.againstWall && player.mirror != player.lastWallJumpSide) {
+                    player.lastWallJumpSide = player.mirror
+                    player.wallJumped = true
+                    player.xv = player.mirror ? 25 : -25
+                    player.mirror = true
+                    player.yv = -15
+                    if(player.mirror) {
+                        hasReleasedAkey = false
+                    } else {
+                        hasReleasedDkey = false
                     }
+                } else {
                     if(player.onFloor || (!player.onFloor && floor(player.airTime) < 5)) {
                         player.yv = -10
                         setAnimation("jump")
@@ -80,7 +94,9 @@ function gameLogic() {
                                 player.isFlying = false
                             }
                         }
-                    }
+                    }                    
+                }
+
                 } else {
                     player.isFlying = false
                     if(player.onFloor) {
@@ -113,9 +129,18 @@ function gameLogic() {
                 if(game.editor && player.allowFly) {
                     player.yv += 5
                 }
-            }   
+            }
+            if(player.wallJumped || player.wallJumpTime > 0) {
+                player.wallJumpTime++  
+                if(player.wallJumpTime > 2 || !player.againstWall) {
+                    player.wallJumped = false
+                }
+                if((player.wallJumpTime > 2 && player.againstWall) || player.wallJumpTime > 10) {
+                    player.wallJumpTime = 0
+                    player.wallJumped = false
+                }
+            }
         }
-
         
         let movespeed = movementSpeed
         if(game.editor) {
@@ -124,20 +149,35 @@ function gameLogic() {
 
         if(checkKey("a")) {
             if(player.dead) return;
+            if(player.wallJumped || player.wallJumpTime > 0) return;
+            //if(player.lastWallJumpSide && player.wallJumpTime != 0) {return}
+            if(!hasReleasedAkey) {return}
             player.mirror = true
             if(player.isSneaking) {
                 player.xv = -2.5
             } else {
-                player.xv = 0-movespeed
+                if(player.onFloor) {
+                    player.xv = 0-movespeed
+                } else {
+                    player.xv += movespeed / -30
+                }
+                
             }
         }
         if(checkKey("d")) {
             if(player.dead) return;
+            if(player.wallJumped || player.wallJumpTime > 0) return;
+            //if(!player.lastWallJumpSide && player.wallJumpTime != 0) {return} 
+            if(!hasReleasedDkey) {return}
             player.mirror = false
             if(player.isSneaking) {
                 player.xv = 2.5 
             } else {
-                player.xv = movespeed
+                if(player.onFloor) {
+                    player.xv = movespeed
+                } else {
+                    player.xv += movespeed / 30
+                }
             }
         }
 
@@ -227,6 +267,14 @@ function gameLogic() {
         } else {
             footstepPlayed = false
         }
+    }
+
+    if(!checkKey("a")) {
+        hasReleasedAkey = true
+    }
+
+    if(!checkKey("d")) {
+        hasReleasedDkey = true
     }
 }
 

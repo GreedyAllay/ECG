@@ -38,10 +38,10 @@ function handlePhysics() {
         }
     }
     if(player.onFloor && !player.dead) {
-        player.xv /= 1.5
+        player.xv *= Math.pow(0.2, DT)
 
     } else {
-        player.xv /= 1.2 //can be changed to 1.3 or 1.1 but would be annoying
+        player.xv *= Math.pow(0.8, DT) //can be changed to 1.3 or 1.1 but would be annoying
 
     }
 

@@ -25,10 +25,6 @@ function gameLogic() {
         player.runningTime = 0
     }
 
-    if(player.onFloor) {
-        lastWallJumpSide = null
-    }
-
     if(player.dead) {
         player.isRunning = false
     }
@@ -275,6 +271,10 @@ function gameLogic() {
 
     if(!checkKey("d")) {
         hasReleasedDkey = true
+    }
+    
+    if(player.onFloor) {
+        player.lastWallJumpSide = null
     }
 }
 

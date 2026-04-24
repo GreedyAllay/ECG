@@ -3,9 +3,9 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = true
+const instantStart = false
 
-const instantMultiplayer = true
+const instantMultiplayer = false
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -217,7 +217,7 @@ game.reset = () => {
     game.isRunning
 }
 
-window.onload = () => { if(instantStart) { if(instantMultiplayer) { multiplayer.start("ws://localhost:6969" );} else {game.start()} } }
+window.onload = () => { if(instantStart) { if(instantMultiplayer) { multiplayer.connect("ws://localhost:6969" );} else {game.start()} } }
 //auto start so u dont have to hear the menu song 10 billion times a second when debugging like a loser
 
 game.pause = () => {

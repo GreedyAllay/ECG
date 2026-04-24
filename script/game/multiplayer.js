@@ -33,7 +33,7 @@ multiplayer.connect = async(address) => {
     multiplayer.socket.onmessage = (message) => {
         const rx = JSON.parse(message.data)
         const {type} = rx
-        
+        console.log(type)
         switch (type) {
             case "update":
                 const {players: serverPlayers} = rx
@@ -73,6 +73,7 @@ multiplayer.tick = () => {
         multiplayer.socket.send(JSON.stringify(tx))
         lastPlayerData = tx
     }
+
 }
 
 function simulateMultiplayers() {
@@ -82,3 +83,18 @@ function simulateMultiplayers() {
 function addChatMessage(message) {
     alert(message)
 }
+
+function sendGlobalChat(message) {
+    const tx = {
+        type: "chat", message: message
+    }
+    multiplayer.socket.send(JSON.stringify(tx))
+}
+
+addEventListener("keypress", (e) => {
+    switch(e.key) {
+        case "t":
+        sendGlobalChat(`${multiplayer.username}: ${prompt("chat")}`)
+        break;
+    }
+})

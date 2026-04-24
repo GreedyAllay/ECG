@@ -210,7 +210,6 @@ none:focus {
 }
 
 p {
-    color: white;
 }
 
 a {
@@ -278,17 +277,25 @@ a:visited {
     cursor: pointer;
     color: white;
     width: 100%;
-    max-height: 30px;
     justify-content: center;
-    cursor: pointer;
 }
 
 .serverItem {
     width: 100%;
+    cursor: pointer;
+    max-height: 50px;
+    color: white;
+}
+
+.serverItem[selected] {
+    background-color: #151523;
+    outline-style: solid;
+    outline-color: white;
+    outline-width: .5px;
+    color: #ffa800;
 }
 
 .serverName {
-    color: white;
     font-size: 10px;
     margin-left: 10px;
 }

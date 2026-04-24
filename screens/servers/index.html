@@ -21,20 +21,19 @@
     </div>
     
     <div id="customOptions">
-        <div id="customOption">join server</div>
-        <div id="customOption">add server</div>
-        <div id="customOption">direct connect</div>
-        <div id="customOption">remove</div>
+        <div class="customOption">join server</div>
+        <div class="customOption">add server</div>
+        <div class="customOption">direct connect</div>
+        <div class="customOption">remove</div>
     </div>
 
     <script src="../../script/tools.js"></script>
 
-        <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
+        <p id="credits">&#169 2026 - Axolay</p>
     <script>
         const audio = window.parent.audio
-        const buttons = document.querySelectorAll('.button')
+        const buttons = document.querySelectorAll('.customOption')
         buttons.forEach((element, i) => {
-            if(element.hasAttribute("enabled")) {
             element.addEventListener('pointerdown', () => {
                 audio.click0.play()
                 audio.click1.pause()
@@ -46,9 +45,9 @@
                 audio.click0.currentTime = 0
             })
             element.addEventListener('click', () => {
-                buttonClick(i)
+                alert("hoi")
+                buttonClick(i, element)
             })
-        }
         });
 
         //oh my fucking god its like so late i can barely see well
@@ -67,12 +66,18 @@
 
             server.appendChild(serverName)
             server.appendChild(serverDesc)
+
+            server.addEventListener("click", (e) => {
+                server.setAttribute("selected", "")
+            })
+
             element("levels").appendChild(server)
         }
 
-        addServer("evil server", "so evil")
+        addServer("evil server", "pinging...")
 
-        function buttonClick(id) {
+        function buttonClick(id, el) {
+            el.setAttribute("selected", "")
             switch (id) {
                 case 0:
                     window.location.href = "../start"

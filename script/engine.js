@@ -3,7 +3,9 @@ let level = [];
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
+
+const instantMultiplayer = true
 
 let frameTime = (1/targetFramerate)*1000
 let keys= []
@@ -112,6 +114,8 @@ game.tick = async() => {
             setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 1)
         }
 
+        multiplayer.tick()
+
         clearScreen()
         handleControls()
         handlePhysics()
@@ -128,6 +132,12 @@ game.tick = async() => {
         drawHitboxes()
         checkTriggers()
         drawTriggers()
+
+        simulateMultiplayers()
+
+        renderMultiplayers()
+
+
 
         renderEditor()        
         
@@ -200,14 +210,14 @@ game.start = () => {
 game.startMP = (address) => {
     game.isMultiplayer = true,
     multiplayer.address = address
-    multiplayer.start()
+    //multiplayer.start()
 }
 
 game.reset = () => {
     game.isRunning
 }
 
-window.onload = () => { if(instantStart) game.start(); } 
+window.onload = () => { if(instantStart) { if(instantMultiplayer) { multiplayer.start("ws://localhost:6969" );} else {game.start()} } }
 //auto start so u dont have to hear the menu song 10 billion times a second when debugging like a loser
 
 game.pause = () => {

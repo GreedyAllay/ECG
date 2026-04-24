@@ -1,9 +1,17 @@
 window.multiplayer = {
-    socket: null
+    socket: null,
+    username: "gary"
+}
+
+let lastPlayerData = null
+let players = {
+
 }
 
 multiplayer.connect = async(address) => {
-    alert(`connecting to ${address}...`);
+    const {socket, username} = multiplayer
+    console.log(`connecting to ${address}...`);
+    game.multiplayer = true
 
     //thu bluutoot dievaice is riedi two pel
     multiplayer.socket = await new WebSocket(address)
@@ -11,15 +19,66 @@ multiplayer.connect = async(address) => {
 
     //thu blootoot dievaice, has connectidas sooccesfoolley
     multiplayer.socket.onopen = () => {
-        alert("wow i think have a connection with your mommy")
+        console.log("wow i think have a connection with your mommy")
+        game.start()
+        multiplayer.socket.send(JSON.stringify({type: "join", username: username}))
     }
 
     multiplayer.socket.onclose = () => {
-        alert("bye little server D:")
+        console.log("bye little server D:")
+        alert("server closed")
+        location.reload()
     }
 
-    multiplayer.socket.onmessage = (messgae) => {
-        alert(messgae.data)
+    multiplayer.socket.onmessage = (message) => {
+        const rx = JSON.parse(message.data)
+        const {type} = rx
+        
+        switch (type) {
+            case "update":
+                const {players: serverPlayers} = rx
+                players = serverPlayers
+                break;
+            case "chat":
+                const {message} = rx
+                addChatMessage(message)
+            default:
+                break;
+        }
     }
 
+}
+
+multiplayer.tick = () => {
+    if(!game.multiplayer) {return}
+    const {socket, username} = multiplayer
+    const {x, y, xv, yv, mirror, texture, ox, oy} = player
+
+    const tx = { player: 
+        {
+            x: Math.round(x + ox),
+            y: Math.round(y + oy),
+            xv: Math.round(xv),
+            yv: Math.round(yv),
+            mirror: mirror,
+            texture: texture,
+        
+        },
+        username: multiplayer.username,
+        type: "update"
+    }
+
+
+    if(lastPlayerData != tx) {
+        multiplayer.socket.send(JSON.stringify(tx))
+        lastPlayerData = tx
+    }
+}
+
+function simulateMultiplayers() {
+    //extrapolate and interpolate the positions by locally like kinda simulating it yubtil u get a new packet
+}
+
+function addChatMessage(message) {
+    alert(message)
 }

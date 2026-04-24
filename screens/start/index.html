@@ -29,7 +29,7 @@
     <script src="../../script/tools.js"></script>
     <script src="../../script/tools.js"></script>
 
-        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11700 | Javascript edition</p>
+        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11800 | Javascript edition</p>
         <!-- 
         build naming legend
         1000: major update (for instance one that took all day)
@@ -61,7 +61,7 @@
                 }
             })
             element.addEventListener('click', () => {
-                buttonClick(i)
+                buttonClick(i, element)
             })
         }
         });
@@ -95,7 +95,11 @@
             //startScreen()
         }
 
-        async function buttonClick(id) {
+        async function buttonClick(id, el) {
+            if(el.hasAttribute("enabled")) {
+                el.removeAttribute("enabled")
+                el.textContent += "..."
+            }
             switch (id) {
                 case 0:
                     window.location.href = "../levels"
@@ -104,6 +108,12 @@
                     window.location.href = "../settings"
                     break;
                 case 2:
+                    let username = "gary"
+                    let name = prompt("enter a username")
+                    if(name) {
+                        username = name
+                    }
+                    parent.multiplayer.username = username
                     await parent.multiplayer.connect("ws://localhost:6969")
                     break;
                 case 4:

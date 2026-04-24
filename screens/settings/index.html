@@ -36,12 +36,16 @@
                 audio.click0.currentTime = 0
             })
             element.addEventListener('click', () => {
-                buttonClick(i)
+                buttonClick(i, element)
             })
         }
         });
 
-        function buttonClick(id) {
+        function buttonClick(id, el) {
+            if(el.hasAttribute("enabled")) {
+                el.removeAttribute("enabled")
+                el.textContent += "..."
+            }
             switch (id) {
                 case 0:
                     window.location.href = "settings.html?page=gameplay"

@@ -171,3 +171,20 @@ function renderForegroundLayer() {
         }
     });
 }
+
+function renderMultiplayers() {
+    if(!game.multiplayer) {return}
+    const playerList = Object.keys(players)
+
+    playerList.forEach(a => {
+        const {x, y, xv, yv, mirror, texture} = players[a]
+
+        //render le username
+        drawText(x, y, a, "rgb(255, 132, 0)", 50, 1, "Archivo", "center")
+        if(a == multiplayer.username) {return}
+
+        //zer spielerr
+        //oh fuck i will also have to give server players reflections fuck
+        drawImage(x, y, 100, 100, texture, mirror)
+    })
+}

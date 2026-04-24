@@ -64,7 +64,7 @@ function gameLogic() {
                     player.lastWallJumpSide = player.mirror
                     player.wallJumped = true
                     player.xv = player.mirror ? 25 : -25
-                    player.mirror = true
+                    player.mirror = !player.mirror
                     player.yv = -15
                     if(player.mirror) {
                         hasReleasedAkey = false

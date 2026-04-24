@@ -4,10 +4,10 @@
 
 
 <body>
-    <!-- you are no longer needed but the audio breaks when i get rid of it for some reason -->
+
     <div id="background" class="mainBg"></div>
 
-    
+    <!-- you are no longer needed but the audio breaks when i get rid of it for some reason -->
     <div id="startAudio" hidden>
         <p>press anything to enable audio</p>
     </div>    
@@ -19,7 +19,7 @@
         <div class="button" enabled tabindex="0">play</div>
         <div class="button" enabled tabindex="1">settings</div>
         <div class="button" enabled>multiplayer</div>
-        <div class="button">level editor</div>
+        <div class="button" enabled>level editor</div>
         <div class="button" enabled tabindex="3">credits</div>
     </div>
 
@@ -29,7 +29,7 @@
     <script src="../../script/tools.js"></script>
     <script src="../../script/tools.js"></script>
 
-        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11900 | Javascript edition</p>
+        <p id="credits">&#169 2026 - Axolay | pre-alpha build 11970 | Javascript edition</p>
         <!-- 
         build naming legend
         1000: major update (for instance one that took all day)
@@ -115,6 +115,9 @@
                     }
                     parent.multiplayer.username = username
                     await parent.multiplayer.connect("ws://localhost:6969")
+                    break;
+                case 3:
+                    window.location.href = "../servers"
                     break;
                 case 4:
                     window.location.href = "../credits"

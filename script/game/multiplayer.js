@@ -1,6 +1,7 @@
 window.multiplayer = {
     socket: null,
-    username: "gary"
+    username: "gary",
+    address: null
 }
 
 let lastPlayerData = null
@@ -12,12 +13,13 @@ multiplayer.connect = async(aaa) => {
     //element("chat").hidden = false
     const {socket, username} = multiplayer
     //const address = "ws://192.168.178.45:6969"
-    const address = "ws://localhost:6969" //change this to your host's ip in case you want to test it with other dievaices
-    console.log(`connecting to ${address}...`);
+    //const address = "ws://localhost:6969" //change this to your host's ip in case you want to test it with other dievaices
+    multiplayer.address = prompt("enter server address")
+    console.log(`connecting to ${multiplayer.address}...`);
     game.multiplayer = true
 
     //thu bluutoot dievaice is riedi two pel
-    multiplayer.socket = await new WebSocket(address)
+    multiplayer.socket = await new WebSocket(multiplayer.address)
 
 
     //thu blootoot dievaice, has connectidas sooccesfoolley
@@ -52,7 +54,9 @@ multiplayer.connect = async(aaa) => {
                 eval(data + ";defineLevel()")
                 break;
             case "msg":
-                alert(`message from remote server:\n${rx.msg}`)
+                (async() => {
+                    alert(`message from remote server:\n${rx.msg}`)
+                })()
             default:
                 break;
         }
@@ -92,6 +96,28 @@ multiplayer.tick = () => {
         renderPlayerList()
     }
 
+}
+
+async function queryServer(address) {
+    const websocket = await new WebSocket(address)
+
+
+    websocket.onopen = () => {
+        websocket.send(JSON.stringify({type: "query"}))
+    }
+
+        websocket.onmessage = (message) => {
+        const rx = JSON.parse(message.data)
+        const {type} = rx
+        console.log(rx)
+
+        if(type === "pong") {
+            return rx
+        } else {
+            return {name: "unknown server address", motd: "ok"}
+        }
+        websocket.close()
+    }
 }
 
 function simulateMultiplayers() {

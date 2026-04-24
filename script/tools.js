@@ -26,3 +26,5 @@ const waitDT = (time) => {
     const oldframe = game.frame
     game.frame - oldframe < time
 }
+
+const warn = async(message) => alert(message)

@@ -265,6 +265,42 @@ a:visited {
     background-image: url("../../assets/textures/tileplay.svg");
 }
 
+.mpBg {
+    background-image: url("../../assets/textures/tilemp.svg");
+}
+
+#customOptions {
+    display: flex;
+    position: absolute;
+    gap: 10px;
+    bottom: 0;
+    margin-bottom: 20px;
+    cursor: pointer;
+    color: white;
+    width: 100%;
+    max-height: 30px;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.serverItem {
+    width: 100%;
+}
+
+.serverName {
+    color: white;
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+.serverDesc {
+    color: gray;
+    font-size: 8px;
+    margin-top: -10px;
+    margin-left: 10px;
+
+}
+
 
 #background {
     border-image-repeat: repeat;

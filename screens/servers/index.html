@@ -3,9 +3,6 @@
 </head>
 
 <style>
-    html, body {
-        background-color: rgba(0, 0, 0, 0.404);
-    }
 
     html, body * {
         background-color: rgba(240, 248, 255, 0);
@@ -13,12 +10,21 @@
 </style>
 
 <body>
-    <p id="game-title">unknown message</p>
+    <div id="background" class="mpBg"></div>
+
+
+    <p id="game-title">multiplayer</p>
     <p id="game-description"></p>
 
+    <div id="levels">
 
-    <div id="buttons">
-        <div class="button" enabled>go back to main menu</div>
+    </div>
+    
+    <div id="customOptions">
+        <div id="customOption">join server</div>
+        <div id="customOption">add server</div>
+        <div id="customOption">direct connect</div>
+        <div id="customOption">remove</div>
     </div>
 
     <script src="../../script/tools.js"></script>
@@ -45,6 +51,27 @@
         }
         });
 
+        //oh my fucking god its like so late i can barely see well
+        //why the hell am i doing this i really wanna finish it but damn my eyes hurt
+
+        function addServer(name, address) {
+            const server  = document.createElement("div")
+            const serverName = document.createElement("p")
+            const serverDesc = document.createElement("p")
+            server.className = "serverItem"
+            serverName.className = "serverName"
+            serverDesc.className = "serverDesc"
+
+            serverName.textContent = name
+            serverDesc.textContent = address
+
+            server.appendChild(serverName)
+            server.appendChild(serverDesc)
+            element("levels").appendChild(server)
+        }
+
+        addServer("evil server", "so evil")
+
         function buttonClick(id) {
             switch (id) {
                 case 0:
@@ -54,5 +81,10 @@
                     break;
             }
         }
+
+        (async() => {
+            //alert(await parent.queryServer("ws://localhost:6969"))
+        })()
+
     </script>
 </body>

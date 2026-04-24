@@ -214,3 +214,11 @@ function deleteTemporaryObjects() {
         }
     });
 }
+
+function renderPlayerList() {
+    const pl = Object.keys(players)
+    drawText(display.canvas.width/2, 50, "online players", "rgb(255, 255, 255)", 40, 0, "Archivo Black", "center")   
+    pl.forEach((p, i) => {
+        drawText(display.canvas.width/2, 90+i*40, p, "rgb(255, 140, 0)", 40, 0, "Archivo", "center")   
+    });
+}

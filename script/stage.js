@@ -96,6 +96,8 @@ function drawText(x, y, text, color, size, camera, font, align) {
     font = font ?? "Archivo"
     if(!display.context.textAlign) {
         display.context.textAlign = "left"
+    } else {
+        display.context.textAlign = align
     }
     if(camera) {
         x = screenToWorldX(x)

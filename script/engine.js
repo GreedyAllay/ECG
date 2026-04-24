@@ -114,12 +114,13 @@ game.tick = async() => {
             setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 1)
         }
 
-        multiplayer.tick()
 
         clearScreen()
         handleControls()
         handlePhysics()
         gameLogic()
+
+        multiplayer.tick()
         
         renderBackgroundLayer()
         renderWater()
@@ -139,8 +140,7 @@ game.tick = async() => {
 
 
 
-        renderEditor()        
-        
+        renderEditor()
     } catch (error) {
         console.error(error)
         lastError = error

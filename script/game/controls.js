@@ -7,7 +7,12 @@ function handleControls() {
 }
 
 //key logging (the good one)
+//this used to be a totally acceptable length until i kept adding more
 addEventListener('keydown', (e) => { keys.push(e.key) }); addEventListener('keyup', (e) => { keys = keys.filter(k => k !== e.key); })
+
+addEventListener('keydown', (e) => {
+    if(e.key === "Tab") { e.preventDefault() }
+})
 
 function checkKey(key) {
     return keys.includes(key)
@@ -15,6 +20,7 @@ function checkKey(key) {
 
 //ugly ass key detection i am very sorry
 document.addEventListener('keypress', (e) => {
+    
     if(e.key == "1") {
         game.renderHitBoxes = !game.renderHitBoxes
     }

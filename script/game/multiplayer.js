@@ -48,6 +48,9 @@ multiplayer.connect = async(aaa) => {
             case "level":
                 const {data} = rx
                 eval(data + ";defineLevel()")
+                break;
+            case "msg":
+                alert(`message from remote server:\n${rx.msg}`)
             default:
                 break;
         }
@@ -83,6 +86,10 @@ multiplayer.tick = () => {
         lastPlayerData = tx
     }
 
+    if(checkKey("Tab")) {
+        renderPlayerList()
+    }
+
 }
 
 function simulateMultiplayers() {
@@ -90,7 +97,7 @@ function simulateMultiplayers() {
 }
 
 function addChatMessage(message) {
-    console.log(message)
+    console.log("[CHAT] " + message)
 }
 
 function sendGlobalChat(message) {

@@ -65,41 +65,34 @@ function checkPlayerCollided(ox, oy) {
         const mp = Object.keys(players)
         mp.forEach(p => {
             const pl = players[p]
-            if(p !== multiplayer.username) {
-                if(AABB(player.x, player.y, player.w, player.h, pl.x, pl.y, pl.w, pl.y)) {
-                    collided = true
-                    return
-                }
-            }
 
-        })
-
-        return collided
-
-
-        return;
-
-
-        const playerList = Object.keys(players)
-
-        playerList.forEach(a => {
-            const {x, y, xv, yv, w, h, ox, oy, mirror, texture} = players[a]
-
-            //check if were touching other cats *consentually*,
+            //check if your cat is touching other cats *consentually*,
             //this means if one doesnt want to be touched they can crouch to become untouchable.
             //sorry if you were planning on touching cats
 
-            if(true) {
-                if(AABB(player.x+player.ox, player.y+player.oy, player.w, player.h, x + ox, y + oy, w, h)) {
+            if((p !== multiplayer.username) && !p.sneaking) {
+                if(AABB(player.x, player.y, player.w, player.h, pl.x, pl.y, pl.w, pl.h)) {
                     collided = true
                     return
                 }
             }
+
         })
+
     }
+    return collided
 }
 
 function resetPlayerHitbox() { 
+    player.w = 15;
+    player.h = 70;
+    player.ox = -40
+    player.oy = -20
+    player.hbx = 0
+    player.hby = 0
+
+
+    return;
     const memory = {
         x: player.x, y: player.y,
         w: player.w, h: player.h,
@@ -124,6 +117,12 @@ function resetPlayerHitbox() {
 }
 
 function setHitboxCrouching (mirror) {
+
+    player.w = 50
+    player.h = 40
+    player.oy = -50
+
+    return;
     player.w = 50
     player.h = 40
     player.oy = -50

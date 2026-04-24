@@ -180,7 +180,10 @@ game.tick = async() => {
 
 let lastUpdate = performance.now()
 
-game.start = () => {
+game.start = (args = {}) => {
+    if(!args) {
+        args = {}
+    }
     if(!game.started) {
         game.started = true
     } else {
@@ -193,6 +196,7 @@ game.start = () => {
         await wait(1000);
         element('menu').remove();
     })();
+    audio.song.pause()
     if(config.performance.fpsLimit) {
         (async()=>{
             while(1) {
@@ -203,7 +207,10 @@ game.start = () => {
     } else {
         requestAnimationFrame(game.tick)
     }
-    defineLevel()
+    
+    if(!args.noLevel) {
+        defineLevel()
+    }
 
 }
 

@@ -22,7 +22,7 @@ multiplayer.connect = async(aaa) => {
     //thu blootoot dievaice, has connectidas sooccesfoolley
     multiplayer.socket.onopen = () => {
         console.log("wow i think have a connection with your mommy")
-        game.start()
+        game.start({noLevel: true})
         multiplayer.socket.send(JSON.stringify({type: "join", username: username}))
     }
 
@@ -44,6 +44,10 @@ multiplayer.connect = async(aaa) => {
             case "chat":
                 const {message} = rx
                 addChatMessage(message)
+                break;
+            case "level":
+                const {data} = rx
+                eval(data + ";defineLevel()")
             default:
                 break;
         }
@@ -55,7 +59,7 @@ multiplayer.connect = async(aaa) => {
 multiplayer.tick = () => {
     if(!game.multiplayer) {return}
     const {socket, username} = multiplayer
-    const {x, y, xv, yv, mirror, w, h, texture, ox, oy} = player
+    const {x, y, xv, yv, mirror, w, h, texture, ox, oy, sneaking} = player
 
     const tx = { player: 
         {
@@ -66,6 +70,7 @@ multiplayer.tick = () => {
             ox: ox, oy: oy,
             w: w,
             h: h,
+            sneaking: sneaking,
             mirror: mirror,
             texture: texture,
         },

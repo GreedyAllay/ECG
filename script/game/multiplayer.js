@@ -11,7 +11,8 @@ let players = {
 multiplayer.connect = async(aaa) => {
     //element("chat").hidden = false
     const {socket, username} = multiplayer
-    const address = "ws://192.168.178.45:6969"
+    //const address = "ws://192.168.178.45:6969"
+    const address = "ws://localhost:6969" //change this to your host's ip in case you want to test it with other dievaices
     console.log(`connecting to ${address}...`);
     game.multiplayer = true
 
@@ -26,6 +27,7 @@ multiplayer.connect = async(aaa) => {
         multiplayer.socket.send(JSON.stringify({type: "join", username: username}))
     }
 
+    //powah awf
     multiplayer.socket.onclose = () => {
         console.log("bye little server D:")
         alert("server closed")

@@ -94,11 +94,8 @@ function loadImage(source, name) {
 function drawText(x, y, text, color, size, camera, font, align) {
     size = size ?? 48
     font = font ?? "Archivo"
-    if(!display.context.textAlign) {
-        display.context.textAlign = "left"
-    } else {
-        display.context.textAlign = align
-    }
+    align = align ?? "left"
+    display.context.textAlign = align
     if(camera) {
         x = screenToWorldX(x)
         y = screenToWorldY(y)

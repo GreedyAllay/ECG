@@ -1,0 +1,36 @@
+<head>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<div id="wrapper">
+    <div id="chat"></div>  
+    <div id="text" contenteditable="true"></div>  
+</div>
+
+
+<scripts src="../../script/tools.js"></script>
+
+<script>
+    function addChatMessage(message, name) {
+        //stupid ahh chat
+        const container = document.createElement("div")
+
+        container.textContent = message
+        container.className = "message"
+
+        document.getElementById("chat").appendChild(container)
+    }
+
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+    addChatMessage("gary: evil")
+
+</script>

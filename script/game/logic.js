@@ -146,8 +146,10 @@ function gameLogic() {
         if(checkKey("a")) {
             if(player.dead) return;
             if(player.wallJumped || player.wallJumpTime > 0) return;
-            //if(player.lastWallJumpSide && player.wallJumpTime != 0) {return}
             if(!hasReleasedAkey) {return}
+            if(player.againstWall) {
+                player.yv = 5
+            }
             player.mirror = true
             if(player.isSneaking) {
                 player.xv = -2.5
@@ -163,8 +165,10 @@ function gameLogic() {
         if(checkKey("d")) {
             if(player.dead) return;
             if(player.wallJumped || player.wallJumpTime > 0) return;
-            //if(!player.lastWallJumpSide && player.wallJumpTime != 0) {return} 
             if(!hasReleasedDkey) {return}
+            if(player.againstWall) {
+                player.yv = 5
+            }
             player.mirror = false
             if(player.isSneaking) {
                 player.xv = 2.5 

@@ -1,0 +1,34 @@
+#chat {
+    width: 100%;
+    height: fit-content;
+    background-color: #31314881;
+    backdrop-filter: blur(2px);
+    overflow-x: hidden;
+    overflow-y: scroll;
+    color: white;
+    font-family: Archivo;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.message {
+    margin-left: 10px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+#wrapper {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+}
+
+#text {
+    width: 100%;
+    height: 20px;
+}
+@font-face {
+    font-family: Archivo;
+    src: url("../../assets/fonts/archivo.ttf");
+}

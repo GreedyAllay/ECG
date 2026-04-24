@@ -9,6 +9,7 @@ let players = {
 }
 
 multiplayer.connect = async(address) => {
+    //element("chat").hidden = false
     const {socket, username} = multiplayer
     console.log(`connecting to ${address}...`);
     game.multiplayer = true

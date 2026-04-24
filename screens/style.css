@@ -33,6 +33,15 @@ body::after {
     font-size: 25;
     z-index: 10;
 }
+#game-description {
+    color: rgb(189, 189, 189);
+    font-family: Archivo;
+    text-align: right;
+    margin-top: -20px;
+    margin-right: 20px;
+    font-size: 10;
+    z-index: 10;
+}
 
 .button[enabled] {
     color: #ffa800;

@@ -257,3 +257,7 @@ level.forEach(obj => {
     }
     
 });
+
+function criticalError(title, message) {
+    document.location.href = `screens/error`
+}

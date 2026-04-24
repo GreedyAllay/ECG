@@ -33,6 +33,13 @@ canvas {
     background-color: #313148;
 }
 
+#chat {
+    position: absolute;
+    z-index: 2000;
+    bottom: 0;
+    overflow: hidden;
+}
+
 @font-face {
     font-family: Archivo;
     src: url("assets/fonts/archivo.ttf");

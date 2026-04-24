@@ -8,9 +8,10 @@ let players = {
 
 }
 
-multiplayer.connect = async(address) => {
+multiplayer.connect = async(aaa) => {
     //element("chat").hidden = false
     const {socket, username} = multiplayer
+    const address = "ws://192.168.178.45:6969"
     console.log(`connecting to ${address}...`);
     game.multiplayer = true
 
@@ -28,7 +29,7 @@ multiplayer.connect = async(address) => {
     multiplayer.socket.onclose = () => {
         console.log("bye little server D:")
         alert("server closed")
-        location.reload()
+        //location.reload()
     }
 
     multiplayer.socket.onmessage = (message) => {
@@ -50,25 +51,27 @@ multiplayer.connect = async(address) => {
 
 }
 
+//WHYT IS THIS SUCH A PEEEEYYNN IN DA ASS
 multiplayer.tick = () => {
     if(!game.multiplayer) {return}
     const {socket, username} = multiplayer
-    const {x, y, xv, yv, mirror, texture, ox, oy} = player
+    const {x, y, xv, yv, mirror, w, h, texture, ox, oy} = player
 
     const tx = { player: 
         {
-            x: Math.round(x + ox),
-            y: Math.round(y + oy),
+            x: Math.round(x),
+            y: Math.round(y),
             xv: Math.round(xv),
             yv: Math.round(yv),
+            ox: ox, oy: oy,
+            w: w,
+            h: h,
             mirror: mirror,
             texture: texture,
-        
         },
         username: multiplayer.username,
         type: "update"
     }
-
 
     if(lastPlayerData != tx) {
         multiplayer.socket.send(JSON.stringify(tx))
@@ -82,7 +85,7 @@ function simulateMultiplayers() {
 }
 
 function addChatMessage(message) {
-    alert(message)
+    console.log(message)
 }
 
 function sendGlobalChat(message) {

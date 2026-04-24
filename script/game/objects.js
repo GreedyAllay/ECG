@@ -1,7 +1,7 @@
 const define = {
-    object: (x, y, w, h, color, ghost, layer) => {
+    object: (x, y, w, h, color, ghost, layer, temp) => {
         level.push({
-            type: 0, x: x, y: y, w: w, h: h, ghost: ghost, color: color, layer: layer
+            type: 0, x: x, y: y, w: w, h: h, ghost: ghost, color: color, layer: layer, temp: temp
         })
         return applyID()
     },
@@ -116,6 +116,21 @@ function removeID(id) {
     });
     if(success) return;
     console.error("this id cannot be deleted")
+}
+
+function moveID(id, x, y) {
+    let success = false
+    level.forEach((object, i) => {
+        if(object.id === id) {
+            level[object].x = x
+            level[object].y = y
+            success = true
+            console.log(`${id} moved`)
+            return
+        } 
+    });
+    if(success) return;
+    console.error("this id cannot be moved")
 }
 
 //removeID(level[Object.keys(level)[0]].id)

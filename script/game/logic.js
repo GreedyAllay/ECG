@@ -127,7 +127,7 @@ function gameLogic() {
                 }
             }
             if(player.wallJumped || player.wallJumpTime > 0) {
-                player.wallJumpTime++  
+                player.wallJumpTime += DT 
                 if(player.wallJumpTime > 2 || !player.againstWall) {
                     player.wallJumped = false
                 }
@@ -157,14 +157,14 @@ function gameLogic() {
                 if(player.onFloor) {
                     player.xv = 0-movespeed
                 } else {
-                    player.xv += movespeed / -30
+                    player.xv += (movespeed / -30)
                 }
                 
             }
         }
         if(checkKey("d")) {
             if(player.dead) return;
-            if(player.wallJumped || player.wallJumpTime > 0) return;
+            if(player.wallJumped || floor(player.wallJumpTime) > 0) return;
             if(!hasReleasedDkey) {return}
             if(player.againstWall) {
                 player.yv = 5

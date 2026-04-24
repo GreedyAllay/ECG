@@ -60,6 +60,19 @@ function drawHitboxes() {
                 color
             )            
     });
+    if(game.multiplayer) {
+        const mp = Object.keys(players)
+        mp.forEach(p => {
+            const pl = players[p]
+            drawObjectWF(
+                pl.x,
+                pl.y,
+                pl.w,
+                pl.h,
+                "#cf1b1b"
+            ) 
+        })
+    }
     drawObjectWF(player.x+player.hbx, player.y+player.hby, player.w, player.h, "#cf1b1b")
 }
 
@@ -172,12 +185,13 @@ function renderForegroundLayer() {
     });
 }
 
+//WHY did you randomly stop working 🥀
 function renderMultiplayers() {
     if(!game.multiplayer) {return}
     const playerList = Object.keys(players)
 
     playerList.forEach(a => {
-        const {x, y, xv, yv, mirror, texture} = players[a]
+        const {x, y, xv, yv, ox, oy, mirror, texture} = players[a]
 
         //render le username
         drawText(x, y, a, "rgb(255, 132, 0)", 50, 1, "Archivo", "center")
@@ -185,6 +199,18 @@ function renderMultiplayers() {
 
         //zer spielerr
         //oh fuck i will also have to give server players reflections fuck
-        drawImage(x, y, 100, 100, texture, mirror)
+        drawImage(x + ox, y + oy, 100, 100, texture, mirror)
     })
+}
+
+function deleteTemporaryObjects() {
+    level.forEach((object, i) => {
+        if(object.temp) {
+            if(object.isLast) {
+                level.splice(i, 1)
+            } else {
+                object.isLast = 1
+            }
+        }
+    });
 }

@@ -217,7 +217,7 @@ game.reset = () => {
     game.isRunning
 }
 
-window.onload = () => { if(instantStart) { if(instantMultiplayer) { multiplayer.connect("ws://localhost:6969" );} else {game.start()} } }
+window.onload = () => { if(instantStart) { if(instantMultiplayer) { multiplayer.connect("ws://localhost:6969");} else {game.start()} } }
 //auto start so u dont have to hear the menu song 10 billion times a second when debugging like a loser
 
 game.pause = () => {

@@ -352,6 +352,7 @@ a:visited {
     display: flex;
     flex-direction: row;
     height: auto;
+    padding-left: 10px;
 }
 
 .serverOption {

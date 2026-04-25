@@ -118,7 +118,7 @@ function addServer(address, official) {
             server.setAttribute("selected", "")
             serverDesc.setAttribute("selected", "")
 
-            addServerProperties(server, address, official)    
+            addServerProperties(server, address, official, checkAvailability)    
         }
 
     })
@@ -181,12 +181,13 @@ function removeServerProps() {
 
 }
 
-function addServerProperties(serverItem, address, official) {
+function addServerProperties(serverItem, address, official, checkAvailability) {
     removeServerProps()
     const options = [
         "join",
         "edit",
-        "delete"
+        "delete",
+        "reload"
     ]
 
     const properties = document.createElement("div")
@@ -207,6 +208,10 @@ function addServerProperties(serverItem, address, official) {
 
                     break;
 
+                    case "reload":
+                        checkAvailability()
+                    break;
+
                     case "delete":
                     serverItem.remove()
                     serverList.forEach((item, i) => {
@@ -215,7 +220,6 @@ function addServerProperties(serverItem, address, official) {
                     saveServerList()
                 }
                 
-                return
             })                    
             }
 

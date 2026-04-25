@@ -99,10 +99,14 @@ multiplayer.tick = () => {
 }
 
 async function queryServer(address) {
-    const websocket = await new WebSocket(address)
+
+    return new Promise ((resolve, reject) => {
+    const websocket = new WebSocket(address)
+
+    let output = ""
 
 
-    websocket.onopen = () => {
+    websocket.onopen = async() => {
         websocket.send(JSON.stringify({type: "query"}))
     }
 
@@ -111,13 +115,20 @@ async function queryServer(address) {
         const {type} = rx
         console.log(rx)
 
-        if(type === "pong") {
-            return rx
+        if(type === "query") {
+           resolve(rx)
         } else {
-            return {name: "unknown server address", motd: "ok"}
+            reject()
+            //resolve({name: "unknown server address", motd: "ok"})
         }
+
         websocket.close()
     }
+
+    websocket.onerror = (error) => {
+        reject(error)
+    }
+})
 }
 
 function simulateMultiplayers() {

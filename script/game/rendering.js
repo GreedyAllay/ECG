@@ -201,7 +201,7 @@ function renderForegroundLayer() {
     });
 }
 
-//WHY did you randomly stop working 🥀
+//WHY did you randomly stop working gng 🥀
 function renderMultiplayers() {
     if(!game.multiplayer) {return}
     const playerList = Object.keys(players)
@@ -236,6 +236,7 @@ function deleteTemporaryObjects() {
 
 function renderPlayerList() {
     //we got player
+    drawObject(0, 0, 200, 200, "#4758")
     const pl = Object.keys(players)
     drawText(display.canvas.width/2, 50, "online players", "rgb(255, 255, 255)", 40, 0, "Archivo Black", "center")   
     drawText(display.canvas.width/2, 80, multiplayer.address, "rgba(255, 255, 255, 0.65)", 30, 0, "Archivo", "center")   

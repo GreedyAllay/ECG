@@ -59,6 +59,8 @@ multiplayer.connect = async(address) => {
                 (async() => {
                     //alert(`message from remote server:\n${rx.msg}`)
                     criticalError(rx.msg)
+                    multiplayer.socket.close()
+                    game.multiplayer = false
                 })()
             default:
                 break;

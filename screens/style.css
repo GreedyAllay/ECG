@@ -101,11 +101,10 @@ body::after {
 #levels {
     width: calc(100% - 20px);
     max-height: calc(100% - 100px);
-    height: 100%;
     border-radius: 5px;
     background-color: rgba(21, 21, 35, 0.50);
     backdrop-filter: blur(1px);
-    overflow-y: scroll;
+    overflow-y: scroll !important;
     position: absolute;
     scrollbar-width: none;
     display: flex;

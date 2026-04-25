@@ -266,5 +266,22 @@ level.forEach(obj => {
 });
 
 function criticalError(title, message) {
-    document.location.href = `screens/error`
+    const warn = document.createElement('iframe')
+    warn.src= `/screens/message/index.html?title=${title}&message=${message}&close=true`
+    warn.id = "message"
+    document.body.appendChild(warn)
 }
+
+function fullScreenMessage(title, message) {
+    const warn = document.createElement('iframe')
+    warn.src= `/screens/message/index.html?title=${title}&message=${message}&close=false`
+    warn.id = "message"
+    document.body.appendChild(warn)
+}
+
+function closeFullscreenMessage() {
+    element("message").remove()
+}
+
+
+//criticalError("message", "description")

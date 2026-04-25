@@ -25,6 +25,15 @@
 
         <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
     <script>
+        const parameters = new URLSearchParams(window.location.search);
+        const message = parameters.get('message')
+        const title = parameters.get('title')
+        const closep = parameters.get('close')
+        if(!closep) {
+            element.buttons.remove()
+        }
+        element("game-title").textContent = title
+        element("game-description").textContent = message
         const audio = window.parent.audio
         const buttons = document.querySelectorAll('.button')
         buttons.forEach((element, i) => {
@@ -48,7 +57,9 @@
         function buttonClick(id) {
             switch (id) {
                 case 0:
-                    window.location.href = "../start"
+                    parent.location.reload()
+                    parent.document.getElementById("message").remove()
+                    //window.location.href = "../start"
                     break;
                 default:
                     break;

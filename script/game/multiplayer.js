@@ -25,6 +25,7 @@ multiplayer.connect = async(address) => {
 
     //thu blootoot dievaice, has connectidas sooccesfoolley
     multiplayer.socket.onopen = () => {
+        closeFullscreenMessage()
         console.log("wow i think have a connection with your mommy")
         game.start({noLevel: true})
         multiplayer.socket.send(JSON.stringify({type: "join", username: username}))
@@ -33,7 +34,7 @@ multiplayer.connect = async(address) => {
     //powah awf
     multiplayer.socket.onclose = () => {
         console.log("bye little server D:")
-        alert("server closed")
+        criticalError("server closed", "the host was shutdown")
         //location.reload()
     }
 
@@ -57,6 +58,7 @@ multiplayer.connect = async(address) => {
             case "msg":
                 (async() => {
                     alert(`message from remote server:\n${rx.msg}`)
+                    criticalError(rx.msg)
                 })()
             default:
                 break;

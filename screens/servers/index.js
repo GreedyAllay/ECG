@@ -124,6 +124,7 @@ function addServer(address, official) {
     })
 
     async function checkAvailability() {
+        status.setAttribute("online", "false")
         serverName.textContent = "pinging..."
         serverDesc.textContent = address
         let hasFound = false;
@@ -201,6 +202,7 @@ function addServerProperties(serverItem, address, official, checkAvailability) {
             property.addEventListener('click', (e) => {
                 switch(property.textContent) {
                     case "join":
+                        parent.multiplayer.username = prompt("enter a username (or leave empty)") || "gary"
                         parent.fullScreenMessage("connecting", `connecting to ${address}...`)
                         parent.multiplayer.connect(address)
                     break;

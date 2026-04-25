@@ -281,7 +281,9 @@ a:visited {
 }
 
 .serverItem {
-    width: calc(100% - 10px);
+    width: 50%;
+    left:25%;
+    transform: translateX(50%);
     cursor: pointer;
     height: 50px;
     color: white;
@@ -325,7 +327,7 @@ a:visited {
 }
 
 .badge {
-    background-color: #ffa800;
+    background-color: #d28c00;
     padding: 4px;
     color: white;
     border-radius: 3px;
@@ -361,7 +363,7 @@ a:visited {
     padding: 3px;
     background-color: #151523;
     color: white;
-    font-size: 5px;
+    font-size: 7.5px;
     margin: 5px;
     margin-left: 2px;
     margin-top: 0;

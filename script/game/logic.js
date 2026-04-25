@@ -157,7 +157,7 @@ function gameLogic() {
                 if(player.onFloor) {
                     player.xv = 0-movespeed
                 } else {
-                    player.xv += (movespeed / -30)
+                    player.xv += movespeed / (-5 / DT)
                 }
                 
             }
@@ -176,7 +176,7 @@ function gameLogic() {
                 if(player.onFloor) {
                     player.xv = movespeed
                 } else {
-                    player.xv += movespeed / 30
+                    player.xv += movespeed / (5 / DT)
                 }
             }
         }

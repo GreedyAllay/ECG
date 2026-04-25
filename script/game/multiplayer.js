@@ -57,7 +57,7 @@ multiplayer.connect = async(address) => {
                 break;
             case "msg":
                 (async() => {
-                    alert(`message from remote server:\n${rx.msg}`)
+                    //alert(`message from remote server:\n${rx.msg}`)
                     criticalError(rx.msg)
                 })()
             default:

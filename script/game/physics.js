@@ -84,15 +84,6 @@ function checkPlayerCollided(ox, oy) {
 }
 
 function resetPlayerHitbox() { 
-    player.w = 15;
-    player.h = 70;
-    player.ox = -40
-    player.oy = -20
-    player.hbx = 0
-    player.hby = 0
-
-
-    return;
     const memory = {
         x: player.x, y: player.y,
         w: player.w, h: player.h,
@@ -117,12 +108,6 @@ function resetPlayerHitbox() {
 }
 
 function setHitboxCrouching (mirror) {
-
-    player.w = 50
-    player.h = 40
-    player.oy = -50
-
-    return;
     player.w = 50
     player.h = 40
     player.oy = -50

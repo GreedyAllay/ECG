@@ -84,6 +84,7 @@ function addServer(address, official) {
     const serverDesc = document.createElement("p")
     const serverAddress = document.createElement("p")
     const status = document.createElement("div")
+    const count = document.createElement("p")
     if(official) {
         const badge = document.createElement("div")
         badge.textContent = "official"
@@ -95,6 +96,8 @@ function addServer(address, official) {
     serverDesc.className = "serverDesc"
     serverAddress.className = "serverAddress"
     status.className = "serverStatus"
+    count.textContent = `-/-`
+    count.className = `serverCount`
 
     serverName.textContent = "evil cat server"
     serverDesc.textContent = address
@@ -104,6 +107,7 @@ function addServer(address, official) {
 
     server.appendChild(serverName)
     server.appendChild(serverDesc)
+    server.appendChild(count)
     //server.appendChild(serverAddress)
     server.appendChild(status)
 
@@ -141,6 +145,7 @@ function addServer(address, official) {
 
         serverName.textContent = data.name
         serverDesc.textContent = data.motd
+        count.textContent = `${data.count}/${data.max}`
         status.setAttribute("online", "true")
     }
 

@@ -2,6 +2,7 @@ html, body {
     margin: 0;
     background-color: #313148;
     overflow: hidden;
+    /* cursor: url("cursor.svg") 16 16, auto; */
 }
 
 canvas {

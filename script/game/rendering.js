@@ -1,6 +1,8 @@
 function renderObjects() {
+    //drawing in my drawing book!
+    //why does it keep getting erased every time i finish drawing..?
     level.forEach(object => {
-        if(!object.layer) {
+        if(!object.layer || !config.performance.layers) {
             renderObject(object)
         }
     });
@@ -15,12 +17,12 @@ function renderObjects() {
 function renderObject(object) {
     switch (object.type) {
         case 0:
-                drawObject(
-                object.x,
-                object.y,
-                object.w,
-                object.h,
-                object.color
+            drawObject(
+            object.x,
+            object.y,
+            object.w,
+            object.h,
+            object.color
         )
         break;
             case 1:
@@ -73,6 +75,7 @@ function drawHitboxes() {
             ) 
         })
     }
+    //we do a bit of cheating here
     drawObjectWF(player.x+player.hbx, player.y+player.hby, player.w, player.h, "#cf1b1b")
 }
 
@@ -97,10 +100,12 @@ function drawTriggers() {
 }
 
 function renderPlayer() {
+    //ugly ass mf
     drawImage(player.x+player.ox, player.y+player.oy, 100, 100, player.texture, player.mirror)
 }
 
 function renderWater() {
+    //really made a whole function just for drawing a rectangle that improperly renders
     drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2 - camera.y, "#3f89e4b8")
 }
 
@@ -146,6 +151,7 @@ const editorobject = {
 }
 
 const damageFlashy = () => {
+    //owie
     return
     let tick = 0
     return () => {
@@ -159,6 +165,7 @@ const damageFlashy = () => {
 }
 
 async function damageFlash() {
+    //OUCH MOTHERFUCKER WHATS WRONG WITH YOU????!!
     const canvas = display.canvas
     const {width, height} = canvas
     const oldTick = game.frame
@@ -170,6 +177,8 @@ async function damageFlash() {
 }
 
 function renderBackgroundLayer() {
+    //thats definitely great for purrformance
+    if(!config.performance.layers) {return}
     level.forEach(object => {
         if(object.layer == -1) {
             renderObject(object)
@@ -178,6 +187,13 @@ function renderBackgroundLayer() {
 }
 
 function renderForegroundLayer() {
+    //thats also definitely great for purrformance
+
+    //prr... prrr
+    //yeah you love cuddles, dont you...
+
+    //sorry
+    if(!config.performance.layers) {return}
     level.forEach(object => {
         if(object.layer > 0) {
             renderObject(object)
@@ -201,9 +217,12 @@ function renderMultiplayers() {
         //oh fuck i will also have to give server players reflections fuck
         drawImage(x + ox, y + oy, 100, 100, texture, mirror)
     })
+
+    renderOutsidePlayerMarkers()
 }
 
 function deleteTemporaryObjects() {
+    //ewww... brother, ewww... whats that... ? whats thaat brotha... ?
     level.forEach((object, i) => {
         if(object.temp) {
             if(object.isLast) {
@@ -216,10 +235,16 @@ function deleteTemporaryObjects() {
 }
 
 function renderPlayerList() {
+    //we got player
     const pl = Object.keys(players)
     drawText(display.canvas.width/2, 50, "online players", "rgb(255, 255, 255)", 40, 0, "Archivo Black", "center")   
     drawText(display.canvas.width/2, 80, multiplayer.address, "rgba(255, 255, 255, 0.65)", 30, 0, "Archivo", "center")   
     pl.forEach((p, i) => {
         drawText(display.canvas.width/2, 120+i*40, p, "rgb(255, 140, 0)", 40, 0, "Archivo", "center")   
     });
+}
+
+function renderOutsidePlayerMarkers() {
+    //ik it looks kinda dumb
+    drawImage(0, 0, 100, 100, "calico/head.svg")
 }

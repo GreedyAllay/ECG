@@ -65,6 +65,7 @@ window.config = {
         particles: true,
         transparency: false,
         fpsLimit: false,
+        layers: false,
     },
     gameplay: {
         gore: true,
@@ -282,6 +283,4 @@ function fullScreenMessage(title, message) {
 function closeFullscreenMessage() {
     element("message").remove()
 }
-
-
 //criticalError("message", "description")

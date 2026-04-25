@@ -101,6 +101,7 @@ body::after {
 #levels {
     width: calc(100% - 20px);
     max-height: calc(100% - 100px);
+    height: 100%;
     border-radius: 5px;
     background-color: rgba(21, 21, 35, 0.50);
     backdrop-filter: blur(1px);
@@ -109,13 +110,9 @@ body::after {
     scrollbar-width: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center;    
 }
 
-.serverList {
-    flex-direction: column;
-    flex-wrap: wrap;
-}
 
 .level {
     padding: 0px;
@@ -283,12 +280,16 @@ a:visited {
 .serverItem {
     width: 50%;
     left:25%;
-    transform: translateX(50%);
     cursor: pointer;
-    height: 50px;
+    height: 40px;
     color: white;
     padding: -5px;
     margin: 5px;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-width: none;
+    position: relative;
+    transform: translateX(-50%);
 }
 
 .serverItem[selected] {
@@ -335,7 +336,8 @@ a:visited {
     font-size: 5px;
     position: absolute;
     margin: 5px;
-    right: 20px;
+    right: 40px;
+    top: 3px;
 }
 
 .serverStatus {
@@ -347,6 +349,17 @@ a:visited {
     top: 0;
     margin-bottom: auto;
     margin: 10px;
+}
+
+.serverCount {
+    border-radius: 100px;
+    position: absolute;
+    right: 12px;
+    top: 0px;
+    font-size: 10px;
+    margin-bottom: auto;
+    margin: 10px;
+    text-align: right;
 }
 
 #serverOptions {

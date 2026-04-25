@@ -68,8 +68,11 @@ multiplayer.connect = async(address) => {
 }
 
 //WHYT IS THIS SUCH A PEEEEYYNN IN DA ASS
-multiplayer.tick = () => {
+multiplayer.tick = async() => {
     if(!game.multiplayer) {return}
+
+    await wait(50);
+    
     const {socket, username} = multiplayer
     const {x, y, xv, yv, mirror, w, h, texture, ox, oy, sneaking} = player
 

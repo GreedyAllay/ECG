@@ -49,7 +49,7 @@ function addCustomServer(address) {
 }
 
 function loadServers() {
-    addServer("ws://localhost:6969", 1)
+    addServer("ws://84.31.218.125:6969", 1)
     const hr = document.createElement("hr")
     serverList.forEach(s => {
         addServer(s)

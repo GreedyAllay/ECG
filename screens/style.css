@@ -308,7 +308,10 @@ a:visited {
     color: #ffa800;
     height: 60px;
     border-radius: 5px;
+}
 
+.serverItem:hover {
+    background-color: #6b6bb328;
 }
 
 .serverName {

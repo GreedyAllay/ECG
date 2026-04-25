@@ -122,6 +122,7 @@ game.tick = async() => {
         gameLogic()
 
         multiplayer.tick()
+        simulateMultiplayers()
         
         renderBackgroundLayer()
         renderWater()
@@ -134,14 +135,15 @@ game.tick = async() => {
         drawHitboxes()
         checkTriggers()
         drawTriggers()
-
-        simulateMultiplayers()
-
         renderMultiplayers()
-
-
-
         renderEditor()
+
+
+        if(checkKey("Tab")) {
+            renderPlayerList()
+        }
+
+
     } catch (error) {
         console.error(error)
         lastError = error

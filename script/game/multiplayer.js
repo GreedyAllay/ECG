@@ -100,10 +100,6 @@ multiplayer.tick = async() => {
         lastPlayerData = tx
     }
 
-    if(checkKey("Tab")) {
-        renderPlayerList()
-    }
-
 }
 
 async function queryServer(address) {

@@ -203,6 +203,7 @@ function renderForegroundLayer() {
 
 //WHY did you randomly stop working gng 🥀
 function renderMultiplayers() {
+    return;
     if(!game.multiplayer) {return}
     const playerList = Object.keys(players)
 
@@ -234,11 +235,12 @@ function deleteTemporaryObjects() {
     });
 }
 
+//WHYYYYYYYYYYYYYYYY ARE YOU NOT FUCKING RENDERING?????????????????????????????
 function renderPlayerList() {
     //we got player
     drawObject(0, 0, 200, 200, "#4758")
     const pl = Object.keys(players)
-    drawText(display.canvas.width/2, 50, "online players", "rgb(255, 255, 255)", 40, 0, "Archivo Black", "center")   
+    drawText(display.canvas.width/2, 50, "online players", "rgb(255, 255, 255)", 40, 0, "Archivo Black", "center")
     drawText(display.canvas.width/2, 80, multiplayer.address, "rgba(255, 255, 255, 0.65)", 30, 0, "Archivo", "center")   
     pl.forEach((p, i) => {
         drawText(display.canvas.width/2, 120+i*40, p, "rgb(255, 140, 0)", 40, 0, "Archivo", "center")   
@@ -246,6 +248,7 @@ function renderPlayerList() {
 }
 
 function renderOutsidePlayerMarkers() {
+    return;
     //ik it looks kinda dumb
-    drawImage(0, 0, 100, 100, "calico/head.svg")
+    drawImage(0, 0, 100, 100, " head.svg")
 }

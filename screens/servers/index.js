@@ -16,6 +16,10 @@ buttons.forEach((element, i) => {
     })
 });
 
+element("levels").addEventListener("click", () => {
+    
+})
+
 let serverList = []
 
 loadServerList()

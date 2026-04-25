@@ -110,7 +110,10 @@ body::after {
     scrollbar-width: none;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;    
+    justify-content: center;
+    border-width: 0.5px;
+    border-style: solid;
+    border-color: #343463;
 }
 
 
@@ -186,6 +189,11 @@ none:focus {
 @font-face {
     font-family: Archivo;
     src: url('../../assets/fonts/archivo.ttf');
+}
+
+@font-face {
+    font-family: Archivo Black;
+    src: url('../../assets/fonts/archivoblack.ttf');
 }
 
 #startAudio {
@@ -293,12 +301,13 @@ a:visited {
 }
 
 .serverItem[selected] {
-    background-color: #151523;
+    background-color: #15152384;
     outline-style: solid;
-    outline-color: white;
+    outline-color: #343463;
     outline-width: .5px;
     color: #ffa800;
     height: 60px;
+    border-radius: 5px;
 
 }
 
@@ -306,6 +315,7 @@ a:visited {
     font-size: 10px;
     margin-left: 10px;
     transition: .1s;
+    font-family: "Archivo Black";
 }
 
 .serverDesc {
@@ -380,6 +390,10 @@ a:visited {
     margin: 5px;
     margin-left: 2px;
     margin-top: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 40px;
+    text-align: center;
 }
 
 .serverOption:hover {

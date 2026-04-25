@@ -16,12 +16,12 @@
     <p id="game-title">multiplayer</p>
     <p id="game-description"></p>
 
-    <div id="levels">
+    <div id="levels" class="serverList">
 
     </div>
     
     <div id="customOptions">
-        <div class="customOption">join server</div>
+        <div class="customOption">go back</div>
         <div class="customOption">add server</div>
         <div class="customOption">direct connect</div>
         <div class="customOption">remove</div>
@@ -49,15 +49,53 @@
             })
         });
 
+        let serverList = []
+
+        loadServerList()
+
+        loadServers()
+
+        function loadServerList() {
+            const data = localStorage.getItem("servers")
+            serverList = data ? JSON.parse(data) : []
+        }
+
+        function saveServerList() {
+            localStorage.setItem("servers", JSON.stringify(serverList))
+        }
+
+        function syncServerList() {
+            serverList = localStorage.getItem("servers")
+            if(!serverList) {
+                serverList = []
+            }
+        }
+
+        function addCustomServer(address) {
+            serverList.push(address)
+            saveServerList()
+            addServer(address)
+        }
+
+        function loadServers() {
+            addServer("ws://localhost:6969", 1)
+            const hr = document.createElement("hr")
+            serverList.forEach(s => {
+                addServer(s)
+            })
+        }
 
 
+        //addCustomServer()
 
-        addServer("ws://localhost:6969")
-        addServer("ws://localhost:6969")
+        //addServer("ws://localhost:6969")
+        //addServer("ws://192.168.178.195:6969")
+
+        //saveServerList()
 
 
         const servers = document.querySelectorAll('.serverItem')
-        buttons.forEach((element, i) => {
+        servers.forEach((element, i) => {
             element.addEventListener('pointerdown', () => {
                 audio.click0.play()
                 audio.click1.pause()
@@ -68,36 +106,52 @@
                 audio.click1.play()
                 audio.click0.currentTime = 0
             })
-            element.addEventListener('click', () => {
-                buttonClick(i, element)
-            })
         });
 
         //oh my fucking god its like so late i can barely see well
         //why the hell am i doing this i really wanna finish it but damn my eyes hurt
 
-        function addServer(address) {
+        function addServer(address, official) {
             const server  = document.createElement("div")
             const serverName = document.createElement("p")
             const serverDesc = document.createElement("p")
+            const serverAddress = document.createElement("p")
             const status = document.createElement("div")
+            if(official) {
+                const badge = document.createElement("div")
+                badge.textContent = "official"
+                badge.className = "badge"
+                server.appendChild(badge)
+            }
             server.className = "serverItem"
             serverName.className = "serverName"
             serverDesc.className = "serverDesc"
+            serverAddress.className = "serverAddress"
             status.className = "serverStatus"
 
             serverName.textContent = "evil cat server"
             serverDesc.textContent = address
+            serverAddress.textContent = address
 
             status.setAttribute("online", "false")
 
             server.appendChild(serverName)
             server.appendChild(serverDesc)
+            //server.appendChild(serverAddress)
             server.appendChild(status)
 
             server.addEventListener("click",async(e) => {
                 if(!server.hasAttribute("selected")) {
+                    document.querySelectorAll('.serverItem').forEach(el => {
+                        el.removeAttribute("selected")
+                    })
+                    document.querySelectorAll('.serverDesc').forEach(el => {
+                        el.removeAttribute("selected")
+                    }) 
                     server.setAttribute("selected", "")
+                    serverDesc.setAttribute("selected", "")
+
+                    addServerProperties(server, address, official)    
                 }
 
             })
@@ -120,7 +174,6 @@
                 serverName.textContent = data.name
                 serverDesc.textContent = data.motd
                 status.setAttribute("online", "true")
-                addServerProperties(server)    
             }
 
             checkAvailability()
@@ -129,23 +182,40 @@
             element("levels").appendChild(server)
         }
 
-        function buttonClick(id, el) {
-            el.setAttribute("selected", "")
+        async function buttonClick(id, el) {
             switch (id) {
                 case 0:
                     window.location.href = "../start"
+                    break;
+                case 1:
+                    const ip = prompt("enter server address (often looks like: ws://<ip>:6969)")
+                        addCustomServer(ip)
+                    break;
+                case 2:
+                    //direct connection stuff
+                    let username = "gary"
+                    let name = prompt("enter a username")
+                    if(name) {
+                        username = name
+                    }
+                    parent.multiplayer.username = username
+                    await parent.multiplayer.connect(prompt("server address") ?? "ws://localhost:6969")
                     break;
                 default:
                     break;
             }
         }
 
-        function addServerProperties(serverItem) {
+        function removeServerProps() {
             const oldprops = document.querySelectorAll("#serverOptions")
             oldprops.forEach(el => {
                 el.remove()
             })
 
+        }
+
+        function addServerProperties(serverItem, address, official) {
+            removeServerProps()
             const options = [
                 "join",
                 "edit",
@@ -155,10 +225,28 @@
             const properties = document.createElement("div")
             properties.id = "serverOptions"
             for(let i = 0; i < options.length; i++) {
-                const property = document.createElement("div")
-                property.className = "serverOption"
-                property.textContent = options[i]
-                properties.appendChild(property)
+                if(!(official && (i === 2) || (i === 1))) {
+                    const property = document.createElement("div")
+                    property.className = "serverOption"
+                    property.textContent = options[i]
+                    properties.appendChild(property)
+                    property.addEventListener('click', (e) => {
+                        switch(property.textContent) {
+                            case "join":
+                            parent.multiplayer.connect(address)
+                            break;
+                            case "edit":
+
+                            break;
+
+                            case "delete":
+                            serverItem.remove()
+                        }
+                        
+                        return
+                    })                    
+                    }
+
             }
             serverItem.appendChild(properties)
         }

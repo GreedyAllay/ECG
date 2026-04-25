@@ -218,7 +218,8 @@ function deleteTemporaryObjects() {
 function renderPlayerList() {
     const pl = Object.keys(players)
     drawText(display.canvas.width/2, 50, "online players", "rgb(255, 255, 255)", 40, 0, "Archivo Black", "center")   
+    drawText(display.canvas.width/2, 80, multiplayer.address, "rgba(255, 255, 255, 0.65)", 30, 0, "Archivo", "center")   
     pl.forEach((p, i) => {
-        drawText(display.canvas.width/2, 90+i*40, p, "rgb(255, 140, 0)", 40, 0, "Archivo", "center")   
+        drawText(display.canvas.width/2, 120+i*40, p, "rgb(255, 140, 0)", 40, 0, "Archivo", "center")   
     });
 }

@@ -9,12 +9,13 @@ let players = {
 
 }
 
-multiplayer.connect = async(aaa) => {
+multiplayer.connect = async(address) => {
+    multiplayer.address = address
     //element("chat").hidden = false
     const {socket, username} = multiplayer
     //const address = "ws://192.168.178.45:6969"
     //const address = "ws://localhost:6969" //change this to your host's ip in case you want to test it with other dievaices
-    multiplayer.address = prompt("enter server address")
+    //multiplayer.address = prompt("enter server address")
     console.log(`connecting to ${multiplayer.address}...`);
     game.multiplayer = true
 
@@ -40,7 +41,7 @@ multiplayer.connect = async(aaa) => {
         const rx = JSON.parse(message.data)
         const {type} = rx
         console.log(type)
-        switch (type) {
+        switch (type) { //clean ass packet system for first time socketer
             case "update":
                 const {players: serverPlayers} = rx
                 players = serverPlayers

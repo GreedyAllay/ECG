@@ -49,7 +49,7 @@ function addCustomServer(address) {
 }
 
 function loadServers() {
-    addServer("ws://84.31.218.125:6969", 1)
+    addServer("wss://evilserver.cattiesworld.nl/", 1) //yeyy secure server shit so it works in fucking netlify so nice
     const hr = document.createElement("hr")
     serverList.forEach(s => {
         addServer(s)

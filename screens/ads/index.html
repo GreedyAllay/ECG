@@ -1,0 +1,72 @@
+<head>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<style>
+    html, body {
+        background-color: rgba(0, 0, 0, 0.404);
+    }
+
+    html, body * {
+        background-color: rgba(240, 248, 255, 0);
+    }
+</style>
+
+<body>
+    <p id="game-title">will you allow me to show ads?</p>
+    <p id="game-description">game development is my hobby, i often spend all day on development. however, i don't earn anything from it, so if you like my work, perhaps let me show some ads, i promise it won't be annoying. you can at any time turn them off again in the settings. if you REALLY love my work, perhaps consider donating, it help much more than you think!</p>
+
+
+    <div id="buttons">
+        <div class="button" enabled>no ads, sorry</div>
+        <div class="button" enabled>sure</div>
+        <div class="button" enabled white>donate</div>
+    </div>
+
+    <script src="../../script/tools.js"></script>
+
+        <p id="credits">&#169 2026 - Axolay | pre-alpha v0.1</p>
+    <script>
+        const parameters = new URLSearchParams(window.location.search);
+        const message = parameters.get('message')
+        const title = parameters.get('title')
+        const closep = parameters.get('close')
+        if(!closep) {
+            element.buttons.remove()
+        }
+        element("game-title").textContent = title
+        element("game-description").textContent = message
+        const audio = window.parent.audio
+        const buttons = document.querySelectorAll('.button')
+        buttons.forEach((element, i) => {
+            if(element.hasAttribute("enabled")) {
+            element.addEventListener('pointerdown', () => {
+                audio.click0.play()
+                audio.click1.pause()
+                audio.click1.currentTime = 0
+            })
+            element.addEventListener('pointerup', () => {
+                audio.click0.pause()
+                audio.click1.play()
+                audio.click0.currentTime = 0
+            })
+            element.addEventListener('click', () => {
+                buttonClick(i)
+            })
+        }
+        });
+
+        function buttonClick(id) {
+            switch (id) {
+                case 0:
+                    parent.location.reload()
+                    parent.document.getElementById("message").remove()
+                    //window.location.href = "../start"
+                    break;
+                default:
+                    break;
+            }
+        }
+    </script>
+</body>

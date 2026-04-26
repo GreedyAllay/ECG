@@ -1,0 +1,26 @@
+#game-title {
+    text-align: center;
+}
+
+#game-description {
+    text-align: center;
+}
+
+.button {
+    color: gray;
+    padding: 1px;
+    font-size: 15;
+    animation: moveUp .75s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+    cursor: not-allowed;
+    right: 50%;
+    position: absolute;
+    text-align: center !important;
+}
+
+html, body {
+    font-family: Archivo;
+    user-select: none;
+    zoom: 1.7;
+    text-align: center !important;
+    overflow: hidden;
+}

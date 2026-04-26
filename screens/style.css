@@ -244,6 +244,16 @@ a:visited {
     }
 }
 
+@keyframes moveUp {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateX(-200%);
+
+    }
+}
+
 @keyframes moveBack {
     from {
         transform: translateX(0);

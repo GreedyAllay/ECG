@@ -203,7 +203,6 @@ function renderForegroundLayer() {
 
 //WHY did you randomly stop working gng 🥀
 function renderMultiplayers() {
-    return;
     if(!game.multiplayer) {return}
     const playerList = Object.keys(players)
 

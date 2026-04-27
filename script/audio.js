@@ -6,7 +6,20 @@ window.audio = {}
 
 const song = "toaster-kubbi.mp3" //change la song here gng
 
-audio.song = new Audio(`../../assets/audio/${song}`) 
+const path = (name) => {
+    return "../../assets/audio/" + name 
+}
+
+
+const introSongs = [
+    path("music/start/lost-in-nothingness.mp3")
+]
+
+audio.intro = new Audio(introSongs[random(0, introSongs.length-1)])
+
+audio.intro.volume = 0.25
+
+
 audio.click0 = new Audio(`../../assets/audio/click0.wav`)
 audio.click1 = new Audio(`../../assets/audio/click1.wav`)
 audio.coolclick = new Audio(`../../assets/audio/coolclick.wav`)

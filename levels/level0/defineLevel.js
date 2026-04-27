@@ -3,6 +3,8 @@ const defineLevel = () => {
 
     world.useReflections = false
 
+    game.music = "name of a song"
+
 
     const color = {
         rock: "#909190",
@@ -122,6 +124,7 @@ const defineLevel = () => {
         `, "pulse", 2)
     //define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 
+        loadJetCatTextures();
 
     player.allowFly = false
     set.water(0)

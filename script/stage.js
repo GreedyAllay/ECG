@@ -171,6 +171,10 @@ function setCamera(x, y, s) {
     }
 }
 
+function limitCamPos() {
+    if(camera.x > 0) { camera.x = 0}
+}
+
 function trackPosition(x, y) {
     setCamera(((0 - playerX) - x / 2), ((0 - playerY) - y / 2), true);
 }

@@ -114,6 +114,7 @@ game.tick = async() => {
         } else {
             setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 1)
         }
+        limitCamPos()
 
 
         clearScreen()
@@ -199,7 +200,7 @@ game.start = (args = {}) => {
         await wait(1000);
         element('menu').remove();
     })();
-    audio.song.pause()
+    audio.intro.pause()
     if(config.performance.fpsLimit) {
         (async()=>{
             while(1) {

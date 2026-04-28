@@ -108,6 +108,7 @@ function addServer(address, official) {
     serverAddress.textContent = address
 
     status.setAttribute("online", "false")
+    status.title = "offline"
 
     server.appendChild(serverName)
     server.appendChild(serverDesc)
@@ -134,6 +135,7 @@ function addServer(address, official) {
     async function checkAvailability() {
         status.setAttribute("online", "false")
         serverName.textContent = "pinging..."
+        status.title = "pinging..."
         serverDesc.textContent = address
         let hasFound = false;
         (async() => {
@@ -141,6 +143,7 @@ function addServer(address, official) {
             if(!hasFound) {
                 serverName.textContent = "server offline"
                 serverDesc.textContent = "unknown host"
+                status.title = "offline"
                 status.setAttribute("online", "offline")
             }
         })()
@@ -151,6 +154,7 @@ function addServer(address, official) {
         serverDesc.textContent = data.motd
         count.textContent = `${data.count}/${data.max}`
         status.setAttribute("online", "true")
+        status.title = "online!"
     }
 
     checkAvailability()
@@ -211,6 +215,7 @@ function addServerProperties(serverItem, address, official, checkAvailability) {
             property.addEventListener('click', (e) => {
                 switch(property.textContent) {
                     case "join":
+                        audio.coolclick.play()
                         parent.multiplayer.username = prompt("enter a username (or leave empty)") || "gary"
                         parent.fullScreenMessage("connecting", `connecting to ${address}...`)
                         parent.multiplayer.connect(address)
@@ -236,4 +241,8 @@ function addServerProperties(serverItem, address, official, checkAvailability) {
 
     }
     serverItem.appendChild(properties)
+}
+
+if(!parent.config.performance.background) {
+    document.querySelector("#background").id = "noBg"
 }

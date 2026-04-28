@@ -24,12 +24,16 @@
     </div>
 
 
-    <div id="notice" hidden>Please use a chromium-based browser for best performance <a href="compat.html">more info</a></div>
+    <div id="noticeContainer">
+        <div class="notice" id="browser" hidden>please use a chromium-based browser for best performance <a href="compat.html">more info</a></div>
+        <div class="notice" id="acceleration" hidden>please enable hardware-acceleration if you like framerates</a></div>
+    </div>
+
 
     <script src="../../script/tools.js"></script>
     <script src="../../script/tools.js"></script>
 
-        <p id="credits">&#169 2026 - Axolay | pre-alpha build 12210 | Javascript edition</p>
+        <p id="credits">&#169 2026 - Axolay | pre-alpha build 12310 | Javascript edition</p>
         <!-- 
         build naming legend
         1000: major update (for instance one that took all day)
@@ -130,7 +134,20 @@
         startScreen()
 
         if(navigator.userAgent.includes("Firefox")) {
-            element("notice").removeAttribute("hidden")
+            document.querySelector("#browser").removeAttribute("hidden")
+        }
+
+(async () => {
+    while (typeof parent.hasHWA === "undefined") {
+        await wait(100)
+    }
+
+    if (!parent.hasHWA) {
+        document.querySelector("#acceleration").removeAttribute("hidden")
+    }
+})();
+        if(!parent.config.performance.background) {
+            document.querySelector("#background").id = "noBg"
         }
     </script>
 </body>

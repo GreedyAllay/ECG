@@ -32,6 +32,7 @@ canvas {
     z-index: 1000;
     animation: fadeOut, 1s;
     background-color: #313148;
+    border: none;
 }
 
 #chat {

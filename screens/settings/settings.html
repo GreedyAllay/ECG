@@ -67,5 +67,9 @@
             window.location.href = "index.html"
         })
 
+        if(!parent.config.performance.background) {
+            document.querySelector("#background").id = "noBg"
+        }
+
     </script>
 </body>

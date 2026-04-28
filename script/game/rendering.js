@@ -201,7 +201,7 @@ function renderForegroundLayer() {
     });
 }
 
-//WHY did you randomly stop working gng 🥀
+//WHY did you randomly stop working gng :wilted-rose:
 function renderMultiplayers() {
     if(!game.multiplayer) {return}
     const playerList = Object.keys(players)

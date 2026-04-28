@@ -165,7 +165,7 @@ none:focus {
     color: rgb(9, 255, 0)
 }
 
-#notice {
+.notice {
     background-color: rgb(112, 59, 59);
     border-color: rgb(147, 45, 45);
     border-width: .5px;
@@ -177,13 +177,23 @@ none:focus {
     padding-bottom: 5px;
     margin-top: 5px;
     border-radius: 3px;
+    font-size: 5px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#noticeContainer {
     position: fixed;
     top: 0;
     margin-left: auto;
     margin-right: auto;
-    font-size: 5px;
-    left: 50%;
-    transform: translateX(-50%);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: flex;
+    width: 100%;
+    z-index: 6767676767;
 }
 
 @font-face {
@@ -295,19 +305,23 @@ a:visited {
     justify-content: center;
 }
 
+
 .serverItem {
     width: 50%;
     left:25%;
     cursor: pointer;
     height: 40px;
     color: white;
+    outline-color: #6f6fd3;
     padding: -5px;
     margin: 5px;
     overflow-x: hidden;
     overflow-y: scroll;
+    scrollbar-width: thin;
     scrollbar-width: none;
     position: relative;
     transform: translateX(-50%);
+    transition: 0.2s;
 }
 
 .serverItem[selected] {
@@ -394,23 +408,24 @@ a:visited {
 }
 
 .serverOption {
-    width: fit-content;
     height: 100%;
     padding: 3px;
-    background-color: #151523;
     color: white;
     font-size: 7.5px;
     margin: 5px;
     margin-left: 2px;
     margin-top: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    width: 40px;
+   /* width: 40px; */
     text-align: center;
 }
 
 .serverOption:hover {
-    background-color: #3f3f77;
+   /* background-color: #3f3f77; */
+}
+
+.serverOption:active {
+   /* background-color: #3f3f77; */
+    filter: brightness(.8);
 }
  
 .serverStatus[online="true"] {
@@ -438,6 +453,22 @@ a:visited {
     animation: animateBackground 5s linear infinite;
 }
 
+/* srry idk i was lazy so its copied over go kill me ovcer that */
+
+#noBg {
+    border-image-repeat: repeat;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform: translate(-29px, -29px);
+    width: calc(100% + 29px);
+    height: calc(100% + 29px);
+    z-index: -1;
+    animation: none;
+}
+
+/* i am deeply sorry if that ruined your day. */
+
 @keyframes animateBackground {
     from {
         left: 0;
@@ -448,4 +479,3 @@ a:visited {
         top: 0;
     }
 }
-

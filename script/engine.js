@@ -1,6 +1,8 @@
 let level = [];
 
 //you need to add 1 or 2 to make it actually reach the desired number cause i used settimeout
+
+const setup = {}
 let targetFramerate = 32
 
 const instantStart = false
@@ -66,6 +68,7 @@ window.config = {
         transparency: false,
         fpsLimit: false,
         layers: false,
+        background: false,
     },
     gameplay: {
         gore: true,
@@ -286,4 +289,27 @@ function fullScreenMessage(title, message) {
 function closeFullscreenMessage() {
     element("message").remove()
 }
+
 //criticalError("message", "description")
+
+// Source - https://stackoverflow.com/a/77170999
+// Posted by Kaiido, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-04-27, License - CC BY-SA 4.0
+
+const hasHWA = (() => {
+  // create a test function for both "default" drawing and forced software
+  const test = (force=false) => {
+    // Firefox (at lest on macOS) doesn't accelerate OffscreenCanvas
+    const canvas = document.createElement("canvas");
+    // willReadFrequently will force software rendering
+    const ctx = canvas.getContext("2d", { willReadFrequently: force });
+    ctx.moveTo(0, 0),
+    ctx.lineTo(120, 121); // HWA is bad at obliques
+    ctx.stroke();
+    return ctx.getImageData(0, 0, 200, 200).data.join();
+  };
+  // check that both return different results
+  return test(true) !== test(false);
+})();
+
+config.performance.background = hasHWA;

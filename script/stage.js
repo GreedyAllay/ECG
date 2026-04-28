@@ -172,6 +172,10 @@ function setCamera(x, y, s) {
 }
 
 function limitCamPos() {
+    //const actualCam = {
+    //    x: camera.x + display.canvas.width/2, 
+    //    y: camera.y + display.canvas.height/2
+    //}
     if(camera.x > 0) { camera.x = 0}
 }
 
@@ -204,8 +208,10 @@ playTrigger.addEventListener('click', ()=> {
 })
 
 function openMenu(name) {
-    const menu = document.createElement('div')
-    
-    document.body.appendChild()
+    const menu = document.createElement('iframe')
+    menu.src = `screens/${name}`
+    menu.id = "menu"
+    menu.className = "menu"
+    document.body.appendChild(menu)
 }
 

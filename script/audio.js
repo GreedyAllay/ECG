@@ -60,3 +60,9 @@ function playFootStep() {
 function pickupSound() {
     audio.pickup.play()
 }
+
+//stolen from stackoverflow without crediting :scream:
+audio.intro.addEventListener('ended', function() {
+    this.currentTime = 0;
+    this.play();
+}, false);

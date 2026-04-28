@@ -4,5 +4,8 @@
     }
     #creditlist {
         text-align: center;
+        color: white !important;
+    }
+    html, body {
         color: white;
     }

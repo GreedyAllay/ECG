@@ -70,5 +70,9 @@
             document.appendChild(transition)
         }
 
+        if(!parent.config.performance.background) {
+            document.querySelector("#background").id = "noBg"
+        }
+
     </script>
 </body>

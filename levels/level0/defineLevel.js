@@ -1,5 +1,5 @@
 const defineLevel = () => {
-    const skipIntro = false
+    const skipIntro = true
 
     world.useReflections = false
 

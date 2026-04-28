@@ -5,7 +5,7 @@ let level = [];
 const setup = {}
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 const instantMultiplayer = false
 
@@ -66,9 +66,10 @@ window.config = {
         reflections: true,
         particles: true,
         transparency: false,
-        fpsLimit: false,
+        fpsLimit: true,
         layers: false,
         background: false,
+        culling: true
     },
     gameplay: {
         gore: true,
@@ -121,26 +122,27 @@ game.tick = async() => {
 
 
         clearScreen()
-        handleControls()
+        handleControls() //fine
         handlePhysics()
-        gameLogic()
+        gameLogic() //somewhat haevy
 
         multiplayer.tick()
         simulateMultiplayers()
         
         renderBackgroundLayer()
         renderWater()
-        renderObjects()
-        renderWaterReflections()
-        renderStains()
-        handleParticles()
-        renderPlayer()
-        renderForegroundLayer()
+
+        renderObjects() //super heavy (-60 fps) culprit
+        renderWaterReflections() // -60 fps
+        renderStains() // depends
+        handleParticles() //also depends
+        renderPlayer() //fine
+        renderForegroundLayer() //fine somehow
         drawHitboxes()
-        checkTriggers()
-        drawTriggers()
-        renderMultiplayers()
-        renderEditor()
+        checkTriggers() //fine
+        drawTriggers() //fine
+        renderMultiplayers() //fine
+        renderEditor() //fine
 
 
         if(checkKey("Tab")) {
@@ -208,7 +210,7 @@ game.start = (args = {}) => {
         (async()=>{
             while(1) {
                 game.tick()
-                await wait(frameTime)
+                await wait(1) //frametime
             }
         })()
     } else {

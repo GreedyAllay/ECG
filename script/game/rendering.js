@@ -15,6 +15,7 @@ function renderObjects() {
 }
 
 function renderObject(object) {
+    if(!checkCulling(object)) {return;}
     switch (object.type) {
         case 0:
             drawObject(
@@ -48,6 +49,25 @@ function renderObject(object) {
             default:
                 break;
         }
+}
+
+function checkCulling(object) {
+    if(object.type === 2 || config.performance.culling) {return true;}
+    const {x, y, w, h} = object
+    const stage = display.canvas
+    const {sx, sy, sw, sh} = {
+        sx: 0-camera.x - stage.width/2 / camera.z,
+        sy:  0-camera.y - stage.height/2 / camera.z,
+        sw: display.canvas.width / camera.z,
+        sh: display.canvas.height / camera.z
+    }
+    if(false) {
+        preDrawObject(sx, sy, sw, sh)
+        display.context.fillStyle = "rgba(0, 0, 0, 0.26)"
+        display.context.fill()
+
+    }
+    return AABB(x, y, w, h, sx, sy, sw, sh)
 }
 
 function drawHitboxes() {

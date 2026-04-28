@@ -8,7 +8,7 @@ const editorFlyingSpeed = 5
 
 let footstepPlayed = false
 
-player.lastWallJumpSide = null
+try { player.lastWallJumpSide = null} catch (e) {}
 
 var hasReleasedAkey = false
 var hasReleasedDkey = false

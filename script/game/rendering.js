@@ -52,7 +52,7 @@ function renderObject(object) {
 }
 
 function checkCulling(object) {
-    if(object.type === 2 || config.performance.culling) {return true;}
+    if(object.type === 2 || !config.performance.culling) {return true;}
     const {x, y, w, h} = object
     const stage = display.canvas
     const {sx, sy, sw, sh} = {

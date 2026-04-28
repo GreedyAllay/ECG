@@ -56,13 +56,25 @@ multiplayer.connect = async(address) => {
                 eval(data + ";defineLevel()")
                 break;
             case "msg":
+                const {msg} = rx
                 (async() => {
                     //alert(`message from remote server:\n${rx.msg}`)
-                    criticalError(rx.msg)
+                    criticalError(msg)
                     multiplayer.socket.close()
                     game.multiplayer = false
                 })()
+                break;
+            case "edit":
+                const {change, object} = rx
+                switch(change) {
+                    case "add": 
+                    const {x, y, w, h} = object
+                    define.object(x, y, w, h)
+                    break;
+                }
+            break;
             default:
+                console.log("whats this? " + JSON.stringify(rx))
                 break;
         }
     }
@@ -101,6 +113,8 @@ multiplayer.tick = async() => {
     }
 
 }
+
+
 
 async function queryServer(address) {
 

@@ -66,7 +66,7 @@ window.config = {
         reflections: true,
         particles: true,
         transparency: false,
-        fpsLimit: true,
+        fpsLimit: false,
         layers: false,
         background: false,
         culling: true

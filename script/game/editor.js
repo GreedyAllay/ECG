@@ -25,8 +25,22 @@ function renderEditor() {
 
 addEventListener("mousedown", (e) => {
     if(game.editor) {
-        editorobjects.push(`define.object(${Math.round(editorobject.x)}, ${Math.round(editorobject.y)}, ${editorobject.width}, ${editorobject.height}, '#742cbb', 0)`)
-        define.object(editorobject.x, editorobject.y, editorobject.width, editorobject.height, "#742cbb")
+        const {x, y, w, h} = {
+            x: Math.round(editorobject.x),
+            y: Math.round(editorobject.y),
+            w: editorobject.width,
+            h: editorobject.height
+        }
+        if(game.multiplayer) {
+            const tx = {
+                type: "edit", change: "add", data: editorobject
+            }
+            multiplayer.socket.send(JSON.stringify(tx))
+        } else {
+            define.object(x, y, w, h, "#742cbb")
+            editorobjects.push(`define.object(${x}, ${y}, ${w}, ${h}, '#742cbb', 0)`)
+        }
+
     }
 })
 

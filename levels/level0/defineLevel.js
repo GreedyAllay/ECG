@@ -124,8 +124,6 @@ const defineLevel = () => {
         `, "pulse", 2)
     //define.trigger(386, 2, 100, 100, `killPlayer()`, "pulse", 2)
 
-        loadJetCatTextures();
-
     player.allowFly = false
     set.water(0)
 

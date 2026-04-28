@@ -1,3 +1,4 @@
-fixed a tiny bug where the player wasnt perfectly centered due to width
-
-added more scenery stuff
+- added multiplayer building support
+    - made placing blocks go through the server and back to each client
+    - stored all added blocks in a list to send players that join post
+    - fun

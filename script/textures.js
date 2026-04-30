@@ -1,5 +1,17 @@
 //dont you dare forget one or it will be very sad
 
+//hello here you can add textures. you should totally go to game/animations.js first tho
+
+//if you just came from there, hear me out
+
+//you first add the textures to the textures folder under assets
+//then you name them correctly, if you are planning on using a single texture for an animation, name it the name of the animation
+//we always use animations, even for stationary player textures.
+//otherwise, name them name0, name1... respectively.
+//then make sure to NOT forget adding them to the LoadTextures() function otherwise the engine will be very, very, very unhappy.
+
+//you're welcome please give me a star on github
+
 
 loadTextures(
     [

@@ -126,7 +126,7 @@ function renderPlayer() {
 
 function renderWater() {
     //really made a whole function just for drawing a rectangle that improperly renders
-    drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2 - camera.y, "#3f89e4b8")
+    drawObject((0-camera.x) - display.canvas.width / 4, world.minHeight, display.canvas.width, display.canvas.height / 2 - camera.y, "#9cbde61a")
 }
 
 function renderWaterReflections() {
@@ -227,11 +227,15 @@ function renderMultiplayers() {
     const playerList = Object.keys(players)
 
     playerList.forEach(a => {
-        const {x, y, xv, yv, ox, oy, mirror, texture} = players[a]
+        const {x, y, xv, yv, ox, oy, mirror, texture, sneaking} = players[a]
 
         //render le username
         drawText(x, y, a, "rgb(255, 132, 0)", 50, 1, "Archivo", "center")
         if(a == multiplayer.username) {return}
+
+        if(sneaking) {
+            return;
+        }
 
         //zer spielerr
         //oh fuck i will also have to give server players reflections fuck

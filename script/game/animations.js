@@ -2,6 +2,13 @@
 
 //ok
 
+//if you wanna add custom animations, hear me out my man
+
+//basically you use player.animation = "something" to set custom animations
+//we use this instead of setting individual textures because it's the sexier approach
+//to add a custom animation, add it to the list of runAnimations()
+//the first param is just the animation name, it will take the pictures from that name (e.g. idle0 and idle1 for 2 frames)
+//now that will break because you didnt actually define the pictures. bozo. but you can do that by going to ../textures.js
 
 let controller;
 
@@ -32,7 +39,7 @@ async function runAnimations() {
             await defineAnimation("idle", 2, .7, 1)
             await defineAnimation("run", 6, .1, 1)
             await defineAnimation("jump", 0, .1, 1)
-            await defineAnimation("fly", 1, .1, 1)
+            await defineAnimation("fly", 2, .1, 1)
             await defineAnimation("fall", 0, .1, 1)
             await defineAnimation("land", 0, .1, 1)
             await defineAnimation("accident", 0, .1, 1)

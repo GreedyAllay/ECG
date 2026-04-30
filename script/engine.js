@@ -5,7 +5,7 @@ let level = [];
 const setup = {}
 let targetFramerate = 32
 
-const instantStart = true
+const instantStart = false
 
 const instantMultiplayer = false
 
@@ -114,9 +114,9 @@ game.tick = async() => {
 
     try {
         if(player.dead) {
-            setCamera(0-player.death.x - player.w/2, 0-player.death.y  - player.h/2, 0)
+            setCamera(0-player.death.x - player.w/2, 0-player.death.y  - player.h/2, 1)
         } else {
-            setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 0)
+            setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 1)
         }
         limitCamPos()
 
@@ -130,9 +130,9 @@ game.tick = async() => {
         simulateMultiplayers()
         
         renderBackgroundLayer()
-        renderWater()
 
         renderObjects() //super heavy (-60 fps) culprit
+        renderWater()
         renderWaterReflections() // -60 fps
         renderStains() // depends
         handleParticles() //also depends
@@ -143,7 +143,6 @@ game.tick = async() => {
         drawTriggers() //fine
         renderMultiplayers() //fine
         renderEditor() //fine
-
 
         if(checkKey("Tab")) {
             renderPlayerList()

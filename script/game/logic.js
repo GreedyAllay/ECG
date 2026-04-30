@@ -8,7 +8,7 @@ const editorFlyingSpeed = 5
 
 let footstepPlayed = false
 
-try { player.lastWallJumpSide = null} catch (e) {}
+player.lastWallJumpSide = null
 
 var hasReleasedAkey = false
 var hasReleasedDkey = false
@@ -42,8 +42,11 @@ function gameLogic() {
         } else {
         if(checkKey("s") && player.onFloor && player.animation != "accident") {
                 if(player.dead) return;
-                player.isSneaking = true
-                setHitboxCrouching(player.mirror)
+                if(!player.isSneaking) {
+                    player.isSneaking = true
+                    setHitboxCrouching(player.mirror)
+                }
+
                 if(checkKey("a") || checkKey("d")) {
                     setAnimation("crouch")
                 } else {
@@ -56,7 +59,9 @@ function gameLogic() {
                     setAnimation("idle")
                     player.isRunning = false
                 }
-                player.isSneaking = false
+                if(player.isSneaking) {
+                    player.isSneaking = false
+                }
                 if(checkKey("w")) {
                 if(player.dead) return;
                 if(typeof player.lastWallJumpSide == "undefined") { player.lastWallJumpSide = !player.mirror}
@@ -261,7 +266,7 @@ function gameLogic() {
 
     if(player.isRunning && !player.againstWall) {
         const floorRun = player.runningTime % 10
-        if(floorRun > 0 && floorRun < 1 && !footstepPlayed) {
+        if(floorRun > 5 && floorRun < 6 && !footstepPlayed) {
             playFootStep()
             footstepPlayed = true
         } else {
@@ -299,7 +304,7 @@ function killPlayer(cause) {
         default:
         audio.death_meow.play()
         setAnimation("dead", 1)
-         spawnFluidSplash(player.x, player.y+50, 100, "blood")
+        spawnFluidSplash(player.x, player.y+50, 100, "blood")
         if(player.onFloor) {
             spawnBloodPool(player.x, player.y, 5)
         }

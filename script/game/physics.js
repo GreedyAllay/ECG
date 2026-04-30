@@ -107,12 +107,22 @@ function resetPlayerHitbox() {
     unstuckPlayer()
 }
 
+function getFloorTop() {
+  let output = player.y;
+  for (let i = 0; i < level.length; i++) {
+    if (level[i].x < player.x && player.x < level[i].x + level[i].y) {
+      if (output > level[i].y + level[i].h) output = level[i].y + level[i].h;
+    }
+  }
+  return output;
+}
+
 function setHitboxCrouching (mirror) {
     player.w = 50
     player.h = 40
     player.oy = -50
     if(!player.isSneaking) {player.yv = 100}
-    player.y += 29
+    player.y = getFloorTop()
     if(mirror) {
         player.hbx = -30
     } else {

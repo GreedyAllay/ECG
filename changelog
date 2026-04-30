@@ -1,2 +1,3 @@
-- added hover effect and scroll to options menu
-- added escape to go back one menu
+- added new player model
+    - changed the walking animation
+    - and also the idle one

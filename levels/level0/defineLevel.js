@@ -127,6 +127,7 @@ const defineLevel = () => {
     player.allowFly = false
     set.water(0)
 
+        loadJetCatTextures();
     if(!skipIntro) {
 
         camera.follow = false;

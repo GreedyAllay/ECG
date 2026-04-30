@@ -74,5 +74,11 @@
             document.querySelector("#background").id = "noBg"
         }
 
+        addEventListener("keydown", (e) => {
+            if(e.key === "Escape") {
+                window.location.href = "../start"
+            }
+        })
+
     </script>
 </body>

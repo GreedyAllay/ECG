@@ -57,7 +57,7 @@ body::after {
     color: gray;
     padding: 1px;
     font-size: 15;
-    animation: moveIn .75s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+    animation: moveLeft .75s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
     cursor: not-allowed;
 }
 
@@ -73,17 +73,14 @@ body::after {
 
 .option {
     color: gray;
-    padding: 10px;
+    padding: 1px;
     font-size: 15;
-    margin-top: -15;
+    animation: moveRight .75s cubic-bezier(0.770, 0.000, 0.175, 1.000) both;
+    cursor: not-allowed;
 }
 
 .option:hover {
     cursor: pointer;
-}
-
-.option:active[enabled] {
-    filter: brightness(.8);
 }
 
 #buttons {
@@ -146,10 +143,17 @@ none:focus {
     outline-color: gray;
 }
 
-.button:active[enabled] {
-    filter: brightness(.8);
+.button:hover[enabled], .option:hover {
+    filter: brightness(1.1);
+    text-shadow: 0px 0px 2px currentColor;
+    transition: .02s;
 }
 
+.button:active[enabled], .option:active {
+    filter: brightness(.8);
+    text-shadow: none;
+    transition: .02s;
+}
 #credits {
     font-size: 5px;
     color: white;
@@ -244,7 +248,7 @@ a:visited {
     }
 }
 
-@keyframes moveIn {
+@keyframes moveLeft {
     from {
         transform: translateX(130%);
     }
@@ -253,6 +257,16 @@ a:visited {
 
     }
 }
+
+@keyframes moveRight {
+    from {
+        transform: translateX(-20%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
 
 @keyframes moveUp {
     from {
@@ -264,7 +278,7 @@ a:visited {
     }
 }
 
-@keyframes moveBack {
+@keyframes moveLeftBack {
     from {
         transform: translateX(0);
     }
@@ -405,6 +419,18 @@ a:visited {
     flex-direction: row;
     height: auto;
     padding-left: 10px;
+}
+
+#options {
+    width: 200px;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 20px;
+    margin-top: 50px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: calc(100% - 100px);
+    scrollbar-width: none;
 }
 
 .serverOption {

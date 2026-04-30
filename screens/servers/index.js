@@ -246,3 +246,9 @@ function addServerProperties(serverItem, address, official, checkAvailability) {
 if(!parent.config.performance.background) {
     document.querySelector("#background").id = "noBg"
 }
+
+addEventListener("keydown", (e) => {
+    if(e.key === "Escape") {
+        window.location.href = "../start"
+    }
+})

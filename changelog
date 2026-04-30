@@ -1,4 +1,2 @@
-- added multiplayer building support
-    - made placing blocks go through the server and back to each client
-    - stored all added blocks in a list to send players that join post
-    - fun
+- added hover effect and scroll to options menu
+- added escape to go back one menu

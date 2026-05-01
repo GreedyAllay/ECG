@@ -5,7 +5,7 @@ let level = [];
 const setup = {}
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 const instantMultiplayer = false
 
@@ -200,7 +200,7 @@ game.start = (args = {}) => {
 
     element('menu').style.display = 'none';
     (async()=> {
-        setCamera(0-player.x - player.w/2, 0-player.y  - player.h/2, 0)
+        setCamera(-player.x - player.w/2, -player.y  - player.h/2, 0)
         await wait(1000);
         element('menu').remove();
     })();

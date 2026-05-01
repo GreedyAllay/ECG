@@ -1,5 +1,5 @@
 const defineLevel = () => {
-    const skipIntro = true
+    const skipIntro = false
 
     world.useReflections = false
 
@@ -10,7 +10,6 @@ const defineLevel = () => {
         rock: "#909190",
         cave: "#5b5b5b"
     }
-
 
     spawn.bush(-200, 70, 2)
 
@@ -127,7 +126,6 @@ const defineLevel = () => {
     player.allowFly = false
     set.water(0)
 
-        loadJetCatTextures();
     if(!skipIntro) {
 
         camera.follow = false;

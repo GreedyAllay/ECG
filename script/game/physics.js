@@ -118,39 +118,9 @@ function getFloorTop() {
 }
 
 function setHitboxCrouching (mirror) {
-    const {x, y, w, h, ox, oy, hbx, hby}
-    const memory = {
-        x: x, y: y, w: w, h: h, ox: ox, oy: oy, hbx: hbx, hby: hby
-    }
-
     player.w = 50
     player.h = 40
     player.oy = -50
-
-    for(let i = 0; i < 100; i++) {
-        if(checkPlayerCollided(0, -i)) {
-
-        }
-    }
-
-    if(checkPlayerCollided()) {
-        reset()
-    } else {
-        for(let i = 0; i < 50; i++) {
-            if(checkPlayerCollided(0, -i)) {
-                return;
-            }
-        }
-        reset()
-    }
-
-    function reset() {
-        player.w = memory.w
-        player.h = memory.h
-        player.oy = memory.oy
-    }
-
-
     if(!player.isSneaking) {player.yv = 100}
     player.y = getFloorTop()
     if(mirror) {

@@ -260,7 +260,7 @@ a:visited {
 
 @keyframes moveRight {
     from {
-        transform: translateX(-60%);
+        transform: translateX(-20%);
     }
     to {
         transform: translateX(0);

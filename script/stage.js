@@ -34,7 +34,7 @@ size.screenHeight = size.screenScale * 9
 //ppossibly might have stolen this code from past me who coded something similar in c++
 //so he might hate me for that idk actually I can't speak to him unfortunately
 
-size.oldWidth = size.screenWidth
+size.oldWidth = size.screenWidth 
 size.oldHeight = size.screenHeight
 size.defaultHeightNumber = camera.initialZoom / size.defaultHeight
 camera.oldZoom = camera.initialZoom
@@ -184,14 +184,18 @@ function trackPosition(x, y) {
 }
 
 function resize() {
-    //handle different screen sizes at least on paper lets see if it works gng
+    //handle different screen sizes, at least on paper..
     //i stole this code from my c++ game
     
-    display.canvas.width = Math.floor(window.innerWidth)
-    display.canvas.height = Math.floor(window.innerHeight)
+    //thanks to Vadik1 (xeltalliv) for suggesting me to use devicePixelRatio to fix blurriness on different zoom levels
+    display.canvas.width = Math.floor(window.innerWidth * window.devicePixelRatio)
+    display.canvas.height = Math.floor(window.innerHeight * window.devicePixelRatio)
 
     size.screenWidth = display.canvas.width
     size.screenHeight = display.canvas.height
+
+    canvas.style.width = window.innerWidth + "px"; // or just "100%"
+    canvas.style.height = window.innerHeight + "px"; // or just "100%"
 
     if (size.oldWidth != size.screenWidth || camera.oldZoom != camera.initialZoom) {
         size.defaultHeightNumber = camera.initialZoom / size.defaultHeight;
@@ -214,4 +218,3 @@ function openMenu(name) {
     menu.className = "menu"
     document.body.appendChild(menu)
 }
-

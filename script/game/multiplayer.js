@@ -171,3 +171,24 @@ addEventListener("keypress", (e) => {
         break;
     }
 })
+
+function checkUsername(name) {
+    name = name.toLowerCase()
+    const allowedCharacters = "abcdefghijklmnopqrstuvwxyz1234567890-_!@#$%^*()"
+    if(name.length > 30) return false;
+    if(name.length < 3) return false;
+
+    let contains = false; //wanna check if it doesnt contain very mean and illegal characters
+    for(let i = 0; i < name.length; i++) {
+        if(!allowedCharacters.includes(name[i])) {
+            contains = true;
+            break;
+        }
+    }
+    if(contains) return false;
+
+    //still needs regex validation tho
+
+    //ig its fine then
+    return true;
+} 

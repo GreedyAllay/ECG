@@ -147,6 +147,9 @@ game.tick = async() => {
         if(checkKey("Tab")) {
             renderPlayerList()
         }
+    drawObject(mouse.x, 0, 100, 100, "#342")
+
+        drawText(20, 200, mouse.x, "#495")
 
 
     } catch (error) {
@@ -248,8 +251,11 @@ game.resume = () => {
 
 const mouse = {}
 addEventListener('mousemove', (e) => {
-    mouse.x = e.clientX
-    mouse.y = e.clientY
+    mouse.screen.x = (e.clientX / display.canvas.width) * size.defaultHeight / camera.z
+    mouse.screen.y = (e.clientY / display.canvas.height) * size.defaultHeight
+
+    mouse.world.x = (e.clientX / display.canvas.width) * size.defaultHeight / camera.z
+    mouse.world.y = (e.clientY / display.canvas.height) * size.defaultHeight
 })
 
 const set = {

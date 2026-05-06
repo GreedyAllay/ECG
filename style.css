@@ -10,6 +10,7 @@ canvas {
     background-color: rgb(166, 210, 237);
     top: 0;
     left: 0;
+    image-rendering: crisp-edges;
 }
 
 .pixelated {

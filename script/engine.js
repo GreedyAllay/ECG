@@ -5,7 +5,7 @@ let level = [];
 const setup = {}
 let targetFramerate = 32
 
-const instantStart = false
+const instantStart = true
 
 const instantMultiplayer = false
 
@@ -73,6 +73,7 @@ window.config = {
     },
     gameplay: {
         gore: true,
+        pixelate: false,
     }
 }
 
@@ -114,9 +115,9 @@ game.tick = async() => {
 
     try {
         if(player.dead) {
-            setCamera(0-player.death.x - player.w/2, 0-player.death.y  - player.h/2, 1)
+            setCamera(0-player.death.x - player.w/2, 0-player.death.y  - player.h/2, 0)
         } else {
-            setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 1)
+            setCamera((0-player.x - player.w/2 ) - player.xv*0, (0-player.y - player.h/2) - player.yv*0 , 0)
         }
         limitCamPos()
 
@@ -147,9 +148,7 @@ game.tick = async() => {
         if(checkKey("Tab")) {
             renderPlayerList()
         }
-    drawObject(mouse.x, 0, 100, 100, "#342")
 
-        drawText(20, 200, mouse.x, "#495")
 
 
     } catch (error) {
@@ -165,7 +164,7 @@ game.tick = async() => {
     framerate = (1000/fpsc.frameTime).toFixed(0)
 
     if(lastError) {
-        drawText(5, 80, lastError, "#ff0000", 30)
+        //drawText(5, 80, lastError, "#ff0000", 30)
     }
 
     drawText(5, 40, framerate, "#000000")
@@ -249,14 +248,14 @@ game.resume = () => {
     console.log("resuming game")
 }
 
-const mouse = {}
-addEventListener('mousemove', (e) => {
-    mouse.screen.x = (e.clientX / display.canvas.width) * size.defaultHeight / camera.z
-    mouse.screen.y = (e.clientY / display.canvas.height) * size.defaultHeight
-
-    mouse.world.x = (e.clientX / display.canvas.width) * size.defaultHeight / camera.z
-    mouse.world.y = (e.clientY / display.canvas.height) * size.defaultHeight
-})
+//const mouse = {}
+//addEventListener('mousemove', (e) => {
+//    mouse.screen.x = (e.clientX / display.canvas.width) * size.defaultHeight / camera.z
+//    mouse.screen.y = (e.clientY / display.canvas.height) * size.defaultHeight
+//
+//    mouse.world.x = (e.clientX / display.canvas.width) * size.defaultHeight / camera.z
+//    mouse.world.y = (e.clientY / display.canvas.height) * size.defaultHeight
+//})
 
 const set = {
     water: (height) => {
@@ -266,11 +265,6 @@ const set = {
 
 
 //function AABB(x1, y1, w1, h1, x2, y2, w2, h2) { (x1, y1, w1, h1, x2, y2, w2, h2) <= Math.abs(x1 - x2) <= ((w1 / 2) + (w2 / 2)) && Math.abs(y1-y2)<=((h1 / 2) + (h2 / 2)) }
-
-
-if(config.performance.pixelate) {
-    display.canvas.className = "pixelated"
-}
 
 level.forEach(obj => {
     if(AABB(obj.x, obj.y, obj.w, obj.y, mouse.x, mouse.y, 0, 0)) {

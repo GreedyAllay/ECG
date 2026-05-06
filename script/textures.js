@@ -41,7 +41,8 @@ loadTextures(
     "warn.svg",
     "water.svg",
     "rockcave.svg",
-    "calico/head.svg"
+    "calico/head.svg",
+    "grass.png"
 ], 
 
 "assets/textures"

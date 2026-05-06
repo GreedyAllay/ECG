@@ -1,3 +1,7 @@
+const doPixelate = false
+const res = 6
+
+
 //ts is kinda important ngl
 const display = {
     canvas: element('canvas'),
@@ -68,6 +72,10 @@ function preDrawObject(x, y, w, h) {
 }
 
 function drawObject(x, y, w, h, color) {
+    if(doPixelate) {
+        x = Math.round(Math.round (x / res) * res)
+        y = Math.round(Math.round (y / res) * res)
+    }
     display.context.fillStyle = color
     preDrawObject(x, y, w, h)
     display.context.fill()
@@ -106,6 +114,10 @@ function drawText(x, y, text, color, size, camera, font, align) {
 }
 
 function drawImage(x, y, w, h, source, mirror, auto, flip, screenspace) {
+    if(doPixelate) {
+        x = Math.round(Math.round (x / res) * res)
+        y = Math.round(Math.round (y / res) * res)
+    }
     //inverse rendering code by jwklong
     if(!textures[source] || !textures[source].complete) { throw("engineError: tried to draw unloaded image"); return}
 
@@ -183,13 +195,19 @@ function trackPosition(x, y) {
     setCamera(((0 - playerX) - x / 2), ((0 - playerY) - y / 2), true);
 }
 
+
+if(doPixelate) {
+    display.canvas.className = "pixelated"
+    display.context.imageSmoothingEnabled = false;
+}
+
 function resize() {
-    //handle different screen sizes, at least on paper..
+    //handle different screen sizes, at least on paper..    
     //i stole this code from my c++ game
     
     //thanks to Vadik1 (xeltalliv) for suggesting me to use devicePixelRatio to fix blurriness on different zoom levels
-    display.canvas.width = Math.floor(window.innerWidth * window.devicePixelRatio)
-    display.canvas.height = Math.floor(window.innerHeight * window.devicePixelRatio)
+    display.canvas.width = Math.floor(window.innerWidth * window.devicePixelRatio) / (doPixelate ? res : 1)
+    display.canvas.height = Math.floor(window.innerHeight * window.devicePixelRatio) / (doPixelate ? res : 1)
 
     size.screenWidth = display.canvas.width
     size.screenHeight = display.canvas.height

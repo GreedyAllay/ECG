@@ -57,7 +57,7 @@ function loadTextures(textures, path) {
 }
 
 function loadJetCatTextures() {
-    const path = "assets/textures/calico/new/"
+    const path = "assets/textures/calico/jetpack/"
     loadTextures([
     "attack0.svg",
     "attack1.svg",

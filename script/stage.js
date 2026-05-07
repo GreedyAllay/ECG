@@ -114,9 +114,10 @@ function drawText(x, y, text, color, size, camera, font, align) {
 }
 
 function drawImage(x, y, w, h, source, mirror, auto, flip, screenspace) {
+    const { round, floor } = Math
     if(doPixelate) {
-        x = Math.round(Math.round (x / res) * res)
-        y = Math.round(Math.round (y / res) * res)
+        x = round(round (floor(x) / res) * res)
+        y = round(round (floor(y) / res) * res)
     }
     //inverse rendering code by jwklong
     if(!textures[source] || !textures[source].complete) { throw("engineError: tried to draw unloaded image"); return}

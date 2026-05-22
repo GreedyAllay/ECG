@@ -5,7 +5,7 @@ let level = [];
 const setup = {}
 let targetFramerate = 32
 
-const instantStart = true
+const instantStart = false
 
 const instantMultiplayer = false
 
